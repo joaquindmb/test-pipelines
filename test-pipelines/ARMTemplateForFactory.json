@@ -1,0 +1,1280 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "test-pipelines"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureDataLakeStoreDataDestination1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().filename"
+		},
+		"AzureDataLakeStoreDataDestination1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().path"
+		},
+		"AzureDataLakeStoreDataSource_File1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().filename"
+		},
+		"AzureDataLakeStoreDataSource_File1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().path"
+		},
+		"AzureDataLakeStoreDataSource_Folder1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"AzureDataLakeStoreDataSource_Folder1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().FolderPath"
+		},
+		"AzureDataLakeStoreFile1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "paises.csv"
+		},
+		"AzureDataLakeStoreFile1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "Test_Pipelines"
+		},
+		"DS_FILE_REFERENCE_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FolderName"
+		},
+		"DS_FILE_REFERENCE1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FolderName"
+		},
+		"DS_FILE_REFERENCE2_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE2_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FolderName"
+		},
+		"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "uno.csv"
+		},
+		"PL_MOVE_FILES_FICHERO_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "origen"
+		},
+		"PL_MOVE_FILES_FICHERO_DESTINO_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "uno.csv"
+		},
+		"PL_MOVE_FILES_FICHERO_DESTINO_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "destino"
+		},
+		"SourceDataset_7kw_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "paises.csv"
+		},
+		"SourceDataset_7kw_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "Test_Pipelines"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://testpipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "c9ef0068-989d-41b3-aaae-709c343cbc70"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "destino"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://testpipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "c9ef0068-989d-41b3-aaae-709c343cbc70"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "origen"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://testpipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "c9ef0068-989d-41b3-aaae-709c343cbc70"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "Test_Pipelines"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_7kw')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_7kw",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Test_Pipelines/paises.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "[[dbo].[Paises]"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDataLakeStoreSource",
+								"recursive": false
+							},
+							"sink": {
+								"type": "SqlSink",
+								"writeBatchSize": 10000
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"columnMappings": {
+									"nombre": "nombre",
+									"name": "name",
+									"nom": "nom",
+									"iso2": "iso2",
+									"iso3": "iso3",
+									"phone_code": "phone_code"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_7kw",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_7kw",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_7kw')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_7kw')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MoveFiles1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Move files from one folder to another folder",
+				"activities": [
+					{
+						"name": "GetFileList",
+						"description": "Get the list of file",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "AzureDataLakeStoreDataSource_Folder1",
+								"type": "DatasetReference",
+								"parameters": {
+									"FolderPath": {
+										"value": "@pipeline().parameters.FolderPath_SourceStore",
+										"type": "Expression"
+									}
+								}
+							},
+							"fieldList": [
+								"childItems"
+							]
+						}
+					},
+					{
+						"name": "ForEachFile",
+						"description": "Iterate each file, and move them one by one.",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "FilterFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('FilterFiles').output.value",
+								"type": "Expression"
+							},
+							"batchCount": 20,
+							"activities": [
+								{
+									"name": "CopyAFile",
+									"description": "Copy a file from the source store to the destination store.",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureDataLakeStoreSource",
+											"recursive": false
+										},
+										"sink": {
+											"type": "AzureDataLakeStoreSink"
+										},
+										"enableStaging": false,
+										"dataIntegrationUnits": 0
+									},
+									"inputs": [
+										{
+											"referenceName": "AzureDataLakeStoreDataSource_File1",
+											"type": "DatasetReference",
+											"parameters": {
+												"path": {
+													"value": "@pipeline().parameters.FolderPath_SourceStore",
+													"type": "Expression"
+												},
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "AzureDataLakeStoreDataDestination1",
+											"type": "DatasetReference",
+											"parameters": {
+												"path": {
+													"value": "@pipeline().parameters.FolderPath_DestinationStore",
+													"type": "Expression"
+												},
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"name": "DeleteAFile",
+									"description": "Delete a file from the source store",
+									"type": "Delete",
+									"dependsOn": [
+										{
+											"activity": "CopyAFile",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "AzureDataLakeStoreDataSource_File1",
+											"type": "DatasetReference",
+											"parameters": {
+												"path": {
+													"value": "@pipeline().parameters.FolderPath_SourceStore",
+													"type": "Expression"
+												},
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										},
+										"enableLogging": false
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "FilterFiles",
+						"description": "Only files will be selected, the sub-folders will not be selected.",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "GetFileList",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('GetFileList').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@contains(item().Name,'.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"FolderPath_SourceStore": {
+						"type": "String",
+						"defaultValue": "/origen/"
+					},
+					"FolderPath_DestinationStore": {
+						"type": "String",
+						"defaultValue": "/destino/"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureDataLakeStoreDataSource_Folder1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureDataLakeStoreDataSource_File1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureDataLakeStoreDataDestination1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MOVE_FILES')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteActivity",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "Copy Data1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS_FILE_REFERENCE",
+								"type": "DatasetReference",
+								"parameters": {
+									"sDS_FileName": {
+										"value": "@pipeline().parameters.sFileName",
+										"type": "Expression"
+									},
+									"sDS_FolderName": {
+										"value": "@pipeline().parameters.sFolderOrigin",
+										"type": "Expression"
+									}
+								}
+							},
+							"enableLogging": false,
+							"maxConcurrentConnections": 1
+						}
+					},
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDataLakeStoreSource",
+								"recursive": false
+							},
+							"sink": {
+								"type": "AzureDataLakeStoreSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_FILE_REFERENCE",
+								"type": "DatasetReference",
+								"parameters": {
+									"sDS_FileName": {
+										"value": "@pipeline().parameters.sFileName",
+										"type": "Expression"
+									},
+									"sDS_FolderName": {
+										"value": "@pipeline().parameters.sFolderOrigin",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_FILE_REFERENCE",
+								"type": "DatasetReference",
+								"parameters": {
+									"sDS_FileName": {
+										"value": "@pipeline().parameters.sFileName",
+										"type": "Expression"
+									},
+									"sDS_FolderName": {
+										"value": "@pipeline().parameters.sFolderDest",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"sFileName": {
+						"type": "String"
+					},
+					"sFolderOrigin": {
+						"type": "String"
+					},
+					"sFolderDest": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_FILE_REFERENCE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MOVE_FILES1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteActivity",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "Copy Data1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS_FILE_REFERENCE2",
+								"type": "DatasetReference",
+								"parameters": {
+									"sDS_FileName": {
+										"value": "@pipeline().parameters.sFileName",
+										"type": "Expression"
+									},
+									"sDS_FolderName": {
+										"value": "@pipeline().parameters.sFolderOrigin",
+										"type": "Expression"
+									}
+								}
+							},
+							"enableLogging": false,
+							"maxConcurrentConnections": 1
+						}
+					},
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDataLakeStoreSource",
+								"recursive": false
+							},
+							"sink": {
+								"type": "AzureDataLakeStoreSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_FILE_REFERENCE2",
+								"type": "DatasetReference",
+								"parameters": {
+									"sDS_FileName": {
+										"value": "@pipeline().parameters.sFileName",
+										"type": "Expression"
+									},
+									"sDS_FolderName": {
+										"value": "@pipeline().parameters.sFolderOrigin",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_FILE_REFERENCE2",
+								"type": "DatasetReference",
+								"parameters": {
+									"sDS_FileName": {
+										"value": "@pipeline().parameters.sFileName",
+										"type": "Expression"
+									},
+									"sDS_FolderName": {
+										"value": "@pipeline().parameters.sFolderDest",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"sFileName": {
+						"type": "String"
+					},
+					"sFolderOrigin": {
+						"type": "String"
+					},
+					"sFolderDest": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_FILE_REFERENCE2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDataLakeStoreSource",
+								"recursive": false
+							},
+							"sink": {
+								"type": "SqlSink",
+								"writeBatchSize": 10000
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"columnMappings": {
+									"nombre": "nombre",
+									"name": "name",
+									"nom": "nom",
+									"iso2": "iso2",
+									"iso3": "iso3",
+									"phone_code": "phone_code"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureDataLakeStoreFile1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureDataLakeStoreFile1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStoreDataDestination1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "It describes the destination store.",
+				"linkedServiceName": {
+					"referenceName": "ADL_CarpetaDestino",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"path": {
+						"type": "String"
+					},
+					"filename": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"treatEmptyAsNull": true
+					},
+					"fileName": {
+						"value": "[parameters('AzureDataLakeStoreDataDestination1_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('AzureDataLakeStoreDataDestination1_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaDestino')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStoreDataSource_File1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "It describes the file in the data source store. ",
+				"linkedServiceName": {
+					"referenceName": "ADL_CarpetaOrigen",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"path": {
+						"type": "String"
+					},
+					"filename": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"fileName": {
+						"value": "[parameters('AzureDataLakeStoreDataSource_File1_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('AzureDataLakeStoreDataSource_File1_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					},
+					"key": {
+						"value": "@dataset().filename",
+						"type": "Expression"
+					},
+					"bucketName": {
+						"value": "@dataset().path",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaOrigen')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStoreDataSource_Folder1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "It describes the folder in the data source store.",
+				"linkedServiceName": {
+					"referenceName": "ADL_CarpetaOrigen",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FolderPath": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"fileName": "[parameters('AzureDataLakeStoreDataSource_Folder1_properties_typeProperties_fileName')]",
+					"folderPath": {
+						"value": "[parameters('AzureDataLakeStoreDataSource_Folder1_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					},
+					"key": "",
+					"bucketName": {
+						"value": "@dataset().FolderPath",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaOrigen')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStoreFile1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "nombre",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "nom",
+						"type": "String"
+					},
+					{
+						"name": "iso2",
+						"type": "String"
+					},
+					{
+						"name": "iso3",
+						"type": "String"
+					},
+					{
+						"name": "phone_code",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('AzureDataLakeStoreFile1_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('AzureDataLakeStoreFile1_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "nombre",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "nom",
+						"type": "String"
+					},
+					{
+						"name": "iso2",
+						"type": "String"
+					},
+					{
+						"name": "iso3",
+						"type": "String"
+					},
+					{
+						"name": "phone_code",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Paises]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_FILE_REFERENCE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sDS_FileName": {
+						"type": "String"
+					},
+					"sDS_FolderName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": {
+						"value": "[parameters('DS_FILE_REFERENCE_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('DS_FILE_REFERENCE_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_FILE_REFERENCE1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADL_CarpetaOrigen",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sDS_FileName": {
+						"type": "String"
+					},
+					"sDS_FolderName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": {
+						"value": "[parameters('DS_FILE_REFERENCE1_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('DS_FILE_REFERENCE1_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaOrigen')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_FILE_REFERENCE2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADL_CarpetaOrigen",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sDS_FileName": {
+						"type": "String"
+					},
+					"sDS_FolderName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": {
+						"value": "[parameters('DS_FILE_REFERENCE2_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('DS_FILE_REFERENCE2_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaOrigen')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_7kw')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "nombre",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "nom",
+						"type": "String"
+					},
+					{
+						"name": "iso2",
+						"type": "String"
+					},
+					{
+						"name": "iso3",
+						"type": "String"
+					},
+					{
+						"name": "phone_code",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Paises]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MOVE_FILES_FICHERO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": "[parameters('PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('PL_MOVE_FILES_FICHERO_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MOVE_FILES_FICHERO_DESTINO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": "[parameters('PL_MOVE_FILES_FICHERO_DESTINO_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('PL_MOVE_FILES_FICHERO_DESTINO_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_7kw')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "nombre",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "nom",
+						"type": "String"
+					},
+					{
+						"name": "iso2",
+						"type": "String"
+					},
+					{
+						"name": "iso3",
+						"type": "String"
+					},
+					{
+						"name": "phone_code",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "\n",
+						"quoteChar": "\"",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('SourceDataset_7kw_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('SourceDataset_7kw_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADL_CarpetaDestino')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('ADL_CarpetaDestino_properties_typeProperties_dataLakeStoreUri')]",
+					"tenant": "[parameters('ADL_CarpetaDestino_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('ADL_CarpetaDestino_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('ADL_CarpetaDestino_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADL_CarpetaOrigen')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('ADL_CarpetaOrigen_properties_typeProperties_dataLakeStoreUri')]",
+					"tenant": "[parameters('ADL_CarpetaOrigen_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('ADL_CarpetaOrigen_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('ADL_CarpetaOrigen_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri')]",
+					"tenant": "[parameters('AzureDataLakeStore1_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeStore1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeStore1_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -1,0 +1,108 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "test-pipelines"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStoreDataDestination1_properties_typeProperties_fileName": {
+			"value": "@dataset().filename"
+		},
+		"AzureDataLakeStoreDataDestination1_properties_typeProperties_folderPath": {
+			"value": "@dataset().path"
+		},
+		"AzureDataLakeStoreDataSource_File1_properties_typeProperties_fileName": {
+			"value": "@dataset().filename"
+		},
+		"AzureDataLakeStoreDataSource_File1_properties_typeProperties_folderPath": {
+			"value": "@dataset().path"
+		},
+		"AzureDataLakeStoreDataSource_Folder1_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"AzureDataLakeStoreDataSource_Folder1_properties_typeProperties_folderPath": {
+			"value": "@dataset().FolderPath"
+		},
+		"AzureDataLakeStoreFile1_properties_typeProperties_fileName": {
+			"value": "paises.csv"
+		},
+		"AzureDataLakeStoreFile1_properties_typeProperties_folderPath": {
+			"value": "Test_Pipelines"
+		},
+		"DS_FILE_REFERENCE_properties_typeProperties_fileName": {
+			"value": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE_properties_typeProperties_folderPath": {
+			"value": "@dataset().sDS_FolderName"
+		},
+		"DS_FILE_REFERENCE1_properties_typeProperties_fileName": {
+			"value": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE1_properties_typeProperties_folderPath": {
+			"value": "@dataset().sDS_FolderName"
+		},
+		"DS_FILE_REFERENCE2_properties_typeProperties_fileName": {
+			"value": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE2_properties_typeProperties_folderPath": {
+			"value": "@dataset().sDS_FolderName"
+		},
+		"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
+			"value": "uno.csv"
+		},
+		"PL_MOVE_FILES_FICHERO_properties_typeProperties_folderPath": {
+			"value": "origen"
+		},
+		"PL_MOVE_FILES_FICHERO_DESTINO_properties_typeProperties_fileName": {
+			"value": "uno.csv"
+		},
+		"PL_MOVE_FILES_FICHERO_DESTINO_properties_typeProperties_folderPath": {
+			"value": "destino"
+		},
+		"SourceDataset_7kw_properties_typeProperties_fileName": {
+			"value": "paises.csv"
+		},
+		"SourceDataset_7kw_properties_typeProperties_folderPath": {
+			"value": "Test_Pipelines"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://testpipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_tenant": {
+			"value": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_subscriptionId": {
+			"value": "c9ef0068-989d-41b3-aaae-709c343cbc70"
+		},
+		"ADL_CarpetaDestino_properties_typeProperties_resourceGroupName": {
+			"value": "destino"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://testpipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_tenant": {
+			"value": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_subscriptionId": {
+			"value": "c9ef0068-989d-41b3-aaae-709c343cbc70"
+		},
+		"ADL_CarpetaOrigen_properties_typeProperties_resourceGroupName": {
+			"value": "origen"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://testpipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"value": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"value": "c9ef0068-989d-41b3-aaae-709c343cbc70"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"value": "Test_Pipelines"
+		}
+	}
+}
