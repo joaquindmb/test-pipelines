@@ -486,7 +486,7 @@
 				"typeProperties": {
 					"format": {
 						"type": "TextFormat",
-						"columnDelimiter": ",",
+						"columnDelimiter": ";",
 						"rowDelimiter": "",
 						"nullValue": "\\N",
 						"treatEmptyAsNull": true,
