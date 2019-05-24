@@ -1,0 +1,63 @@
+{
+	"name": "CopyPipeline_7kw",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_7kw",
+				"type": "Copy",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "Test_Pipelines/paises.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "[dbo].[Paises]"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureDataLakeStoreSource",
+						"recursive": false
+					},
+					"sink": {
+						"type": "SqlSink",
+						"writeBatchSize": 10000
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"columnMappings": {
+							"nombre": "nombre",
+							"name": "name",
+							"nom": "nom",
+							"iso2": "iso2",
+							"iso3": "iso3",
+							"phone_code": "phone_code"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_7kw",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_7kw",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

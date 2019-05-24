@@ -1,0 +1,40 @@
+{
+	"name": "DestinationDataset_7kw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "nombre",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "nom",
+				"type": "String"
+			},
+			{
+				"name": "iso2",
+				"type": "String"
+			},
+			{
+				"name": "iso3",
+				"type": "String"
+			},
+			{
+				"name": "phone_code",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Paises]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

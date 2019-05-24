@@ -1,0 +1,24 @@
+{
+	"name": "PL_MOVE_FILES_FICHERO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStore1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureDataLakeStoreFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": false
+			},
+			"fileName": "uno.csv",
+			"folderPath": "origen"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

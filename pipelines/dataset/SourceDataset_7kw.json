@@ -1,0 +1,52 @@
+{
+	"name": "SourceDataset_7kw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStore1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureDataLakeStoreFile",
+		"structure": [
+			{
+				"name": "nombre",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "nom",
+				"type": "String"
+			},
+			{
+				"name": "iso2",
+				"type": "String"
+			},
+			{
+				"name": "iso3",
+				"type": "String"
+			},
+			{
+				"name": "phone_code",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "\n",
+				"quoteChar": "\"",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "paises.csv",
+			"folderPath": "Test_Pipelines"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

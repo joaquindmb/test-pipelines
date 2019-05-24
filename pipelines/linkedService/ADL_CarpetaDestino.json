@@ -1,0 +1,13 @@
+{
+	"name": "ADL_CarpetaDestino",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://testpipelines.azuredatalakestore.net/webhdfs/v1",
+			"tenant": "cf36141c-ddd7-45a7-b073-111f66d0b30c",
+			"subscriptionId": "c9ef0068-989d-41b3-aaae-709c343cbc70",
+			"resourceGroupName": "destino"
+		}
+	}
+}
