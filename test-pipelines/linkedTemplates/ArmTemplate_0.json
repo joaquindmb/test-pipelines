@@ -115,6 +115,14 @@
 			"type": "string",
 			"defaultValue": "@dataset().sDS_FolderName"
 		},
+		"DS_FILE_REFERENCE3_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE3_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FolderName"
+		},
 		"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "uno.csv"
@@ -542,6 +550,49 @@
 					},
 					"folderPath": {
 						"value": "[parameters('DS_FILE_REFERENCE2_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaOrigen')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_FILE_REFERENCE3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADL_CarpetaOrigen",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sDS_FileName": {
+						"type": "String"
+					},
+					"sDS_FolderName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": {
+						"value": "[parameters('DS_FILE_REFERENCE3_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('DS_FILE_REFERENCE3_properties_typeProperties_folderPath')]",
 						"type": "Expression"
 					}
 				}
@@ -1094,123 +1145,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_FILE_REFERENCE')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_MOVE_FILES1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DeleteActivity",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "Copy Data1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DS_FILE_REFERENCE2",
-								"type": "DatasetReference",
-								"parameters": {
-									"sDS_FileName": {
-										"value": "@pipeline().parameters.sFileName",
-										"type": "Expression"
-									},
-									"sDS_FolderName": {
-										"value": "@pipeline().parameters.sFolderOrigin",
-										"type": "Expression"
-									}
-								}
-							},
-							"enableLogging": false,
-							"maxConcurrentConnections": 1
-						}
-					},
-					{
-						"name": "Copy Data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDataLakeStoreSource",
-								"recursive": false
-							},
-							"sink": {
-								"type": "AzureDataLakeStoreSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "DS_FILE_REFERENCE2",
-								"type": "DatasetReference",
-								"parameters": {
-									"sDS_FileName": {
-										"value": "@pipeline().parameters.sFileName",
-										"type": "Expression"
-									},
-									"sDS_FolderName": {
-										"value": "@pipeline().parameters.sFolderOrigin",
-										"type": "Expression"
-									}
-								}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DS_FILE_REFERENCE2",
-								"type": "DatasetReference",
-								"parameters": {
-									"sDS_FileName": {
-										"value": "@pipeline().parameters.sFileName",
-										"type": "Expression"
-									},
-									"sDS_FolderName": {
-										"value": "@pipeline().parameters.sFolderDest",
-										"type": "Expression"
-									}
-								}
-							}
-						]
-					}
-				],
-				"parameters": {
-					"sFileName": {
-						"type": "String"
-					},
-					"sFolderOrigin": {
-						"type": "String"
-					},
-					"sFolderDest": {
-						"type": "String"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_FILE_REFERENCE2')]"
 			]
 		}
 	]
