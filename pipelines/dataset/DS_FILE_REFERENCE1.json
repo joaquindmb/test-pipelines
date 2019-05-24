@@ -1,0 +1,37 @@
+{
+	"name": "DS_FILE_REFERENCE1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADL_CarpetaOrigen",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sDS_FileName": {
+				"type": "String"
+			},
+			"sDS_FolderName": {
+				"type": "String"
+			}
+		},
+		"type": "AzureDataLakeStoreFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": false
+			},
+			"fileName": {
+				"value": "@dataset().sDS_FileName",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "@dataset().sDS_FolderName",
+				"type": "Expression"
+			}
+		}
+	}
+}
