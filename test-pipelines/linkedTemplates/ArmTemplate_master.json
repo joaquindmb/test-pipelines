@@ -75,6 +75,14 @@
 			"type": "string",
 			"defaultValue": "@dataset().sDS_FolderName"
 		},
+		"DS_FILE_REFERENCE4_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FileName"
+		},
+		"DS_FILE_REFERENCE4_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().sDS_FolderName"
+		},
 		"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "uno.csv"
@@ -260,6 +268,12 @@
 					},
 					"DS_FILE_REFERENCE3_properties_typeProperties_folderPath": {
 						"value": "[parameters('DS_FILE_REFERENCE3_properties_typeProperties_folderPath')]"
+					},
+					"DS_FILE_REFERENCE4_properties_typeProperties_fileName": {
+						"value": "[parameters('DS_FILE_REFERENCE4_properties_typeProperties_fileName')]"
+					},
+					"DS_FILE_REFERENCE4_properties_typeProperties_folderPath": {
+						"value": "[parameters('DS_FILE_REFERENCE4_properties_typeProperties_folderPath')]"
 					},
 					"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
 						"value": "[parameters('PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName')]"
