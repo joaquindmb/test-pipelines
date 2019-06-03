@@ -56,12 +56,6 @@
 		"DS_FILE_REFERENCE3_properties_typeProperties_folderPath": {
 			"value": "@dataset().sDS_FolderName"
 		},
-		"DS_FILE_REFERENCE4_properties_typeProperties_fileName": {
-			"value": "@dataset().sDS_FileName"
-		},
-		"DS_FILE_REFERENCE4_properties_typeProperties_folderPath": {
-			"value": "@dataset().sDS_FolderName"
-		},
 		"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
 			"value": "uno.csv"
 		},

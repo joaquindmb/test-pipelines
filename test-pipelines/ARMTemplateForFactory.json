@@ -75,14 +75,6 @@
 			"type": "string",
 			"defaultValue": "@dataset().sDS_FolderName"
 		},
-		"DS_FILE_REFERENCE4_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().sDS_FileName"
-		},
-		"DS_FILE_REFERENCE4_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "@dataset().sDS_FolderName"
-		},
 		"PL_MOVE_FILES_FICHERO_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "uno.csv"
@@ -1106,49 +1098,6 @@
 					},
 					"folderPath": {
 						"value": "[parameters('DS_FILE_REFERENCE3_properties_typeProperties_folderPath')]",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADL_CarpetaOrigen')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_FILE_REFERENCE4')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADL_CarpetaOrigen",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"sDS_FileName": {
-						"type": "String"
-					},
-					"sDS_FolderName": {
-						"type": "String"
-					}
-				},
-				"annotations": [],
-				"type": "AzureDataLakeStoreFile",
-				"typeProperties": {
-					"format": {
-						"type": "TextFormat",
-						"columnDelimiter": ",",
-						"rowDelimiter": "",
-						"nullValue": "\\N",
-						"treatEmptyAsNull": true,
-						"skipLineCount": 0,
-						"firstRowAsHeader": false
-					},
-					"fileName": {
-						"value": "[parameters('DS_FILE_REFERENCE4_properties_typeProperties_fileName')]",
-						"type": "Expression"
-					},
-					"folderPath": {
-						"value": "[parameters('DS_FILE_REFERENCE4_properties_typeProperties_folderPath')]",
 						"type": "Expression"
 					}
 				}
