@@ -8,12 +8,6 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
-		"AzureBlob1_properties_typeProperties_fileName": {
-			"value": "new"
-		},
-		"AzureBlob1_properties_typeProperties_folderPath": {
-			"value": "main-blob"
-		},
 		"OData1_properties_typeProperties_url": {
 			"value": "https://services.odata.org/V3/Northwind/Northwind.svc"
 		}
