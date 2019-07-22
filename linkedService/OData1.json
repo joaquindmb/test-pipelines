@@ -5,7 +5,7 @@
 		"annotations": [],
 		"type": "OData",
 		"typeProperties": {
-			"url": "http:\\\\OData.com",
+			"url": "https://services.odata.org/V3/Northwind/Northwind.svc",
 			"authenticationType": "Anonymous"
 		}
 	}
