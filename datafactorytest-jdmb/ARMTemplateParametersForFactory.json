@@ -5,9 +5,6 @@
 		"factoryName": {
 			"value": "datafactorytest-jdmb"
 		},
-		"AzureBlobStorage1_connectionString": {
-			"value": ""
-		},
 		"OData1_properties_typeProperties_url": {
 			"value": "https://services.odata.org/V3/Northwind/Northwind.svc"
 		}

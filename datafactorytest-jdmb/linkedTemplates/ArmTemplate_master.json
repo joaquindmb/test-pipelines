@@ -7,10 +7,6 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "datafactorytest-jdmb"
 		},
-		"AzureBlobStorage1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-		},
 		"OData1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
@@ -41,9 +37,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"AzureBlobStorage1_connectionString": {
-						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
 					"OData1_properties_typeProperties_url": {
 						"value": "[parameters('OData1_properties_typeProperties_url')]"
