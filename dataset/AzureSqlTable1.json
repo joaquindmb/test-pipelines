@@ -1,0 +1,68 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "OrderID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CustomerID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EmployeeID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OrderDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RequiredDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShippedDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShipVia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Freight",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShipName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShipAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShipRegion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShipPostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ShipCountry",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Orders]"
+		}
+	}
+}
