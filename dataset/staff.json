@@ -26,6 +26,103 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "Data_Load_Date",
+				"type": "String"
+			},
+			{
+				"name": "Period",
+				"type": "String"
+			},
+			{
+				"name": "Data_Source",
+				"type": "String"
+			},
+			{
+				"name": "Employee_ID",
+				"type": "String"
+			},
+			{
+				"name": "Gender_ID",
+				"type": "String"
+			},
+			{
+				"name": "Birth_Date",
+				"type": "String"
+			},
+			{
+				"name": "Position",
+				"type": "String"
+			},
+			{
+				"name": "Prof_Category_ID",
+				"type": "String"
+			},
+			{
+				"name": "Contract_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "Hire_Date",
+				"type": "String"
+			},
+			{
+				"name": "Employment_Status_ID",
+				"type": "String"
+			},
+			{
+				"name": "FTE",
+				"type": "String"
+			},
+			{
+				"name": "Real_Hour",
+				"type": "String"
+			},
+			{
+				"name": "Theorical_Hour",
+				"type": "String"
+			},
+			{
+				"name": "Leaving_Date",
+				"type": "String"
+			},
+			{
+				"name": "Leave_Reason_ID",
+				"type": "String"
+			},
+			{
+				"name": "Leave_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "International_Assigment",
+				"type": "String"
+			},
+			{
+				"name": "Type_of_Assigment_ID",
+				"type": "String"
+			},
+			{
+				"name": "International_Asgm_Start Date",
+				"type": "String"
+			},
+			{
+				"name": "Home_Country_ID",
+				"type": "String"
+			},
+			{
+				"name": "Host_Country_ID",
+				"type": "String"
+			},
+			{
+				"name": "Destination_Legal_Entity_ID",
+				"type": "String"
+			},
+			{
+				"name": "Active_ID",
+				"type": "String"
+			}
+		]
 	}
 }
