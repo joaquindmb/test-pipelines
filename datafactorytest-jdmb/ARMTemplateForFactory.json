@@ -110,7 +110,10 @@
 									"type": "String"
 								},
 								"RESULT_DS": {
-									"value": "Inicio Pipeline",
+									"value": {
+										"value": "@concat('Incio Pipeline: ',pipeline().RunId)",
+										"type": "Expression"
+									},
 									"type": "String"
 								},
 								"RESULT_OK_KO": {
@@ -278,7 +281,10 @@
 									"type": "String"
 								},
 								"RESULT_DS": {
-									"value": "Fin Pipeline OK",
+									"value": {
+										"value": "@concat('Fin Pipeline OK: ',pipeline().RunId)",
+										"type": "Expression"
+									},
 									"type": "String"
 								},
 								"RESULT_OK_KO": {
@@ -523,8 +529,8 @@
 															"Leave_Reason_ID": "Leave_Reason_ID",
 															"Leave_Type_ID": "Leave_Type_ID",
 															"International_Assigment": "International_Assigment",
-															"International_Assigment_Type_ID": "International_Assigment_Type_ID",
-															"International_Asgm_Start_Date": "International_Asgm_Start_Date",
+															"Type_of_Assigment_ID": "International_Assigment_Type_ID",
+															"International_Asgm_Start Date": "International_Asgm_Start_Date",
 															"Home_Country_ID": "Home_Country_ID",
 															"Host_Country_ID": "Host_Country_ID",
 															"Destination_Legal_Entity_ID": "Destination_Legal_Entity_ID",
@@ -778,7 +784,16 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
-													"storedProcedureName": "[[PEOPLE_REVIEW].[PL_FEED_PR_Fact_Staff]"
+													"storedProcedureName": "[[PEOPLE_REVIEW].[PL_FEED_PR_Fact_Staff]",
+													"storedProcedureParameters": {
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
 												},
 												"linkedServiceName": {
 													"referenceName": "connecttosql",
@@ -1314,15 +1329,15 @@
 					},
 					{
 						"name": "FTE",
-						"type": "Decimal"
+						"type": "String"
 					},
 					{
 						"name": "Real_Hour",
-						"type": "Decimal"
+						"type": "String"
 					},
 					{
 						"name": "Theorical_Hour",
-						"type": "Decimal"
+						"type": "String"
 					},
 					{
 						"name": "Leaving_Date",
@@ -1341,11 +1356,11 @@
 						"type": "String"
 					},
 					{
-						"name": "International_Assigment_Type_ID",
+						"name": "Type_of_Assigment_ID",
 						"type": "String"
 					},
 					{
-						"name": "International_Asgm_Start_Date",
+						"name": "International_Asgm_Start Date",
 						"type": "String"
 					},
 					{
@@ -1469,6 +1484,139 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/staff')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"NameFile": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"fileName": {
+							"value": "@dataset().NameFile",
+							"type": "Expression"
+						},
+						"folderPath": "FromsFTP"
+					},
+					"columnDelimiter": "|@|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Data_Load_Date",
+						"type": "String"
+					},
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Employee_ID",
+						"type": "String"
+					},
+					{
+						"name": "Gender_ID",
+						"type": "String"
+					},
+					{
+						"name": "Birth_Date",
+						"type": "String"
+					},
+					{
+						"name": "Position",
+						"type": "String"
+					},
+					{
+						"name": "Prof_Category_ID",
+						"type": "String"
+					},
+					{
+						"name": "Contract_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Hire_Date",
+						"type": "String"
+					},
+					{
+						"name": "Employment_Status_ID",
+						"type": "String"
+					},
+					{
+						"name": "FTE",
+						"type": "String"
+					},
+					{
+						"name": "Real_Hour",
+						"type": "String"
+					},
+					{
+						"name": "Theorical_Hour",
+						"type": "String"
+					},
+					{
+						"name": "Leaving_Date",
+						"type": "String"
+					},
+					{
+						"name": "Leave_Reason_ID",
+						"type": "String"
+					},
+					{
+						"name": "Leave_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "International_Assigment",
+						"type": "String"
+					},
+					{
+						"name": "Type_of_Assigment_ID",
+						"type": "String"
+					},
+					{
+						"name": "International_Asgm_Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Home_Country_ID",
+						"type": "String"
+					},
+					{
+						"name": "Host_Country_ID",
+						"type": "String"
+					},
+					{
+						"name": "Destination_Legal_Entity_ID",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
+			]
 		}
 	]
 }
