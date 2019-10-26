@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorytest-jdmb"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
 		"connecttosql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
@@ -18,6 +14,30 @@
 		"OData1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
+		},
+		"connecttodatalake_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://pruebaspipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"connecttodatalake_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"connecttodatalake_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "af366761-7221-4663-a2ea-a9919ab7f12f"
+		},
+		"connecttodatalake_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "test-jdmb"
+		},
+		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().NameFile"
+		},
+		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "FromsFTP"
 		},
 		"containerUri": {
 			"type": "string",
@@ -46,14 +66,29 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureSqlDatabase1_connectionString": {
-						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
 					"connecttosql_connectionString": {
 						"value": "[parameters('connecttosql_connectionString')]"
 					},
 					"OData1_properties_typeProperties_url": {
 						"value": "[parameters('OData1_properties_typeProperties_url')]"
+					},
+					"connecttodatalake_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('connecttodatalake_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"connecttodatalake_properties_typeProperties_tenant": {
+						"value": "[parameters('connecttodatalake_properties_typeProperties_tenant')]"
+					},
+					"connecttodatalake_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('connecttodatalake_properties_typeProperties_subscriptionId')]"
+					},
+					"connecttodatalake_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('connecttodatalake_properties_typeProperties_resourceGroupName')]"
+					},
+					"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
+						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName')]"
+					},
+					"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
+						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
 					}
 				}
 			},

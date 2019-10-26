@@ -5,14 +5,29 @@
 		"factoryName": {
 			"value": "datafactorytest-jdmb"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"value": ""
-		},
 		"connecttosql_connectionString": {
 			"value": ""
 		},
 		"OData1_properties_typeProperties_url": {
 			"value": "https://services.odata.org/V3/Northwind/Northwind.svc"
+		},
+		"connecttodatalake_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://pruebaspipelines.azuredatalakestore.net/webhdfs/v1"
+		},
+		"connecttodatalake_properties_typeProperties_tenant": {
+			"value": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+		},
+		"connecttodatalake_properties_typeProperties_subscriptionId": {
+			"value": "af366761-7221-4663-a2ea-a9919ab7f12f"
+		},
+		"connecttodatalake_properties_typeProperties_resourceGroupName": {
+			"value": "test-jdmb"
+		},
+		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
+			"value": "@dataset().NameFile"
+		},
+		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
+			"value": "FromsFTP"
 		},
 		"containerUri": {
 			"value": ""
