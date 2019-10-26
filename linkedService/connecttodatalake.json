@@ -1,0 +1,14 @@
+{
+	"name": "connecttodatalake",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://pruebaspipelines.azuredatalakestore.net/webhdfs/v1",
+			"tenant": "cf36141c-ddd7-45a7-b073-111f66d0b30c",
+			"subscriptionId": "af366761-7221-4663-a2ea-a9919ab7f12f",
+			"resourceGroupName": "test-jdmb"
+		}
+	}
+}
