@@ -1,6 +1,116 @@
 {
 	"name": "pl_MoveFile",
 	"properties": {
+		"activities": [
+			{
+				"name": "Delete File",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Copy File",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_FileReference",
+						"type": "DatasetReference",
+						"parameters": {
+							"sFolderName": {
+								"value": "@pipeline().parameters.sFolderOrig",
+								"type": "Expression"
+							},
+							"sFileName": {
+								"value": "@pipeline().parameters.sFileNameOrig",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"maxConcurrentConnections": 1
+				}
+			},
+			{
+				"name": "Copy File",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureDataLakeStoreSource",
+						"recursive": false
+					},
+					"sink": {
+						"type": "AzureDataLakeStoreSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_FileReference",
+						"type": "DatasetReference",
+						"parameters": {
+							"sFolderName": {
+								"value": "@pipeline().parameters.sFolderOrig",
+								"type": "Expression"
+							},
+							"sFileName": {
+								"value": "@pipeline().parameters.sFileNameOrig",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_FileReference",
+						"type": "DatasetReference",
+						"parameters": {
+							"sFolderName": {
+								"value": "@pipeline().parameters.sFolderDest",
+								"type": "Expression"
+							},
+							"sFileName": {
+								"value": "@pipeline().parameters.sFileNameDest",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"sFolderOrig": {
+				"type": "String"
+			},
+			"sFileNameOrig": {
+				"type": "String"
+			},
+			"sFolderDest": {
+				"type": "String"
+			},
+			"sFileNameDest": {
+				"type": "String"
+			}
+		},
 		"annotations": []
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }
