@@ -46,7 +46,10 @@
 							"type": "String"
 						},
 						"RESULT_DS": {
-							"value": "Inicio Pipeline",
+							"value": {
+								"value": "@concat('Incio Pipeline: ',pipeline().RunId)",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"RESULT_OK_KO": {
@@ -213,7 +216,10 @@
 							"type": "String"
 						},
 						"RESULT_DS": {
-							"value": "Fin Pipeline OK",
+							"value": {
+								"value": "@concat('Fin Pipeline OK: ',pipeline().RunId)",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"RESULT_OK_KO": {
@@ -711,7 +717,16 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"storedProcedureName": "[PEOPLE_REVIEW].[PL_FEED_PR_Fact_Staff]"
+											"storedProcedureName": "[PEOPLE_REVIEW].[PL_FEED_PR_Fact_Staff]",
+											"storedProcedureParameters": {
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
 										},
 										"linkedServiceName": {
 											"referenceName": "connecttosql",
