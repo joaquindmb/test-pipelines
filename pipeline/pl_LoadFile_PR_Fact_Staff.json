@@ -153,6 +153,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataset": {
+						"referenceName": "DataLake_ListFiles",
+						"type": "DatasetReference"
+					},
 					"fieldList": [
 						"childItems"
 					]
@@ -794,7 +798,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@greaterOrEquals(indexof(item().name,'BRIDGE_PRBI_STAFF'),0)",
+						"value": "@greaterOrEquals(indexof(item().name,'BRIDGE_PRBI_STAFF'),0) ",
 						"type": "Expression"
 					}
 				}

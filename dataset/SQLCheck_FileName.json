@@ -1,0 +1,16 @@
+{
+	"name": "SQLCheck_FileName",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttosql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "PEOPLE_REVIEW",
+			"table": "ITC_PIPELINECONTROL"
+		}
+	}
+}
