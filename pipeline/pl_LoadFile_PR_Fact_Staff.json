@@ -424,8 +424,14 @@
 										],
 										"typeProperties": {
 											"source": {
-												"type": "AzureDataLakeStoreSource",
-												"recursive": true
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureDataLakeStoreReadSettings",
+													"recursive": true
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
 											},
 											"sink": {
 												"type": "SqlSink",
@@ -438,37 +444,229 @@
 											"dataIntegrationUnits": 0,
 											"translator": {
 												"type": "TabularTranslator",
-												"columnMappings": {
-													"Data_Load_Date": "Data_Load_Date",
-													"Period": "Period",
-													"Data_Source": "Data_Source",
-													"Employee_ID": "Employee_ID",
-													"Gender_ID": "Gender_ID",
-													"Birth_Date": "Birth_Date",
-													"Position": "Position",
-													"Prof_Category_ID": "Prof_Category_ID",
-													"Contract_Type_ID": "Contract_Type_ID",
-													"Hire_Date": "Hire_Date",
-													"Employment_Status_ID": "Employment_Status_ID",
-													"FTE": "FTE",
-													"Real_Hour": "Real_Hour",
-													"Theorical_Hour": "Theorical_Hour",
-													"Leaving_Date": "Leaving_Date",
-													"Leave_Reason_ID": "Leave_Reason_ID",
-													"Leave_Type_ID": "Leave_Type_ID",
-													"International_Assigment": "International_Assigment",
-													"International_Assigment_Type_ID": "International_Assigment_Type_ID",
-													"International_Asgm_Start_Date": "International_Asgm_Start_Date",
-													"Home_Country_ID": "Home_Country_ID",
-													"Host_Country_ID": "Host_Country_ID",
-													"Destination_Legal_Entity_ID": "Destination_Legal_Entity_ID",
-													"Active_ID": "Active_ID"
-												}
+												"mappings": [
+													{
+														"source": {
+															"name": "Data_Load_Date",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Data_Load_Date"
+														}
+													},
+													{
+														"source": {
+															"name": "Period",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Period"
+														}
+													},
+													{
+														"source": {
+															"name": "Data_Source",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Data_Source"
+														}
+													},
+													{
+														"source": {
+															"name": "Employee_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Employee_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Gender_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Gender_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Birth_Date",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Birth_Date"
+														}
+													},
+													{
+														"source": {
+															"name": "Position",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Position"
+														}
+													},
+													{
+														"source": {
+															"name": "Prof_Category_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Prof_Category_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Contract_Type_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Contract_Type_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Hire_Date",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Hire_Date"
+														}
+													},
+													{
+														"source": {
+															"name": "Employment_Status_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Employment_Status_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "FTE",
+															"type": "String"
+														},
+														"sink": {
+															"name": "FTE"
+														}
+													},
+													{
+														"source": {
+															"name": "Real_Hour",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Real_Hour"
+														}
+													},
+													{
+														"source": {
+															"name": "Theorical_Hour",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Theorical_Hour"
+														}
+													},
+													{
+														"source": {
+															"name": "Leaving_Date",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Leaving_Date"
+														}
+													},
+													{
+														"source": {
+															"name": "Leave_Reason_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Leave_Reason_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Leave_Type_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Leave_Type_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "International_Assigment",
+															"type": "String"
+														},
+														"sink": {
+															"name": "International_Assigment"
+														}
+													},
+													{
+														"source": {
+															"name": "Type_of_Assigment_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "International_Assigment_Type_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "International_Asgm_Start Date",
+															"type": "String"
+														},
+														"sink": {
+															"name": "International_Asgm_Start_Date"
+														}
+													},
+													{
+														"source": {
+															"name": "Home_Country_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Home_Country_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Host_Country_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Host_Country_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Destination_Legal_Entity_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Destination_Legal_Entity_ID"
+														}
+													},
+													{
+														"source": {
+															"name": "Active_ID",
+															"type": "String"
+														},
+														"sink": {
+															"name": "Active_ID"
+														}
+													}
+												]
 											}
 										},
 										"inputs": [
 											{
-												"referenceName": "PR_Fact_Staff_Source_Lake",
+												"referenceName": "staff",
 												"type": "DatasetReference",
 												"parameters": {
 													"NameFile": {
