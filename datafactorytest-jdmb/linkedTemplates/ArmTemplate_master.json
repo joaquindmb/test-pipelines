@@ -11,6 +11,30 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
 		},
+		"DS_FileReference_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().sFileName"
+		},
+		"DS_FileReference_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().sFolderName"
+		},
+		"DataLake_ListFiles_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"DataLake_ListFiles_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "FromsFTP"
+		},
+		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().NameFile"
+		},
+		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "FromsFTP"
+		},
 		"OData1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
@@ -30,14 +54,6 @@
 		"connecttodatalake_properties_typeProperties_resourceGroupName": {
 			"type": "string",
 			"defaultValue": "test-jdmb"
-		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().NameFile"
-		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "FromsFTP"
 		},
 		"containerUri": {
 			"type": "string",
@@ -83,6 +99,18 @@
 					},
 					"connecttodatalake_properties_typeProperties_resourceGroupName": {
 						"value": "[parameters('connecttodatalake_properties_typeProperties_resourceGroupName')]"
+					},
+					"DS_FileReference_properties_typeProperties_fileName": {
+						"value": "[parameters('DS_FileReference_properties_typeProperties_fileName')]"
+					},
+					"DS_FileReference_properties_typeProperties_folderPath": {
+						"value": "[parameters('DS_FileReference_properties_typeProperties_folderPath')]"
+					},
+					"DataLake_ListFiles_properties_typeProperties_fileName": {
+						"value": "[parameters('DataLake_ListFiles_properties_typeProperties_fileName')]"
+					},
+					"DataLake_ListFiles_properties_typeProperties_folderPath": {
+						"value": "[parameters('DataLake_ListFiles_properties_typeProperties_folderPath')]"
 					},
 					"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
 						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName')]"

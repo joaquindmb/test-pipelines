@@ -6,54 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorytest-jdmb"
-		},
-		"connecttosql_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
-		},
-		"DS_FileReference_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().sFileName"
-		},
-		"DS_FileReference_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "@dataset().sFolderName"
-		},
-		"DataLake_ListFiles_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": ""
-		},
-		"DataLake_ListFiles_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "FromsFTP"
-		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().NameFile"
-		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "FromsFTP"
-		},
-		"OData1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
-		},
-		"connecttodatalake_properties_typeProperties_dataLakeStoreUri": {
-			"type": "string",
-			"defaultValue": "https://pruebaspipelines.azuredatalakestore.net/webhdfs/v1"
-		},
-		"connecttodatalake_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
-		},
-		"connecttodatalake_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "af366761-7221-4663-a2ea-a9919ab7f12f"
-		},
-		"connecttodatalake_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "test-jdmb"
 		}
 	},
 	"variables": {
@@ -219,8 +171,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "DataLake_ListFiles",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -357,8 +308,7 @@
 										},
 										"dataset": {
 											"referenceName": "SQLCheck_FileName",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									}
 								},
@@ -545,8 +495,7 @@
 												"outputs": [
 													{
 														"referenceName": "PR_Fact_Staff_Destination_SQL",
-														"type": "DatasetReference",
-														"parameters": {}
+														"type": "DatasetReference"
 													}
 												]
 											},
@@ -932,11 +881,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]",
 				"[concat(variables('factoryId'), '/datasets/DataLake_ListFiles')]",
 				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
 				"[concat(variables('factoryId'), '/datasets/SQLCheck_FileName')]",
-				"[concat(variables('factoryId'), '/datasets/PR_Fact_Staff_Source_Lake')]",
 				"[concat(variables('factoryId'), '/datasets/PR_Fact_Staff_Destination_SQL')]"
 			]
 		},
@@ -1090,18 +1037,16 @@
 						"firstRowAsHeader": false
 					},
 					"fileName": {
-						"value": "[parameters('DS_FileReference_properties_typeProperties_fileName')]",
+						"value": "@dataset().sFileName",
 						"type": "Expression"
 					},
 					"folderPath": {
-						"value": "[parameters('DS_FileReference_properties_typeProperties_folderPath')]",
+						"value": "@dataset().sFolderName",
 						"type": "Expression"
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DataLake_ListFiles')]",
@@ -1124,13 +1069,11 @@
 						"skipLineCount": 0,
 						"firstRowAsHeader": false
 					},
-					"fileName": "[parameters('DataLake_ListFiles_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('DataLake_ListFiles_properties_typeProperties_folderPath')]"
+					"fileName": "",
+					"folderPath": "FromsFTP"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PR_Fact_Staff_Destination_SQL')]",
@@ -1245,145 +1188,7 @@
 					"tableName": "[[PEOPLE_REVIEW].[STG_PR_Fact_Staff]"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PR_Fact_Staff_Source_Lake')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "connecttodatalake",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"NameFile": {
-						"type": "String"
-					}
-				},
-				"annotations": [],
-				"type": "AzureDataLakeStoreFile",
-				"structure": [
-					{
-						"name": "Data_Load_Date",
-						"type": "String"
-					},
-					{
-						"name": "Period",
-						"type": "String"
-					},
-					{
-						"name": "Data_Source",
-						"type": "String"
-					},
-					{
-						"name": "Employee_ID",
-						"type": "String"
-					},
-					{
-						"name": "Gender_ID",
-						"type": "String"
-					},
-					{
-						"name": "Birth_Date",
-						"type": "String"
-					},
-					{
-						"name": "Position",
-						"type": "String"
-					},
-					{
-						"name": "Prof_Category_ID",
-						"type": "String"
-					},
-					{
-						"name": "Contract_Type_ID",
-						"type": "String"
-					},
-					{
-						"name": "Hire_Date",
-						"type": "String"
-					},
-					{
-						"name": "Employment_Status_ID",
-						"type": "String"
-					},
-					{
-						"name": "FTE",
-						"type": "Decimal"
-					},
-					{
-						"name": "Real_Hour",
-						"type": "Decimal"
-					},
-					{
-						"name": "Theorical_Hour",
-						"type": "Decimal"
-					},
-					{
-						"name": "Leaving_Date",
-						"type": "String"
-					},
-					{
-						"name": "Leave_Reason_ID",
-						"type": "String"
-					},
-					{
-						"name": "Leave_Type_ID",
-						"type": "String"
-					},
-					{
-						"name": "International_Assigment",
-						"type": "String"
-					},
-					{
-						"name": "International_Assigment_Type_ID",
-						"type": "String"
-					},
-					{
-						"name": "International_Asgm_Start_Date",
-						"type": "String"
-					},
-					{
-						"name": "Home_Country_ID",
-						"type": "String"
-					},
-					{
-						"name": "Host_Country_ID",
-						"type": "String"
-					},
-					{
-						"name": "Destination_Legal_Entity_ID",
-						"type": "String"
-					},
-					{
-						"name": "Active_ID",
-						"type": "String"
-					}
-				],
-				"typeProperties": {
-					"format": {
-						"type": "TextFormat",
-						"columnDelimiter": "|@|",
-						"rowDelimiter": "",
-						"nullValue": "\\N",
-						"encodingName": null,
-						"treatEmptyAsNull": true,
-						"skipLineCount": 0,
-						"firstRowAsHeader": true
-					},
-					"fileName": {
-						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName')]",
-						"type": "Expression"
-					},
-					"folderPath": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SQLCheck_FileName')]",
@@ -1400,70 +1205,6 @@
 				"typeProperties": {
 					"schema": "PEOPLE_REVIEW",
 					"table": "ITC_PIPELINECONTROL"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OData1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "OData",
-				"typeProperties": {
-					"url": "[parameters('OData1_properties_typeProperties_url')]",
-					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/connecttodatalake')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataLakeStore",
-				"typeProperties": {
-					"dataLakeStoreUri": "[parameters('connecttodatalake_properties_typeProperties_dataLakeStoreUri')]",
-					"tenant": "[parameters('connecttodatalake_properties_typeProperties_tenant')]",
-					"subscriptionId": "[parameters('connecttodatalake_properties_typeProperties_subscriptionId')]",
-					"resourceGroupName": "[parameters('connecttodatalake_properties_typeProperties_resourceGroupName')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/connecttosql')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('connecttosql_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntimeJokoTest')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "AutoResolve",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLiveInMinutes": 60
-						}
-					}
 				}
 			},
 			"dependsOn": []
