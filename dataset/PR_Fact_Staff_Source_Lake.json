@@ -59,15 +59,15 @@
 			},
 			{
 				"name": "FTE",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Real_Hour",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Theorical_Hour",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Leaving_Date",
@@ -86,11 +86,11 @@
 				"type": "String"
 			},
 			{
-				"name": "International_Assigment_Type_ID",
+				"name": "Type_of_Assigment_ID",
 				"type": "String"
 			},
 			{
-				"name": "International_Asgm_Start_Date",
+				"name": "International_Asgm_Start Date",
 				"type": "String"
 			},
 			{
