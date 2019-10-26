@@ -1,0 +1,39 @@
+{
+	"name": "DS_FileReference",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttodatalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sFolderName": {
+				"type": "String"
+			},
+			"sFileName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDataLakeStoreFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": false
+			},
+			"fileName": {
+				"value": "@dataset().sFileName",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "@dataset().sFolderName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
