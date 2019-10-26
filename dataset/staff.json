@@ -1,0 +1,23 @@
+{
+	"name": "staff",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttodatalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureDataLakeStoreLocation",
+				"fileName": "BRIDGE_PRBI_STAFF_1.TXT",
+				"folderPath": "FromsFTP"
+			},
+			"columnDelimiter": "|@|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
