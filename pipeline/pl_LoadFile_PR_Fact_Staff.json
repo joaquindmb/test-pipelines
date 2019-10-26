@@ -603,6 +603,13 @@
 												"STEP": {
 													"value": "220",
 													"type": "Int32"
+												},
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
 												}
 											}
 										},
