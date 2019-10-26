@@ -788,6 +788,13 @@
 														"type": "Expression"
 													},
 													"type": "String"
+												},
+												"AMBITO": {
+													"value": {
+														"value": "@pipeline().parameters.pLog_AMBIT",
+														"type": "Expression"
+													},
+													"type": "String"
 												}
 											}
 										},
