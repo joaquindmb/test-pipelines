@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"connecttosql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
+		},
 		"OData1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
@@ -44,6 +48,9 @@
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"connecttosql_connectionString": {
+						"value": "[parameters('connecttosql_connectionString')]"
 					},
 					"OData1_properties_typeProperties_url": {
 						"value": "[parameters('OData1_properties_typeProperties_url')]"
