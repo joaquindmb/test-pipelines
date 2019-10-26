@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "destinoSTGstaff",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -9,60 +9,111 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "OrderID",
+				"name": "Data_Load_Date",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CustomerID",
+				"name": "Period",
 				"type": "nvarchar"
 			},
 			{
-				"name": "EmployeeID",
+				"name": "Data_Source",
 				"type": "nvarchar"
 			},
 			{
-				"name": "OrderDate",
+				"name": "Employee_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "RequiredDate",
+				"name": "Gender_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShippedDate",
+				"name": "Birth_Date",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShipVia",
+				"name": "Position",
 				"type": "nvarchar"
 			},
 			{
-				"name": "Freight",
+				"name": "Prof_Category_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShipName",
+				"name": "Contract_Type_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShipAddress",
+				"name": "Hire_Date",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShipRegion",
+				"name": "Employment_Status_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShipPostalCode",
+				"name": "FTE",
+				"type": "decimal",
+				"precision": 28,
+				"scale": 9
+			},
+			{
+				"name": "Real_Hour",
+				"type": "decimal",
+				"precision": 28,
+				"scale": 9
+			},
+			{
+				"name": "Theorical_Hour",
+				"type": "decimal",
+				"precision": 28,
+				"scale": 9
+			},
+			{
+				"name": "Leaving_Date",
 				"type": "nvarchar"
 			},
 			{
-				"name": "ShipCountry",
+				"name": "Leave_Reason_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Leave_Type_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "International_Assigment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "International_Assigment_Type_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "International_Asgm_Start_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Home_Country_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Host_Country_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Destination_Legal_Entity_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Active_ID",
 				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
-			"tableName": "[dbo].[Orders]"
+			"schema": "PEOPLE_REVIEW",
+			"table": "STG_PR_Fact_Staff"
 		}
 	}
 }
