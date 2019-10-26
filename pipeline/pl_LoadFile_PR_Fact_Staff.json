@@ -54,7 +54,7 @@
 							"type": "Int32"
 						},
 						"STEP": {
-							"value": "1",
+							"value": "100",
 							"type": "Int32"
 						},
 						"ID_PIPELINE": {
@@ -408,7 +408,7 @@
 													"type": "Int32"
 												},
 												"STEP": {
-													"value": "100",
+													"value": "300",
 													"type": "Int32"
 												},
 												"ID_PIPELINE": {
@@ -601,7 +601,7 @@
 													"type": "Int32"
 												},
 												"STEP": {
-													"value": "100",
+													"value": "220",
 													"type": "Int32"
 												}
 											}
@@ -673,7 +673,7 @@
 													"type": "Int32"
 												},
 												"STEP": {
-													"value": "100",
+													"value": "220",
 													"type": "Int32"
 												},
 												"ID_PIPELINE": {
@@ -739,7 +739,7 @@
 													"type": "Int32"
 												},
 												"STEP": {
-													"value": "100",
+													"value": "200",
 													"type": "Int32"
 												},
 												"ID_PIPELINE": {
