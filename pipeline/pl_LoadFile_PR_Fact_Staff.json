@@ -233,7 +233,10 @@
 							"type": "Int32"
 						},
 						"ID_PIPELINE": {
-							"value": "@pipeline().RunId",
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -346,7 +349,14 @@
 									{
 										"name": "LOG No Files PR_Fact_Staff",
 										"type": "SqlServerStoredProcedure",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "File To Processed_copy Fichero ya procesado",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"policy": {
 											"timeout": "7.00:00:00",
 											"retry": 0,
@@ -388,7 +398,7 @@
 												},
 												"RESULT_DS": {
 													"value": {
-														"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'))",
+														"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'),', Se mueve a la carpeta Processed')",
 														"type": "Expression"
 													},
 													"type": "String"
@@ -410,6 +420,30 @@
 										"linkedServiceName": {
 											"referenceName": "connecttosql",
 											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "File To Processed_copy Fichero ya procesado",
+										"type": "ExecutePipeline",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pl_MoveFile",
+												"type": "PipelineReference"
+											},
+											"parameters": {
+												"sFolderOrig": "FromsFTP",
+												"sFileNameOrig": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												},
+												"sFolderDest": "Processed",
+												"sFileNameDest": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												}
+											}
 										}
 									}
 								],
