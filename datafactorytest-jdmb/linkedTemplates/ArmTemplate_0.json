@@ -428,7 +428,7 @@
 				"typeProperties": {
 					"format": {
 						"type": "TextFormat",
-						"columnDelimiter": "|@|",
+						"columnDelimiter": ";",
 						"rowDelimiter": "",
 						"nullValue": "\\N",
 						"encodingName": null,
@@ -1023,7 +1023,9 @@
 													},
 													"sink": {
 														"type": "SqlSink",
-														"writeBatchSize": 10000
+														"writeBatchSize": 10000,
+														"preCopyScript": "TRUNCATE TABLE [PEOPLE_REVIEW].[STG_PR_FACT_STAFF]",
+														"disableMetricsCollection": false
 													},
 													"enableStaging": false,
 													"enableSkipIncompatibleRow": false,
