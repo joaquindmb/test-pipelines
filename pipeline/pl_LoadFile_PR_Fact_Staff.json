@@ -46,10 +46,7 @@
 							"type": "String"
 						},
 						"RESULT_DS": {
-							"value": {
-								"value": "@concat('Incio Pipeline: ',pipeline().RunId)",
-								"type": "Expression"
-							},
+							"value": "Inicio Pipeline",
 							"type": "String"
 						},
 						"RESULT_OK_KO": {
@@ -59,6 +56,10 @@
 						"STEP": {
 							"value": "1",
 							"type": "Int32"
+						},
+						"ID_PIPELINE": {
+							"value": "@pipeline().RunId",
+							"type": "String"
 						}
 					}
 				},
@@ -128,6 +129,10 @@
 						"STEP": {
 							"value": "100",
 							"type": "Int32"
+						},
+						"ID_PIPELINE": {
+							"value": "@pipeline().RunId",
+							"type": "String"
 						}
 					}
 				},
@@ -216,10 +221,7 @@
 							"type": "String"
 						},
 						"RESULT_DS": {
-							"value": {
-								"value": "@concat('Fin Pipeline OK: ',pipeline().RunId)",
-								"type": "Expression"
-							},
+							"value": "Fin Pipeline OK",
 							"type": "String"
 						},
 						"RESULT_OK_KO": {
@@ -229,6 +231,10 @@
 						"STEP": {
 							"value": "100",
 							"type": "Int32"
+						},
+						"ID_PIPELINE": {
+							"value": "@pipeline().RunId",
+							"type": "String"
 						}
 					}
 				},
