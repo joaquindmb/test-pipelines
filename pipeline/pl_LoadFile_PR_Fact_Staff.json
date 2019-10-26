@@ -127,7 +127,7 @@
 							"type": "Int32"
 						},
 						"STEP": {
-							"value": "100",
+							"value": "110",
 							"type": "Int32"
 						},
 						"ID_PIPELINE": {
@@ -229,7 +229,7 @@
 							"type": "Int32"
 						},
 						"STEP": {
-							"value": "100",
+							"value": "110",
 							"type": "Int32"
 						},
 						"ID_PIPELINE": {
