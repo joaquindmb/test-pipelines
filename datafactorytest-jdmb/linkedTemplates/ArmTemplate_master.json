@@ -27,14 +27,6 @@
 			"type": "string",
 			"defaultValue": "FromsFTP"
 		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().NameFile"
-		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "FromsFTP"
-		},
 		"OData1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
@@ -111,12 +103,6 @@
 					},
 					"DataLake_ListFiles_properties_typeProperties_folderPath": {
 						"value": "[parameters('DataLake_ListFiles_properties_typeProperties_folderPath')]"
-					},
-					"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
-						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName')]"
-					},
-					"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
-						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
 					}
 				}
 			},

@@ -20,12 +20,6 @@
 		"DataLake_ListFiles_properties_typeProperties_folderPath": {
 			"value": "FromsFTP"
 		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
-			"value": "@dataset().NameFile"
-		},
-		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
-			"value": "FromsFTP"
-		},
 		"OData1_properties_typeProperties_url": {
 			"value": "https://services.odata.org/V3/Northwind/Northwind.svc"
 		},
