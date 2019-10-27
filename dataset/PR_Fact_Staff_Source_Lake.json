@@ -1,0 +1,132 @@
+{
+	"name": "PR_Fact_Staff_Source_Lake",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttodatalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"NameFile": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDataLakeStoreFile",
+		"structure": [
+			{
+				"name": "Data_Load_Date",
+				"type": "String"
+			},
+			{
+				"name": "Period",
+				"type": "String"
+			},
+			{
+				"name": "Data_Source",
+				"type": "String"
+			},
+			{
+				"name": "Employee_ID",
+				"type": "String"
+			},
+			{
+				"name": "Gender_ID",
+				"type": "String"
+			},
+			{
+				"name": "Birth_Date",
+				"type": "String"
+			},
+			{
+				"name": "Position",
+				"type": "String"
+			},
+			{
+				"name": "Prof_Category_ID",
+				"type": "String"
+			},
+			{
+				"name": "Contract_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "Hire_Date",
+				"type": "String"
+			},
+			{
+				"name": "Employment_Status_ID",
+				"type": "String"
+			},
+			{
+				"name": "FTE",
+				"type": "Decimal"
+			},
+			{
+				"name": "Real_Hour",
+				"type": "Decimal"
+			},
+			{
+				"name": "Theorical_Hour",
+				"type": "Decimal"
+			},
+			{
+				"name": "Leaving_Date",
+				"type": "String"
+			},
+			{
+				"name": "Leave_Reason_ID",
+				"type": "String"
+			},
+			{
+				"name": "Leave_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "International_Assigment",
+				"type": "String"
+			},
+			{
+				"name": "International_Assigment_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "International_Asgm_Start_Date",
+				"type": "String"
+			},
+			{
+				"name": "Home_Country_ID",
+				"type": "String"
+			},
+			{
+				"name": "Host_Country_ID",
+				"type": "String"
+			},
+			{
+				"name": "Destination_Legal_Entity_ID",
+				"type": "String"
+			},
+			{
+				"name": "Active_ID",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ";",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": {
+				"value": "@dataset().NameFile",
+				"type": "Expression"
+			},
+			"folderPath": "FromsFTP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
