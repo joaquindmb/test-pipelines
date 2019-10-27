@@ -58,7 +58,10 @@
 							"type": "Int32"
 						},
 						"ID_PIPELINE": {
-							"value": "@pipeline().RunId",
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -131,7 +134,10 @@
 							"type": "Int32"
 						},
 						"ID_PIPELINE": {
-							"value": "@pipeline().RunId",
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -305,7 +311,10 @@
 										},
 										"ID_PIPELINE": {
 											"type": "String",
-											"value": "@pipeline().RunId"
+											"value": {
+												"value": "@pipeline().RunId",
+												"type": "Expression"
+											}
 										}
 									}
 								},
@@ -347,16 +356,9 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "LOG No Files PR_Fact_Staff",
+										"name": "LOG File Alredy Processed PR_Fact_Staff",
 										"type": "SqlServerStoredProcedure",
-										"dependsOn": [
-											{
-												"activity": "File To Processed_copy Fichero ya procesado",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
+										"dependsOn": [],
 										"policy": {
 											"timeout": "7.00:00:00",
 											"retry": 0,
@@ -412,7 +414,10 @@
 													"type": "Int32"
 												},
 												"ID_PIPELINE": {
-													"value": "@pipeline().RunId",
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
 													"type": "String"
 												}
 											}
@@ -423,7 +428,7 @@
 										}
 									},
 									{
-										"name": "File To Processed_copy Fichero ya procesado",
+										"name": "Move File To Processed File Alredy Processed",
 										"type": "ExecutePipeline",
 										"dependsOn": [],
 										"userProperties": [],
@@ -484,7 +489,7 @@
 											"sink": {
 												"type": "SqlSink",
 												"writeBatchSize": 10000,
-												"preCopyScript": "TRUNCATE TABLE [PEOPLE_REVIEW].[STG_PR_FACT_STAFF]",
+												"preCopyScript": "TRUNCATE TABLE [PEOPLE_REVIEW].[PR_Fact_Staff]",
 												"disableMetricsCollection": false
 											},
 											"enableStaging": false,
@@ -511,8 +516,8 @@
 													"Leave_Reason_ID": "Leave_Reason_ID",
 													"Leave_Type_ID": "Leave_Type_ID",
 													"International_Assigment": "International_Assigment",
-													"Type_of_Assigment_ID": "International_Assigment_Type_ID",
-													"International_Asgm_Start Date": "International_Asgm_Start_Date",
+													"International_Assigment_Type_ID": "International_Assigment_Type_ID",
+													"International_Asgm_Start_Date": "International_Asgm_Start_Date",
 													"Home_Country_ID": "Home_Country_ID",
 													"Host_Country_ID": "Host_Country_ID",
 													"Destination_Legal_Entity_ID": "Destination_Legal_Entity_ID",
@@ -684,7 +689,10 @@
 													"type": "Int32"
 												},
 												"ID_PIPELINE": {
-													"value": "@pipeline().RunId",
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
 													"type": "String"
 												}
 											}
@@ -750,7 +758,10 @@
 													"type": "Int32"
 												},
 												"ID_PIPELINE": {
-													"value": "@pipeline().RunId",
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
 													"type": "String"
 												}
 											}
@@ -889,7 +900,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@greaterOrEquals(indexof(item().name,'BRIDGE_PRBI_STAFF'),0)",
+						"value": "@and(greaterOrEquals(indexof(item().name,'BRIDGE_PRBI_STAFF'),0),endswith(item().name,'.TXT')) ",
 						"type": "Expression"
 					}
 				}
