@@ -15,10 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "HttpTrigger1",
+					"functionName": "api/HttpTrigger1",
 					"method": "POST",
 					"body": {
-						"name": "Prueba"
+						"name": "Jhony"
 					}
 				},
 				"linkedServiceName": {
