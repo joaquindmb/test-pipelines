@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Azure Function1",
+				"name": "Azure Function test",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "api/HttpTrigger1",
+					"functionName": "HttpTrigger1",
 					"method": "POST",
 					"body": {
 						"name": "Jhony"
