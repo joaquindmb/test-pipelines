@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"functionName": "PGPDecrypt",
 					"method": "POST",
-					"body": "{'privateKeySecretId':'uno','passPhraseSecretId':'dos'}"
+					"body": {
+						"privateKeySecretId": "uno",
+						"passPhraseSecretId": "dos"
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureFunction1",
