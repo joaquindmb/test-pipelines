@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "PGPDecrypt",
+					"functionName": "PGPDecrypts",
 					"method": "POST",
 					"body": {
 						"privatekeysecretid": "privateKey_1",
