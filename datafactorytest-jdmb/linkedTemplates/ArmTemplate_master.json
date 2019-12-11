@@ -67,10 +67,6 @@
 			"type": "string",
 			"defaultValue": "test-jdmb"
 		},
-		"triggerEvent_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -142,9 +138,6 @@
 					},
 					"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
-					},
-					"triggerEvent_properties_typeProperties_scope": {
-						"value": "[parameters('triggerEvent_properties_typeProperties_scope')]"
 					}
 				}
 			},
