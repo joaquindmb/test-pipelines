@@ -1,0 +1,24 @@
+{
+	"name": "triggerEvent",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "test_events",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/containertest/blobs/origen/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
