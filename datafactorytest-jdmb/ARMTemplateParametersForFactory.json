@@ -5,6 +5,12 @@
 		"factoryName": {
 			"value": "datafactorytest-jdmb"
 		},
+		"AzureDataLakeStorageGen2_accountKey": {
+			"value": ""
+		},
+		"AzureFunction1_functionKey": {
+			"value": ""
+		},
 		"connecttosql_connectionString": {
 			"value": ""
 		},
@@ -26,6 +32,9 @@
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 			"value": "FromsFTP"
 		},
+		"AzureDataLakeStorageGen2_properties_typeProperties_url": {
+			"value": "https://jdbmdatalakegen2.dfs.core.windows.net"
+		},
 		"OData1_properties_typeProperties_url": {
 			"value": "https://services.odata.org/V3/Northwind/Northwind.svc"
 		},
@@ -40,6 +49,9 @@
 		},
 		"connecttodatalake_properties_typeProperties_resourceGroupName": {
 			"value": "test-jdmb"
+		},
+		"triggerEvent_properties_typeProperties_scope": {
+			"value": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
 		}
 	}
 }

@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorytest-jdmb"
 		},
+		"AzureDataLakeStorageGen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorageGen2'"
+		},
+		"AzureFunction1_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'AzureFunction1'"
+		},
 		"connecttosql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
@@ -35,6 +43,10 @@
 			"type": "string",
 			"defaultValue": "FromsFTP"
 		},
+		"AzureDataLakeStorageGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jdbmdatalakegen2.dfs.core.windows.net"
+		},
 		"OData1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://services.odata.org/V3/Northwind/Northwind.svc"
@@ -54,6 +66,10 @@
 		"connecttodatalake_properties_typeProperties_resourceGroupName": {
 			"type": "string",
 			"defaultValue": "test-jdmb"
+		},
+		"triggerEvent_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
 		},
 		"containerUri": {
 			"type": "string",
@@ -82,8 +98,17 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureDataLakeStorageGen2_accountKey": {
+						"value": "[parameters('AzureDataLakeStorageGen2_accountKey')]"
+					},
+					"AzureFunction1_functionKey": {
+						"value": "[parameters('AzureFunction1_functionKey')]"
+					},
 					"connecttosql_connectionString": {
 						"value": "[parameters('connecttosql_connectionString')]"
+					},
+					"AzureDataLakeStorageGen2_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorageGen2_properties_typeProperties_url')]"
 					},
 					"OData1_properties_typeProperties_url": {
 						"value": "[parameters('OData1_properties_typeProperties_url')]"
@@ -117,6 +142,9 @@
 					},
 					"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
+					},
+					"triggerEvent_properties_typeProperties_scope": {
+						"value": "[parameters('triggerEvent_properties_typeProperties_scope')]"
 					}
 				}
 			},
