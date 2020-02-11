@@ -78,6 +78,14 @@
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "FromsFTP"
+		},
+		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().NameFile"
+		},
+		"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat(dataset().RaizRuta,'/FromsFTP')"
 		}
 	},
 	"variables": {
@@ -768,180 +776,119 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/ds_biinsite_SourceLake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"NameFile": {
+						"type": "String"
+					},
+					"RaizRuta": {
+						"type": "string",
+						"defaultValue": "peoplereviewtest"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
 					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "Binary2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Binary3",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
+						"name": "Data_Load_Date",
+						"type": "String"
+					},
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
 					}
 				],
-				"annotations": []
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": "|",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": {
+						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Binary2')]",
-				"[concat(variables('factoryId'), '/datasets/Binary3')]"
+				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_MoveFile')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/ds_biinsite_Destination_SQL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
+				"linkedServiceName": {
+					"referenceName": "connecttosql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
 					{
-						"name": "Delete File",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "Copy File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DS_FileReference",
-								"type": "DatasetReference",
-								"parameters": {
-									"sFolderName": {
-										"value": "@pipeline().parameters.sFolderOrig",
-										"type": "Expression"
-									},
-									"sFileName": {
-										"value": "@pipeline().parameters.sFileNameOrig",
-										"type": "Expression"
-									}
-								}
-							},
-							"enableLogging": false,
-							"maxConcurrentConnections": 1
-						}
+						"name": "Data_Load_Date",
+						"type": "String"
 					},
 					{
-						"name": "Copy File",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDataLakeStoreSource",
-								"recursive": false
-							},
-							"sink": {
-								"type": "AzureDataLakeStoreSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "DS_FileReference",
-								"type": "DatasetReference",
-								"parameters": {
-									"sFolderName": {
-										"value": "@pipeline().parameters.sFolderOrig",
-										"type": "Expression"
-									},
-									"sFileName": {
-										"value": "@pipeline().parameters.sFileNameOrig",
-										"type": "Expression"
-									}
-								}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DS_FileReference",
-								"type": "DatasetReference",
-								"parameters": {
-									"sFolderName": {
-										"value": "@pipeline().parameters.sFolderDest",
-										"type": "Expression"
-									},
-									"sFileName": {
-										"value": "@pipeline().parameters.sFileNameDest",
-										"type": "Expression"
-									}
-								}
-							}
-						]
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
 					}
 				],
-				"parameters": {
-					"sFolderOrig": {
-						"type": "String"
-					},
-					"sFileNameOrig": {
-						"type": "String"
-					},
-					"sFolderDest": {
-						"type": "String"
-					},
-					"sFileNameDest": {
-						"type": "String"
-					}
-				},
-				"annotations": []
+				"typeProperties": {
+					"tableName": "[[PEOPLE_REVIEW].[STG_PR_Dim_Course_Type]"
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_FileReference')]"
+				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]"
 			]
 		}
 	]
