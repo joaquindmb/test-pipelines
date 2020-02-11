@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'functionKey' of 'AzureFunction1'"
 		},
+		"Connecttofunction_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'Connecttofunction'"
+		},
 		"connecttosql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
@@ -34,6 +38,14 @@
 		"DataLake_ListFiles_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "FromsFTP"
+		},
+		"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().NameFile"
+		},
+		"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat(dataset().RaizRuta,'/FromsFTP')"
 		},
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
 			"type": "string",
@@ -104,6 +116,9 @@
 					"AzureFunction1_functionKey": {
 						"value": "[parameters('AzureFunction1_functionKey')]"
 					},
+					"Connecttofunction_functionKey": {
+						"value": "[parameters('Connecttofunction_functionKey')]"
+					},
 					"connecttosql_connectionString": {
 						"value": "[parameters('connecttosql_connectionString')]"
 					},
@@ -137,18 +152,44 @@
 					"DataLake_ListFiles_properties_typeProperties_folderPath": {
 						"value": "[parameters('DataLake_ListFiles_properties_typeProperties_folderPath')]"
 					},
+					"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_fileName": {
+						"value": "[parameters('PR_Dim_Course_Type_Source_Lake_properties_typeProperties_fileName')]"
+					},
+					"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_folderPath": {
+						"value": "[parameters('PR_Dim_Course_Type_Source_Lake_properties_typeProperties_folderPath')]"
+					},
 					"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
 						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName')]"
 					},
 					"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"trigger1_properties_typeProperties_scope": {
 						"value": "[parameters('trigger1_properties_typeProperties_scope')]"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
 		}
 	]
 }

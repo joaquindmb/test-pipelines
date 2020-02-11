@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'functionKey' of 'AzureFunction1'"
 		},
+		"Connecttofunction_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'Connecttofunction'"
+		},
 		"connecttosql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
@@ -59,6 +63,14 @@
 			"type": "string",
 			"defaultValue": "FromsFTP"
 		},
+		"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().NameFile"
+		},
+		"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat(dataset().RaizRuta,'/FromsFTP')"
+		},
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "@dataset().NameFile"
@@ -66,10 +78,6 @@
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "FromsFTP"
-		},
-		"trigger1_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
 		}
 	},
 	"variables": {
@@ -105,6 +113,23 @@
 					"functionKey": {
 						"type": "SecureString",
 						"value": "[parameters('AzureFunction1_functionKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Connecttofunction')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFunction",
+				"typeProperties": {
+					"functionAppUrl": "https://gpgdecript.azurewebsites.net",
+					"functionKey": {
+						"type": "SecureString",
+						"value": "[parameters('Connecttofunction_functionKey')]"
 					}
 				}
 			},
@@ -258,6 +283,29 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Binary3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "procesado",
+						"fileSystem": "containertest"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageGen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_FileReference')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -323,6 +371,122 @@
 					},
 					"fileName": "[parameters('DataLake_ListFiles_properties_typeProperties_fileName')]",
 					"folderPath": "[parameters('DataLake_ListFiles_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PR_Dim_Course_Type_Destination_SQL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttosql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "Data_Load_Date",
+						"type": "String"
+					},
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[PEOPLE_REVIEW].[STG_PR_Dim_Course_Type]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PR_Dim_Course_Type_Source_Lake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"NameFile": {
+						"type": "String"
+					},
+					"RaizRuta": {
+						"type": "string",
+						"defaultValue": "peoplereviewtest"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "Data_Load_Date",
+						"type": "String"
+					},
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": "|",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": {
+						"value": "[parameters('PR_Dim_Course_Type_Source_Lake_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('PR_Dim_Course_Type_Source_Lake_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
 				}
 			},
 			"dependsOn": [
@@ -604,26 +768,60 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Binary3')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorageGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "procesado",
-						"fileSystem": "containertest"
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary3",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
-				}
+				],
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageGen2')]"
+				"[concat(variables('factoryId'), '/datasets/Binary2')]",
+				"[concat(variables('factoryId'), '/datasets/Binary3')]"
 			]
 		},
 		{
@@ -744,1128 +942,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_FileReference')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/test_events')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "Binary1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Binary2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Binary1')]",
-				"[concat(variables('factoryId'), '/datasets/Binary2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "Binary2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Binary3",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Binary2')]",
-				"[concat(variables('factoryId'), '/datasets/Binary3')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pl_LoadFile_PR_Fact_Staff')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Log Inicio PR_Fact_Staff",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-							"storedProcedureParameters": {
-								"AMBIT": {
-									"value": {
-										"value": "@pipeline().parameters.pLog_AMBIT",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ENTRY": {
-									"value": {
-										"value": "@variables('vLog_ENTRY')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"OUT": {
-									"value": {
-										"value": "@variables('vLog_OUT')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"PROCNAME": {
-									"value": {
-										"value": "@variables('vLog_PROCNAME')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_DS": {
-									"value": "Inicio Pipeline",
-									"type": "String"
-								},
-								"RESULT_OK_KO": {
-									"value": "1",
-									"type": "Int32"
-								},
-								"STEP": {
-									"value": "100",
-									"type": "Int32"
-								},
-								"ID_PIPELINE": {
-									"value": {
-										"value": "@pipeline().RunId",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "connecttosql",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Log Fin KO PR_Fact_Staff",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "File To Failed Load",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-							"storedProcedureParameters": {
-								"AMBIT": {
-									"value": {
-										"value": "@pipeline().parameters.pLog_AMBIT",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ENTRY": {
-									"value": {
-										"value": "@variables('vLog_ENTRY')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"OUT": {
-									"value": {
-										"value": "@variables('vLog_OUT')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"PROCNAME": {
-									"value": {
-										"value": "@variables('vLog_PROCNAME')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_DS": {
-									"value": "Fin Pipeline KO",
-									"type": "String"
-								},
-								"RESULT_OK_KO": {
-									"value": "0",
-									"type": "Int32"
-								},
-								"STEP": {
-									"value": "110",
-									"type": "Int32"
-								},
-								"ID_PIPELINE": {
-									"value": {
-										"value": "@pipeline().RunId",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "connecttosql",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Get NameFile PR_Fact_Staff",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Log Inicio PR_Fact_Staff",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DataLake_ListFiles",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems"
-							]
-						}
-					},
-					{
-						"name": "Log Fin OK PR_Fact_Staff",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "ForEach PR_Fact_Staff",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-							"storedProcedureParameters": {
-								"AMBIT": {
-									"value": {
-										"value": "@pipeline().parameters.pLog_AMBIT",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ENTRY": {
-									"value": {
-										"value": "@variables('vLog_ENTRY')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"OUT": {
-									"value": {
-										"value": "@variables('vLog_OUT')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"PROCNAME": {
-									"value": {
-										"value": "@variables('vLog_PROCNAME')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_DS": {
-									"value": "Fin Pipeline OK",
-									"type": "String"
-								},
-								"RESULT_OK_KO": {
-									"value": "1",
-									"type": "Int32"
-								},
-								"STEP": {
-									"value": "110",
-									"type": "Int32"
-								},
-								"ID_PIPELINE": {
-									"value": {
-										"value": "@pipeline().RunId",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "connecttosql",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "ForEach PR_Fact_Staff",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Filter PR_Fact_Staff",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Filter PR_Fact_Staff').output.value",
-								"type": "Expression"
-							},
-							"isSequential": true,
-							"activities": [
-								{
-									"name": "Check FileName Already PR_Fact_Staff",
-									"type": "Lookup",
-									"dependsOn": [
-										{
-											"activity": "Set FileName PR_Fact_Staff",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SqlSource",
-											"sqlReaderStoredProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINE_FILE_LOG_INSERT]",
-											"storedProcedureParameters": {
-												"FileName": {
-													"type": "String",
-													"value": {
-														"value": "@variables('vFileNameCurrent')",
-														"type": "Expression"
-													}
-												},
-												"Proc": {
-													"type": "String",
-													"value": {
-														"value": "@variables('vLog_PROCNAME')",
-														"type": "Expression"
-													}
-												},
-												"ID_PIPELINE": {
-													"type": "String",
-													"value": {
-														"value": "@pipeline().RunId",
-														"type": "Expression"
-													}
-												}
-											}
-										},
-										"dataset": {
-											"referenceName": "SQLCheck_FileName",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									}
-								},
-								{
-									"name": "Set FileName PR_Fact_Staff",
-									"type": "SetVariable",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "vFileNameCurrent",
-										"value": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
-								},
-								{
-									"name": "Copy_File_ToSQL PR_Fact_Staff",
-									"type": "IfCondition",
-									"dependsOn": [
-										{
-											"activity": "Check FileName Already PR_Fact_Staff",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"userProperties": [],
-									"typeProperties": {
-										"expression": {
-											"value": "@activity('Check FileName Already PR_Fact_Staff').output.firstRow.Result",
-											"type": "Expression"
-										},
-										"ifFalseActivities": [
-											{
-												"name": "LOG File Alredy Processed PR_Fact_Staff",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": {
-																"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'),', Se mueve a la carpeta Processed')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "1",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "300",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Move File To Processed File Alredy Processed",
-												"type": "ExecutePipeline",
-												"dependsOn": [],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pl_MoveFile",
-														"type": "PipelineReference"
-													},
-													"parameters": {
-														"sFolderOrig": "FromsFTP",
-														"sFileNameOrig": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														},
-														"sFolderDest": "Processed",
-														"sFileNameDest": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														}
-													}
-												}
-											}
-										],
-										"ifTrueActivities": [
-											{
-												"name": "Copy To SQL PR_Fact_Staff",
-												"type": "Copy",
-												"dependsOn": [
-													{
-														"activity": "Log Inicio Copia PR_Fact_Staff",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [
-													{
-														"name": "Source",
-														"value": "/__"
-													},
-													{
-														"name": "Destination",
-														"value": "__"
-													}
-												],
-												"typeProperties": {
-													"source": {
-														"type": "AzureDataLakeStoreSource",
-														"recursive": true
-													},
-													"sink": {
-														"type": "SqlSink",
-														"writeBatchSize": 10000,
-														"preCopyScript": "TRUNCATE TABLE [PEOPLE_REVIEW].[PR_Fact_Staff]",
-														"disableMetricsCollection": false
-													},
-													"enableStaging": false,
-													"enableSkipIncompatibleRow": false,
-													"dataIntegrationUnits": 0,
-													"translator": {
-														"type": "TabularTranslator",
-														"columnMappings": {
-															"Data_Load_Date": "Data_Load_Date",
-															"Period": "Period",
-															"Data_Source": "Data_Source",
-															"Employee_ID": "Employee_ID",
-															"Gender_ID": "Gender_ID",
-															"Birth_Date": "Birth_Date",
-															"Position": "Position",
-															"Prof_Category_ID": "Prof_Category_ID",
-															"Contract_Type_ID": "Contract_Type_ID",
-															"Hire_Date": "Hire_Date",
-															"Employment_Status_ID": "Employment_Status_ID",
-															"FTE": "FTE",
-															"Real_Hour": "Real_Hour",
-															"Theorical_Hour": "Theorical_Hour",
-															"Leaving_Date": "Leaving_Date",
-															"Leave_Reason_ID": "Leave_Reason_ID",
-															"Leave_Type_ID": "Leave_Type_ID",
-															"International_Assigment": "International_Assigment",
-															"International_Assigment_Type_ID": "International_Assigment_Type_ID",
-															"International_Asgm_Start_Date": "International_Asgm_Start_Date",
-															"Home_Country_ID": "Home_Country_ID",
-															"Host_Country_ID": "Host_Country_ID",
-															"Destination_Legal_Entity_ID": "Destination_Legal_Entity_ID",
-															"Active_ID": "Active_ID"
-														}
-													}
-												},
-												"inputs": [
-													{
-														"referenceName": "PR_Fact_Staff_Source_Lake",
-														"type": "DatasetReference",
-														"parameters": {
-															"NameFile": {
-																"value": "@variables('vFileNameCurrent')",
-																"type": "Expression"
-															}
-														}
-													}
-												],
-												"outputs": [
-													{
-														"referenceName": "PR_Fact_Staff_Destination_SQL",
-														"type": "DatasetReference",
-														"parameters": {}
-													}
-												]
-											},
-											{
-												"name": "Log OK PR_Fact_Staff",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "File To Processed",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": {
-																"value": "@concat('Fin del proceso de copia OK: ',string(activity('Copy To SQL PR_Fact_Staff').output))",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "1",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "220",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Log KO PR_Fact_Staff",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "File To FailedLoad",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": {
-																"value": "@concat('Fin del proceso de copia ERROR: ',string(activity('Copy To SQL PR_Fact_Staff').output))",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "0",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "220",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Log Inicio Copia PR_Fact_Staff",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": "Inicio proceso de copia",
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "1",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "200",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "PL_FEED__PR_Fact_Staff",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "Copy To SQL PR_Fact_Staff",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[PEOPLE_REVIEW].[PL_FEED_PR_Fact_Staff]",
-													"storedProcedureParameters": {
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"AMBITO": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "File To Processed",
-												"type": "ExecutePipeline",
-												"dependsOn": [
-													{
-														"activity": "PL_FEED__PR_Fact_Staff",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pl_MoveFile",
-														"type": "PipelineReference"
-													},
-													"parameters": {
-														"sFolderOrig": "FromsFTP",
-														"sFileNameOrig": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														},
-														"sFolderDest": "Processed",
-														"sFileNameDest": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														}
-													}
-												}
-											},
-											{
-												"name": "File To FailedLoad",
-												"type": "ExecutePipeline",
-												"dependsOn": [
-													{
-														"activity": "Copy To SQL PR_Fact_Staff",
-														"dependencyConditions": [
-															"Failed"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pl_MoveFile",
-														"type": "PipelineReference"
-													},
-													"parameters": {
-														"sFolderOrig": "FromsFTP",
-														"sFileNameOrig": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														},
-														"sFolderDest": "FailedLoad",
-														"sFileNameDest": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														}
-													}
-												}
-											}
-										]
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Filter PR_Fact_Staff",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Get NameFile PR_Fact_Staff",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get NameFile PR_Fact_Staff').output.childitems",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@and(greaterOrEquals(indexof(item().name,'BRIDGE_PRBI_STAFF'),0),endswith(item().name,'.TXT')) ",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "File To Failed Load",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "ForEach PR_Fact_Staff",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "pl_MoveFile",
-								"type": "PipelineReference"
-							},
-							"parameters": {
-								"sFolderOrig": "FromsFTP",
-								"sFileNameOrig": {
-									"value": "@variables('vFileNameCurrent')",
-									"type": "Expression"
-								},
-								"sFolderDest": "FailedLoad",
-								"sFileNameDest": {
-									"value": "@variables('vFileNameCurrent')",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"parameters": {
-					"pLog_AMBIT": {
-						"type": "String",
-						"defaultValue": "OBRA"
-					}
-				},
-				"variables": {
-					"vLog_PROCNAME": {
-						"type": "String",
-						"defaultValue": "pl_LoadFile_PR_Fact_Staff"
-					},
-					"vLog_ENTRY": {
-						"type": "String",
-						"defaultValue": "File_PR_Fact_Staff"
-					},
-					"vLog_OUT": {
-						"type": "String"
-					},
-					"vFileNameCurrent": {
-						"type": "String",
-						"defaultValue": "PR_Fact_Staff"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]",
-				"[concat(variables('factoryId'), '/datasets/DataLake_ListFiles')]",
-				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
-				"[concat(variables('factoryId'), '/datasets/SQLCheck_FileName')]",
-				"[concat(variables('factoryId'), '/datasets/PR_Fact_Staff_Source_Lake')]",
-				"[concat(variables('factoryId'), '/datasets/PR_Fact_Staff_Destination_SQL')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/containertest/blobs/destino/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
 			]
 		}
 	]

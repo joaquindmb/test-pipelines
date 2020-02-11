@@ -11,6 +11,9 @@
 		"AzureFunction1_functionKey": {
 			"value": ""
 		},
+		"Connecttofunction_functionKey": {
+			"value": ""
+		},
 		"connecttosql_connectionString": {
 			"value": ""
 		},
@@ -25,6 +28,12 @@
 		},
 		"DataLake_ListFiles_properties_typeProperties_folderPath": {
 			"value": "FromsFTP"
+		},
+		"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_fileName": {
+			"value": "@dataset().NameFile"
+		},
+		"PR_Dim_Course_Type_Source_Lake_properties_typeProperties_folderPath": {
+			"value": "@concat(dataset().RaizRuta,'/FromsFTP')"
 		},
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_fileName": {
 			"value": "@dataset().NameFile"
