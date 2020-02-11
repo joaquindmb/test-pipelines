@@ -1,5 +1,5 @@
 {
-	"name": "AzureDataLakeStoreFile1",
+	"name": "ds_biinsite_SourceLake",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "connecttodatalake",

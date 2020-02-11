@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "ds_biinsite_Destination_SQL",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "connecttosql",
