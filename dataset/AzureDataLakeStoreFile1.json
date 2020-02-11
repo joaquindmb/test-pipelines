@@ -1,0 +1,67 @@
+{
+	"name": "AzureDataLakeStoreFile1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttodatalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"NameFile": {
+				"type": "String"
+			},
+			"RaizRuta": {
+				"type": "string",
+				"defaultValue": "peoplereviewtest"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDataLakeStoreFile",
+		"structure": [
+			{
+				"name": "Data_Load_Date",
+				"type": "String"
+			},
+			{
+				"name": "Period",
+				"type": "String"
+			},
+			{
+				"name": "Data_Source",
+				"type": "String"
+			},
+			{
+				"name": "Course_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "Course_Type_Description",
+				"type": "String"
+			},
+			{
+				"name": "Active_ID",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": "|",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": {
+				"value": "@dataset().NameFile",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "@concat(dataset().RaizRuta,'/FromsFTP')",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
