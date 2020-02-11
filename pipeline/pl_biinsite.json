@@ -471,7 +471,7 @@
 										"type": "Copy",
 										"dependsOn": [
 											{
-												"activity": "Function Decrypt PR_Dim_Course_Type",
+												"activity": "Log Inicio Copia PR_Dim_Course_Type",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -548,7 +548,7 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "Delete Decrypted File",
+												"activity": "File To Processed",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -627,7 +627,7 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "Delete Decrypted Failed File",
+												"activity": "File To FailedLoad",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -859,6 +859,12 @@
 												"dependencyConditions": [
 													"Failed"
 												]
+											},
+											{
+												"activity": "PL_FEED__PR_Dim_Course_Type",
+												"dependencyConditions": [
+													"Failed"
+												]
 											}
 										],
 										"userProperties": [],
@@ -885,113 +891,6 @@
 													"type": "Expression"
 												}
 											}
-										}
-									},
-									{
-										"name": "Function Decrypt PR_Dim_Course_Type",
-										"type": "AzureFunctionActivity",
-										"dependsOn": [
-											{
-												"activity": "Log Inicio Copia PR_Dim_Course_Type",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"functionName": {
-												"value": "@concat('BridgeDecriptGPG?filename=',variables('vFileNameCurrent'),'&idexecpipeline=',pipeline().RunId, '&fileSystemName=',pipeline().parameters.pRaizRuta)",
-												"type": "Expression"
-											},
-											"method": "GET"
-										},
-										"linkedServiceName": {
-											"referenceName": "Connecttofunction",
-											"type": "LinkedServiceReference"
-										}
-									},
-									{
-										"name": "Delete Decrypted Failed File",
-										"type": "Delete",
-										"dependsOn": [
-											{
-												"activity": "File To FailedLoad",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"dataset": {
-												"referenceName": "DS_FileReference",
-												"type": "DatasetReference",
-												"parameters": {
-													"sFolderName": {
-														"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTP')",
-														"type": "Expression"
-													},
-													"sFileName": {
-														"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
-														"type": "Expression"
-													}
-												}
-											},
-											"enableLogging": false,
-											"maxConcurrentConnections": 1
-										}
-									},
-									{
-										"name": "Delete Decrypted File",
-										"type": "Delete",
-										"dependsOn": [
-											{
-												"activity": "File To Processed",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"dataset": {
-												"referenceName": "DS_FileReference",
-												"type": "DatasetReference",
-												"parameters": {
-													"sFolderName": {
-														"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTP')",
-														"type": "Expression"
-													},
-													"sFileName": {
-														"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
-														"type": "Expression"
-													}
-												}
-											},
-											"enableLogging": false,
-											"maxConcurrentConnections": 1
 										}
 									}
 								]
@@ -1081,11 +980,16 @@
 				"defaultValue": "File_PR_Dim_Course_Type"
 			},
 			"vLog_OUT": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "[finance].[STG_t_biinsite]"
 			},
 			"vFileNameCurrent": {
 				"type": "String",
 				"defaultValue": "PR_Dim_Course_Type"
+			},
+			"vEjecucionConErores": {
+				"type": "Boolean",
+				"defaultValue": "0"
 			}
 		},
 		"annotations": []
