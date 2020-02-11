@@ -8,10 +8,6 @@
 		"parameters": {
 			"NameFile": {
 				"type": "String"
-			},
-			"RaizRuta": {
-				"type": "string",
-				"defaultValue": "peoplereviewtest"
 			}
 		},
 		"annotations": [],
@@ -45,22 +41,19 @@
 		"typeProperties": {
 			"format": {
 				"type": "TextFormat",
-				"columnDelimiter": "|",
+				"columnDelimiter": ";",
 				"rowDelimiter": "",
 				"nullValue": "\\N",
 				"encodingName": null,
 				"treatEmptyAsNull": true,
 				"skipLineCount": 0,
-				"firstRowAsHeader": true
+				"firstRowAsHeader": false
 			},
 			"fileName": {
 				"value": "@dataset().NameFile",
 				"type": "Expression"
 			},
-			"folderPath": {
-				"value": "@concat(dataset().RaizRuta,'/FromsFTP')",
-				"type": "Expression"
-			}
+			"folderPath": "FromsFTP"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
