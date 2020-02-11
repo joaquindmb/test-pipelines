@@ -617,7 +617,7 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "File To FailedLoad",
+												"activity": "Set EjecucionConErrores PR_Dim_Course_Type",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -881,6 +881,23 @@
 													"type": "Expression"
 												}
 											}
+										}
+									},
+									{
+										"name": "Set EjecucionConErrores PR_Dim_Course_Type",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "File To FailedLoad",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "vEjecucionConErores",
+											"value": true
 										}
 									}
 								]
