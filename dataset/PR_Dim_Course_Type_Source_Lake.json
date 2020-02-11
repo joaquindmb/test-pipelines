@@ -1,6 +1,10 @@
 {
 	"name": "PR_Dim_Course_Type_Source_Lake",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttodatalake",
+			"type": "LinkedServiceReference"
+		},
 		"parameters": {
 			"NameFile": {
 				"type": "String"
