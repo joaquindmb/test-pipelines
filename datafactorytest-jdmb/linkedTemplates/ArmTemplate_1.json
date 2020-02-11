@@ -2318,36 +2318,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/containertest/blobs/destino/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/pl_biinsite')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2579,7 +2549,10 @@
 									"type": "String"
 								},
 								"RESULT_DS": {
-									"value": "Fin Pipeline OK",
+									"value": {
+										"value": "@concat('Fin Pipeline OK',if(variables('vEjecucionConErores'),': Finalizado con errores',''))",
+										"type": "Expression"
+									},
 									"type": "String"
 								},
 								"RESULT_OK_KO": {
@@ -2824,7 +2797,7 @@
 												"type": "Copy",
 												"dependsOn": [
 													{
-														"activity": "Function Decrypt PR_Dim_Course_Type",
+														"activity": "Log Inicio Copia PR_Dim_Course_Type",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -2837,16 +2810,7 @@
 													"secureOutput": false,
 													"secureInput": false
 												},
-												"userProperties": [
-													{
-														"name": "Source",
-														"value": "/__"
-													},
-													{
-														"name": "Destination",
-														"value": "__"
-													}
-												],
+												"userProperties": [],
 												"typeProperties": {
 													"source": {
 														"type": "AzureDataLakeStoreSource",
@@ -2875,15 +2839,11 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "PR_Dim_Course_Type_Source_Lake",
+														"referenceName": "ds_biinsite_SourceLake",
 														"type": "DatasetReference",
 														"parameters": {
-															"NameFile": {
-																"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
-																"type": "Expression"
-															},
-															"RaizRuta": {
-																"value": "@pipeline().parameters.pRaizRuta",
+															"pFileName": {
+																"value": "@variables('vFileNameCurrent')",
 																"type": "Expression"
 															}
 														}
@@ -2891,7 +2851,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "PR_Dim_Course_Type_Destination_SQL",
+														"referenceName": "ds_biinsite_Destination_SQL",
 														"type": "DatasetReference",
 														"parameters": {}
 													}
@@ -2902,7 +2862,7 @@
 												"type": "SqlServerStoredProcedure",
 												"dependsOn": [
 													{
-														"activity": "Delete Decrypted File",
+														"activity": "File To Processed",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -2981,7 +2941,7 @@
 												"type": "SqlServerStoredProcedure",
 												"dependsOn": [
 													{
-														"activity": "Delete Decrypted Failed File",
+														"activity": "Set EjecucionConErrores PR_Dim_Course_Type",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -3213,6 +3173,12 @@
 														"dependencyConditions": [
 															"Failed"
 														]
+													},
+													{
+														"activity": "PL_FEED__PR_Dim_Course_Type",
+														"dependencyConditions": [
+															"Failed"
+														]
 													}
 												],
 												"userProperties": [],
@@ -3242,40 +3208,8 @@
 												}
 											},
 											{
-												"name": "Function Decrypt PR_Dim_Course_Type",
-												"type": "AzureFunctionActivity",
-												"dependsOn": [
-													{
-														"activity": "Log Inicio Copia PR_Dim_Course_Type",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"functionName": {
-														"value": "@concat('BridgeDecriptGPG?filename=',variables('vFileNameCurrent'),'&idexecpipeline=',pipeline().RunId, '&fileSystemName=',pipeline().parameters.pRaizRuta)",
-														"type": "Expression"
-													},
-													"method": "GET",
-													"headers": {}
-												},
-												"linkedServiceName": {
-													"referenceName": "Connecttofunction",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Delete Decrypted Failed File",
-												"type": "Delete",
+												"name": "Set EjecucionConErrores PR_Dim_Course_Type",
+												"type": "SetVariable",
 												"dependsOn": [
 													{
 														"activity": "File To FailedLoad",
@@ -3284,69 +3218,10 @@
 														]
 													}
 												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
 												"userProperties": [],
 												"typeProperties": {
-													"dataset": {
-														"referenceName": "DS_FileReference",
-														"type": "DatasetReference",
-														"parameters": {
-															"sFolderName": {
-																"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTP')",
-																"type": "Expression"
-															},
-															"sFileName": {
-																"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
-																"type": "Expression"
-															}
-														}
-													},
-													"enableLogging": false,
-													"maxConcurrentConnections": 1
-												}
-											},
-											{
-												"name": "Delete Decrypted File",
-												"type": "Delete",
-												"dependsOn": [
-													{
-														"activity": "File To Processed",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"dataset": {
-														"referenceName": "DS_FileReference",
-														"type": "DatasetReference",
-														"parameters": {
-															"sFolderName": {
-																"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTP')",
-																"type": "Expression"
-															},
-															"sFileName": {
-																"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
-																"type": "Expression"
-															}
-														}
-													},
-													"enableLogging": false,
-													"maxConcurrentConnections": 1
+													"variableName": "vEjecucionConErores",
+													"value": true
 												}
 											}
 										]
@@ -3436,17 +3311,52 @@
 						"defaultValue": "File_PR_Dim_Course_Type"
 					},
 					"vLog_OUT": {
-						"type": "String"
+						"type": "String",
+						"defaultValue": "[[finance].[STG_t_biinsite]"
 					},
 					"vFileNameCurrent": {
 						"type": "String",
 						"defaultValue": "PR_Dim_Course_Type"
+					},
+					"vEjecucionConErores": {
+						"type": "Boolean",
+						"defaultValue": false
 					}
 				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pipeline1",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/containertest/blobs/destino/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
 			]
 		}
 	]

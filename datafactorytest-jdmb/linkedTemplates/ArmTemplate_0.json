@@ -81,11 +81,11 @@
 		},
 		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
 			"type": "string",
-			"defaultValue": "@dataset().NameFile"
+			"defaultValue": "@dataset().pFileName"
 		},
 		"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "@concat(dataset().RaizRuta,'/FromsFTP')"
+			"defaultValue": "FromsFTP"
 		}
 	},
 	"variables": {
@@ -776,77 +776,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_biinsite_SourceLake')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "connecttodatalake",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"NameFile": {
-						"type": "String"
-					},
-					"RaizRuta": {
-						"type": "string",
-						"defaultValue": "peoplereviewtest"
-					}
-				},
-				"annotations": [],
-				"type": "AzureDataLakeStoreFile",
-				"structure": [
-					{
-						"name": "Data_Load_Date",
-						"type": "String"
-					},
-					{
-						"name": "Period",
-						"type": "String"
-					},
-					{
-						"name": "Data_Source",
-						"type": "String"
-					},
-					{
-						"name": "Course_Type_ID",
-						"type": "String"
-					},
-					{
-						"name": "Course_Type_Description",
-						"type": "String"
-					},
-					{
-						"name": "Active_ID",
-						"type": "String"
-					}
-				],
-				"typeProperties": {
-					"format": {
-						"type": "TextFormat",
-						"columnDelimiter": "|",
-						"rowDelimiter": "",
-						"nullValue": "\\N",
-						"encodingName": null,
-						"treatEmptyAsNull": true,
-						"skipLineCount": 0,
-						"firstRowAsHeader": true
-					},
-					"fileName": {
-						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_fileName')]",
-						"type": "Expression"
-					},
-					"folderPath": {
-						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ds_biinsite_Destination_SQL')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -889,6 +818,70 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_biinsite_SourceLake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pFileName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "Data_Load_Date",
+						"type": "String"
+					},
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ";",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": {
+						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/connecttodatalake')]"
 			]
 		}
 	]

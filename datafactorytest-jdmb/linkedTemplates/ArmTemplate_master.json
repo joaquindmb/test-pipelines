@@ -55,6 +55,14 @@
 			"type": "string",
 			"defaultValue": "FromsFTP"
 		},
+		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().pFileName"
+		},
+		"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "FromsFTP"
+		},
 		"AzureDataLakeStorageGen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://jdbmdatalakegen2.dfs.core.windows.net"
@@ -82,14 +90,6 @@
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
-		},
-		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().NameFile"
-		},
-		"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "@concat(dataset().RaizRuta,'/FromsFTP')"
 		},
 		"containerUri": {
 			"type": "string",
