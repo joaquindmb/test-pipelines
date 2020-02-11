@@ -1,0 +1,41 @@
+{
+	"name": "PR_Dim_Course_Type_Destination_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttosql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "Data_Load_Date",
+				"type": "String"
+			},
+			{
+				"name": "Period",
+				"type": "String"
+			},
+			{
+				"name": "Data_Source",
+				"type": "String"
+			},
+			{
+				"name": "Course_Type_ID",
+				"type": "String"
+			},
+			{
+				"name": "Course_Type_Description",
+				"type": "String"
+			},
+			{
+				"name": "Active_ID",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[PEOPLE_REVIEW].[STG_PR_Dim_Course_Type]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

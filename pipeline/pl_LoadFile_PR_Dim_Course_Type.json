@@ -1,0 +1,1094 @@
+{
+	"name": "pl_LoadFile_PR_Dim_Course_Type",
+	"properties": {
+		"activities": [
+			{
+				"name": "Log Inicio PR_Dim_Course_Type",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+					"storedProcedureParameters": {
+						"AMBIT": {
+							"value": {
+								"value": "@pipeline().parameters.pLog_AMBIT",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"ENTRY": {
+							"value": {
+								"value": "@variables('vLog_ENTRY')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"OUT": {
+							"value": {
+								"value": "@variables('vLog_OUT')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PROCNAME": {
+							"value": {
+								"value": "@variables('vLog_PROCNAME')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"RESULT_DS": {
+							"value": "Inicio Pipeline",
+							"type": "String"
+						},
+						"RESULT_OK_KO": {
+							"value": "1",
+							"type": "Int32"
+						},
+						"STEP": {
+							"value": "100",
+							"type": "Int32"
+						},
+						"ID_PIPELINE": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "connecttosql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Log Fin KO PR_Dim_Course_Type",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "File To Failed Load",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+					"storedProcedureParameters": {
+						"AMBIT": {
+							"value": {
+								"value": "@pipeline().parameters.pLog_AMBIT",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"ENTRY": {
+							"value": {
+								"value": "@variables('vLog_ENTRY')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"OUT": {
+							"value": {
+								"value": "@variables('vLog_OUT')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PROCNAME": {
+							"value": {
+								"value": "@variables('vLog_PROCNAME')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"RESULT_DS": {
+							"value": "Fin Pipeline KO",
+							"type": "String"
+						},
+						"RESULT_OK_KO": {
+							"value": "0",
+							"type": "Int32"
+						},
+						"STEP": {
+							"value": "110",
+							"type": "Int32"
+						},
+						"ID_PIPELINE": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "connecttosql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Get NameFile PR_Dim_Course_Type",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Log Inicio PR_Dim_Course_Type",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DataLake_ListFiles",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					]
+				}
+			},
+			{
+				"name": "Log Fin OK PR_Dim_Course_Type",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ForEach PR_Dim_Course_Type",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+					"storedProcedureParameters": {
+						"AMBIT": {
+							"value": {
+								"value": "@pipeline().parameters.pLog_AMBIT",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"ENTRY": {
+							"value": {
+								"value": "@variables('vLog_ENTRY')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"OUT": {
+							"value": {
+								"value": "@variables('vLog_OUT')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PROCNAME": {
+							"value": {
+								"value": "@variables('vLog_PROCNAME')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"RESULT_DS": {
+							"value": "Fin Pipeline OK",
+							"type": "String"
+						},
+						"RESULT_OK_KO": {
+							"value": "1",
+							"type": "Int32"
+						},
+						"STEP": {
+							"value": "110",
+							"type": "Int32"
+						},
+						"ID_PIPELINE": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "connecttosql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ForEach PR_Dim_Course_Type",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Filter PR_Dim_Course_Type",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter PR_Dim_Course_Type').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Check FileName Already PR_Dim_Course_Type",
+							"type": "Lookup",
+							"dependsOn": [
+								{
+									"activity": "Set FileName PR_Dim_Course_Type",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlSource",
+									"sqlReaderStoredProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINE_FILE_LOG_INSERT]",
+									"storedProcedureParameters": {
+										"FileName": {
+											"type": "String",
+											"value": {
+												"value": "@variables('vFileNameCurrent')",
+												"type": "Expression"
+											}
+										},
+										"Proc": {
+											"type": "String",
+											"value": {
+												"value": "@variables('vLog_PROCNAME')",
+												"type": "Expression"
+											}
+										},
+										"ID_PIPELINE": {
+											"type": "String",
+											"value": {
+												"value": "@pipeline().RunId",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"dataset": {
+									"referenceName": "SQLCheck_FileName",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "Set FileName PR_Dim_Course_Type",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "vFileNameCurrent",
+								"value": {
+									"value": "@item().name",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy_File_ToSQL PR_Dim_Course_Type",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Check FileName Already PR_Dim_Course_Type",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@activity('Check FileName Already PR_Dim_Course_Type').output.firstRow.Result",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "LOG File Alredy Processed PR_Dim_Course_Type",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Move File To Processed File Alredy Processed",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+											"storedProcedureParameters": {
+												"AMBIT": {
+													"value": {
+														"value": "@pipeline().parameters.pLog_AMBIT",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ENTRY": {
+													"value": {
+														"value": "@variables('vLog_ENTRY')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"OUT": {
+													"value": {
+														"value": "@variables('vLog_OUT')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PROCNAME": {
+													"value": {
+														"value": "@variables('vLog_PROCNAME')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_DS": {
+													"value": {
+														"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'),', Se mueve a la carpeta Processed')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_OK_KO": {
+													"value": "1",
+													"type": "Int32"
+												},
+												"STEP": {
+													"value": "300",
+													"type": "Int32"
+												},
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "connecttosql",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Move File To Processed File Alredy Processed",
+										"type": "ExecutePipeline",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pl_MoveFile",
+												"type": "PipelineReference"
+											},
+											"parameters": {
+												"sFolderOrig": {
+													"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
+													"type": "Expression"
+												},
+												"sFileNameOrig": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												},
+												"sFolderDest": {
+													"value": "@concat(pipeline().parameters.pRaizRuta,'/Processed')",
+													"type": "Expression"
+												},
+												"sFileNameDest": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												}
+											}
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "Copy To SQL PR_Dim_Course_Type",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Function Decrypt PR_Dim_Course_Type",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [
+											{
+												"name": "Source",
+												"value": "/__"
+											},
+											{
+												"name": "Destination",
+												"value": "__"
+											}
+										],
+										"typeProperties": {
+											"source": {
+												"type": "AzureDataLakeStoreSource",
+												"recursive": true
+											},
+											"sink": {
+												"type": "SqlSink",
+												"writeBatchSize": 10000,
+												"preCopyScript": "TRUNCATE TABLE [PEOPLE_REVIEW].[STG_PR_Dim_Course_Type]",
+												"disableMetricsCollection": false
+											},
+											"enableStaging": false,
+											"enableSkipIncompatibleRow": false,
+											"dataIntegrationUnits": 0,
+											"translator": {
+												"type": "TabularTranslator",
+												"columnMappings": {
+													"Data_Load_Date": "Data_Load_Date",
+													"Period": "Period",
+													"Data_Source": "Data_Source",
+													"Course_Type_ID": "Course_Type_ID",
+													"Course_Type_Description": "Course_Type_Description",
+													"Active_ID": "Active_ID"
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "PR_Dim_Course_Type_Source_Lake",
+												"type": "DatasetReference",
+												"parameters": {
+													"NameFile": {
+														"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
+														"type": "Expression"
+													},
+													"RaizRuta": {
+														"value": "@pipeline().parameters.pRaizRuta",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "PR_Dim_Course_Type_Destination_SQL",
+												"type": "DatasetReference"
+											}
+										]
+									},
+									{
+										"name": "Log OK PR_Dim_Course_Type",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Delete Decrypted File",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+											"storedProcedureParameters": {
+												"AMBIT": {
+													"value": {
+														"value": "@pipeline().parameters.pLog_AMBIT",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ENTRY": {
+													"value": {
+														"value": "@variables('vLog_ENTRY')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"OUT": {
+													"value": {
+														"value": "@variables('vLog_OUT')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PROCNAME": {
+													"value": {
+														"value": "@variables('vLog_PROCNAME')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_DS": {
+													"value": {
+														"value": "@concat('Fin del proceso de copia OK: ',string(activity('Copy To SQL PR_Dim_Course_Type').output))",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_OK_KO": {
+													"value": "1",
+													"type": "Int32"
+												},
+												"STEP": {
+													"value": "220",
+													"type": "Int32"
+												},
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "connecttosql",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Log KO PR_Dim_Course_Type",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Delete Decrypted Failed File",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+											"storedProcedureParameters": {
+												"AMBIT": {
+													"value": {
+														"value": "@pipeline().parameters.pLog_AMBIT",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ENTRY": {
+													"value": {
+														"value": "@variables('vLog_ENTRY')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"OUT": {
+													"value": {
+														"value": "@variables('vLog_OUT')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PROCNAME": {
+													"value": {
+														"value": "@variables('vLog_PROCNAME')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_DS": {
+													"value": {
+														"value": "@concat('Fin del proceso de copia ERROR: ',string(activity('Copy To SQL PR_Dim_Course_Type').output))",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_OK_KO": {
+													"value": "0",
+													"type": "Int32"
+												},
+												"STEP": {
+													"value": "220",
+													"type": "Int32"
+												},
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "connecttosql",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Log Inicio Copia PR_Dim_Course_Type",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[PEOPLE_REVIEW].[ITC_PIPELINECONTROL_INSERT]",
+											"storedProcedureParameters": {
+												"AMBIT": {
+													"value": {
+														"value": "@pipeline().parameters.pLog_AMBIT",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ENTRY": {
+													"value": {
+														"value": "@variables('vLog_ENTRY')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"OUT": {
+													"value": {
+														"value": "@variables('vLog_OUT')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PROCNAME": {
+													"value": {
+														"value": "@variables('vLog_PROCNAME')",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"RESULT_DS": {
+													"value": "Inicio proceso de copia",
+													"type": "String"
+												},
+												"RESULT_OK_KO": {
+													"value": "1",
+													"type": "Int32"
+												},
+												"STEP": {
+													"value": "200",
+													"type": "Int32"
+												},
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "connecttosql",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "PL_FEED__PR_Dim_Course_Type",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Copy To SQL PR_Dim_Course_Type",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[PEOPLE_REVIEW].[PL_FEED_PR_Dim_Course_Type]",
+											"storedProcedureParameters": {
+												"ID_PIPELINE": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"AMBITO": {
+													"value": {
+														"value": "@pipeline().parameters.pLog_AMBIT",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "connecttosql",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "File To Processed",
+										"type": "ExecutePipeline",
+										"dependsOn": [
+											{
+												"activity": "PL_FEED__PR_Dim_Course_Type",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pl_MoveFile",
+												"type": "PipelineReference"
+											},
+											"parameters": {
+												"sFolderOrig": {
+													"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
+													"type": "Expression"
+												},
+												"sFileNameOrig": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												},
+												"sFolderDest": {
+													"value": "@concat(pipeline().parameters.pRaizRuta,'/Processed')",
+													"type": "Expression"
+												},
+												"sFileNameDest": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												}
+											}
+										}
+									},
+									{
+										"name": "File To FailedLoad",
+										"type": "ExecutePipeline",
+										"dependsOn": [
+											{
+												"activity": "Copy To SQL PR_Dim_Course_Type",
+												"dependencyConditions": [
+													"Failed"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pl_MoveFile",
+												"type": "PipelineReference"
+											},
+											"parameters": {
+												"sFolderOrig": {
+													"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
+													"type": "Expression"
+												},
+												"sFileNameOrig": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												},
+												"sFolderDest": {
+													"value": "@concat(pipeline().parameters.pRaizRuta,'/FailedLoad')",
+													"type": "Expression"
+												},
+												"sFileNameDest": {
+													"value": "@variables('vFileNameCurrent')",
+													"type": "Expression"
+												}
+											}
+										}
+									},
+									{
+										"name": "Function Decrypt PR_Dim_Course_Type",
+										"type": "AzureFunctionActivity",
+										"dependsOn": [
+											{
+												"activity": "Log Inicio Copia PR_Dim_Course_Type",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"functionName": {
+												"value": "@concat('BridgeDecriptGPG?filename=',variables('vFileNameCurrent'),'&idexecpipeline=',pipeline().RunId, '&fileSystemName=',pipeline().parameters.pRaizRuta)",
+												"type": "Expression"
+											},
+											"method": "GET"
+										},
+										"linkedServiceName": {
+											"referenceName": "Connecttofunction",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Delete Decrypted Failed File",
+										"type": "Delete",
+										"dependsOn": [
+											{
+												"activity": "File To FailedLoad",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"dataset": {
+												"referenceName": "DS_FileReference",
+												"type": "DatasetReference",
+												"parameters": {
+													"sFolderName": {
+														"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTP')",
+														"type": "Expression"
+													},
+													"sFileName": {
+														"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
+														"type": "Expression"
+													}
+												}
+											},
+											"enableLogging": false,
+											"maxConcurrentConnections": 1
+										}
+									},
+									{
+										"name": "Delete Decrypted File",
+										"type": "Delete",
+										"dependsOn": [
+											{
+												"activity": "File To Processed",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"dataset": {
+												"referenceName": "DS_FileReference",
+												"type": "DatasetReference",
+												"parameters": {
+													"sFolderName": {
+														"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTP')",
+														"type": "Expression"
+													},
+													"sFileName": {
+														"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
+														"type": "Expression"
+													}
+												}
+											},
+											"enableLogging": false,
+											"maxConcurrentConnections": 1
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Filter PR_Dim_Course_Type",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Get NameFile PR_Dim_Course_Type",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get NameFile PR_Dim_Course_Type').output.childitems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@greaterOrEquals(indexof(item().name,'BRIDGE_PRBI_COURSE_TYPE'),0)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "File To Failed Load",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ForEach PR_Dim_Course_Type",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_MoveFile",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"sFolderOrig": {
+							"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
+							"type": "Expression"
+						},
+						"sFileNameOrig": {
+							"value": "@variables('vFileNameCurrent')",
+							"type": "Expression"
+						},
+						"sFolderDest": {
+							"value": "@concat(pipeline().parameters.pRaizRuta,'/FailedLoad')",
+							"type": "Expression"
+						},
+						"sFileNameDest": {
+							"value": "@variables('vFileNameCurrent')",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"pLog_AMBIT": {
+				"type": "String",
+				"defaultValue": "BRIDGE"
+			},
+			"pRaizRuta": {
+				"type": "string",
+				"defaultValue": "peoplereviewtest"
+			}
+		},
+		"variables": {
+			"vLog_PROCNAME": {
+				"type": "String",
+				"defaultValue": "pl_LoadFile_PR_Dim_Course_Type"
+			},
+			"vLog_ENTRY": {
+				"type": "String",
+				"defaultValue": "File_PR_Dim_Course_Type"
+			},
+			"vLog_OUT": {
+				"type": "String"
+			},
+			"vFileNameCurrent": {
+				"type": "String",
+				"defaultValue": "PR_Dim_Course_Type"
+			}
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
