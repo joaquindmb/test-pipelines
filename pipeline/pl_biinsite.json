@@ -448,18 +448,12 @@
 												"type": "PipelineReference"
 											},
 											"parameters": {
-												"sFolderOrig": {
-													"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
-													"type": "Expression"
-												},
+												"sFolderOrig": "FromsFTP",
 												"sFileNameOrig": {
 													"value": "@variables('vFileNameCurrent')",
 													"type": "Expression"
 												},
-												"sFolderDest": {
-													"value": "@concat(pipeline().parameters.pRaizRuta,'/Processed')",
-													"type": "Expression"
-												},
+												"sFolderDest": "Processed",
 												"sFileNameDest": {
 													"value": "@variables('vFileNameCurrent')",
 													"type": "Expression"
@@ -821,18 +815,12 @@
 												"type": "PipelineReference"
 											},
 											"parameters": {
-												"sFolderOrig": {
-													"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
-													"type": "Expression"
-												},
+												"sFolderOrig": "FromsFTP",
 												"sFileNameOrig": {
 													"value": "@variables('vFileNameCurrent')",
 													"type": "Expression"
 												},
-												"sFolderDest": {
-													"value": "@concat(pipeline().parameters.pRaizRuta,'/Processed')",
-													"type": "Expression"
-												},
+												"sFolderDest": "Processed",
 												"sFileNameDest": {
 													"value": "@variables('vFileNameCurrent')",
 													"type": "Expression"
@@ -864,18 +852,12 @@
 												"type": "PipelineReference"
 											},
 											"parameters": {
-												"sFolderOrig": {
-													"value": "@concat(pipeline().parameters.pRaizRuta,'/FromsFTPEncripted')",
-													"type": "Expression"
-												},
+												"sFolderOrig": "FromsFTP",
 												"sFileNameOrig": {
 													"value": "@variables('vFileNameCurrent')",
 													"type": "Expression"
 												},
-												"sFolderDest": {
-													"value": "@concat(pipeline().parameters.pRaizRuta,'/FailedLoad')",
-													"type": "Expression"
-												},
+												"sFolderDest": "FailedLoad",
 												"sFileNameDest": {
 													"value": "@variables('vFileNameCurrent')",
 													"type": "Expression"
