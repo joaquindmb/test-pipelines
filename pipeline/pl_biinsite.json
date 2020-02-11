@@ -484,16 +484,7 @@
 											"secureOutput": false,
 											"secureInput": false
 										},
-										"userProperties": [
-											{
-												"name": "Source",
-												"value": "/__"
-											},
-											{
-												"name": "Destination",
-												"value": "__"
-											}
-										],
+										"userProperties": [],
 										"typeProperties": {
 											"source": {
 												"type": "AzureDataLakeStoreSource",
@@ -522,15 +513,11 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "PR_Dim_Course_Type_Source_Lake",
+												"referenceName": "ds_biinsite_SourceLake",
 												"type": "DatasetReference",
 												"parameters": {
-													"NameFile": {
-														"value": "@activity('Function Decrypt PR_Dim_Course_Type').output.ficheroDesenc",
-														"type": "Expression"
-													},
-													"RaizRuta": {
-														"value": "@pipeline().parameters.pRaizRuta",
+													"pFileName": {
+														"value": "@variables('vFileNameCurrent')",
 														"type": "Expression"
 													}
 												}
@@ -538,7 +525,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "PR_Dim_Course_Type_Destination_SQL",
+												"referenceName": "ds_biinsite_Destination_SQL",
 												"type": "DatasetReference"
 											}
 										]
@@ -989,7 +976,7 @@
 			},
 			"vEjecucionConErores": {
 				"type": "Boolean",
-				"defaultValue": "0"
+				"defaultValue": false
 			}
 		},
 		"annotations": []

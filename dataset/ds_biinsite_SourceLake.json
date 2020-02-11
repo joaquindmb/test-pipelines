@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"NameFile": {
+			"pFileName": {
 				"type": "String"
 			}
 		},
