@@ -50,7 +50,7 @@
 				"firstRowAsHeader": false
 			},
 			"fileName": {
-				"value": "@dataset().NameFile",
+				"value": "@dataset().pFileName",
 				"type": "Expression"
 			},
 			"folderPath": "FromsFTP"

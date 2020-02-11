@@ -227,7 +227,10 @@
 							"type": "String"
 						},
 						"RESULT_DS": {
-							"value": "Fin Pipeline OK",
+							"value": {
+								"value": "@concat('Fin Pipeline OK',if(variables('vEjecucionConErores'),': Finalizado con errores',''))",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"RESULT_OK_KO": {
