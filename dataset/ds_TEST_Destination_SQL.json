@@ -1,0 +1,12 @@
+{
+	"name": "ds_TEST_Destination_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttosql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
