@@ -1,5 +1,5 @@
 {
-	"name": "TEST_Source_Lake",
+	"name": "ds_TEST_Source_Lake",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "connecttodatalake",
