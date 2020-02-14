@@ -509,7 +509,13 @@
 										"inputs": [
 											{
 												"referenceName": "ds_TEST_Source_Lake",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"FileName": {
+														"value": "@variables('vFileNameCurrent')",
+														"type": "Expression"
+													}
+												}
 											}
 										],
 										"outputs": [
