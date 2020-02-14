@@ -296,7 +296,7 @@
 							"typeProperties": {
 								"source": {
 									"type": "SqlSource",
-									"sqlReaderStoredProcedureName": "FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+									"sqlReaderStoredProcedureName": "FINANCE].[ITC_PIPELINE_FILE_LOG_INSERT]",
 									"storedProcedureParameters": {
 										"FileName": {
 											"type": "String",
@@ -509,25 +509,13 @@
 										"inputs": [
 											{
 												"referenceName": "ds_TEST_Source_Lake",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileName": {
-														"value": "@variables('vFileNameCurrent')",
-														"type": "Expression"
-													}
-												}
+												"type": "DatasetReference"
 											}
 										],
 										"outputs": [
 											{
 												"referenceName": "ds_TEST_Destination_SQL",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileName": {
-														"value": "@variables('vFileNameCurrent')",
-														"type": "Expression"
-													}
-												}
+												"type": "DatasetReference"
 											}
 										]
 									},
