@@ -3672,7 +3672,7 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
-													"storedProcedureName": "[[].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureName": "ITC_PIPELINECONTROL_INSERT",
 													"storedProcedureParameters": {
 														"AMBIT": {
 															"value": {
@@ -3727,7 +3727,7 @@
 													}
 												},
 												"linkedServiceName": {
-													"referenceName": "connecttosql",
+													"referenceName": "connecttosql_ams",
 													"type": "LinkedServiceReference"
 												}
 											},

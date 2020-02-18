@@ -2765,7 +2765,7 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
-													"storedProcedureName": "[[].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureName": "ITC_PIPELINECONTROL_INSERT",
 													"storedProcedureParameters": {
 														"AMBIT": {
 															"value": {
@@ -2820,7 +2820,7 @@
 													}
 												},
 												"linkedServiceName": {
-													"referenceName": "connecttosql",
+													"referenceName": "connecttosql_ams",
 													"type": "LinkedServiceReference"
 												}
 											},
@@ -4184,7 +4184,6 @@
 				"[concat(variables('factoryId'), '/datasets/DataLake_ListFiles')]",
 				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
 				"[concat(variables('factoryId'), '/datasets/SQLCheck_FileName_ams')]",
-				"[concat(variables('factoryId'), '/linkedServices/connecttosql')]",
 				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Source_Lake')]",
 				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Destination_SQL')]"
 			]
