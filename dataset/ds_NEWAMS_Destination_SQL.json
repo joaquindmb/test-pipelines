@@ -1,0 +1,361 @@
+{
+	"name": "ds_NEWAMS_Destination_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttosql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Opportunity_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Reporting_Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CSG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sub_CSG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Master_Client_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Master_Client_Class",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Financial_Customer_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CR_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opportunity_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Industry_Segment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Industry_Sub_Segment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opportunity_Class",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Stage",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Restricted",
+				"type": "varchar"
+			},
+			{
+				"name": "Win_Probability",
+				"type": "varchar"
+			},
+			{
+				"name": "Total_Current_Revenue",
+				"type": "varchar"
+			},
+			{
+				"name": "CCI",
+				"type": "varchar"
+			},
+			{
+				"name": "CCI1",
+				"type": "varchar"
+			},
+			{
+				"name": "Target_Margin",
+				"type": "varchar"
+			},
+			{
+				"name": "Create_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Stage_Update_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Pipeline_Entry_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Proposal_Submission_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Expected_Contract_Signing_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Status_Since_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Cons_Start_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Cons_End_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "OS_Start_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "OS_End_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "ECSD_Quarter",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RSD_Quarter",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ToW",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Business_Dimensions",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Service_Start_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Service_End_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "SSG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opp_Service_Revenue",
+				"type": "varchar"
+			},
+			{
+				"name": "Current_Revenue",
+				"type": "varchar"
+			},
+			{
+				"name": "Wtd_Current_Revenue",
+				"type": "varchar"
+			},
+			{
+				"name": "Target_Price",
+				"type": "varchar"
+			},
+			{
+				"name": "CCI2",
+				"type": "varchar"
+			},
+			{
+				"name": "Total_CCI",
+				"type": "varchar"
+			},
+			{
+				"name": "Global_Client_Account_Lead",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Technology_Services_Lead",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Client_Account_Lead",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sales_Capture_Primary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Contract_Extension_Flag",
+				"type": "varchar"
+			},
+			{
+				"name": "Selling_Country_Location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Geo_Unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Primary_Work_Location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Delivery_Centers",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Competitor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Winning_Competitor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Competitive_Sole_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Third_Party_Advisor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Digital",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Accenture_Products_Platforms",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Alliances",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Business_Service",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Consulting_Practice",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cross_Service_Group_Offering",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mergers_Acquisitions",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Strategy_Offerings",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tech_Operations_Offerings",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Win_Category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Extension_non_Extension",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Deal_size",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OG_Abbrev",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Geo_Unit1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Master_Client_Lvl_2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "New",
+				"type": "nvarchar"
+			},
+			{
+				"name": "New_since_last_week",
+				"type": "varchar"
+			},
+			{
+				"name": "New_this_month",
+				"type": "varchar"
+			},
+			{
+				"name": "Deal_Volume",
+				"type": "varchar"
+			},
+			{
+				"name": "Master_Contract",
+				"type": "varchar"
+			},
+			{
+				"name": "Master_Contract_Name_Global",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Valid_from",
+				"type": "varchar"
+			},
+			{
+				"name": "Valid_to",
+				"type": "varchar"
+			},
+			{
+				"name": "Sales_Sept",
+				"type": "varchar"
+			},
+			{
+				"name": "Revenue_Sept",
+				"type": "varchar"
+			},
+			{
+				"name": "Contract_CI_Sept",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "STG_T_NEWAMS"
+		}
+	}
+}
