@@ -502,8 +502,7 @@
 												"mappings": [
 													{
 														"source": {
-															"name": "Prop_0",
-															"type": "String"
+															"name": "Opportunity ID #"
 														},
 														"sink": {
 															"name": "Opportunity_ID",
@@ -512,8 +511,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_1",
-															"type": "String"
+															"name": "Reporting Status"
 														},
 														"sink": {
 															"name": "Reporting_Status",
@@ -522,8 +520,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_2",
-															"type": "String"
+															"name": "OG"
 														},
 														"sink": {
 															"name": "OG",
@@ -532,8 +529,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_3",
-															"type": "String"
+															"name": "OU"
 														},
 														"sink": {
 															"name": "OU",
@@ -542,8 +538,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_4",
-															"type": "String"
+															"name": "CSG"
 														},
 														"sink": {
 															"name": "CSG",
@@ -552,8 +547,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_5",
-															"type": "String"
+															"name": "Sub-CSG"
 														},
 														"sink": {
 															"name": "Sub_CSG",
@@ -562,8 +556,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_6",
-															"type": "String"
+															"name": "Master Client Name"
 														},
 														"sink": {
 															"name": "Master_Client_Name",
@@ -572,8 +565,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_7",
-															"type": "String"
+															"name": "Master Client Class"
 														},
 														"sink": {
 															"name": "Master_Client_Class",
@@ -582,8 +574,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_8",
-															"type": "String"
+															"name": "Financial Customer Name"
 														},
 														"sink": {
 															"name": "Financial_Customer_Name",
@@ -592,7 +583,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_9",
+															"name": "CR Name",
 															"type": "String"
 														},
 														"sink": {
@@ -602,7 +593,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_10",
+															"name": "Opportunity Name",
 															"type": "String"
 														},
 														"sink": {
@@ -612,7 +603,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_11",
+															"name": "Industry Segment",
 															"type": "String"
 														},
 														"sink": {
@@ -622,8 +613,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_12",
-															"type": "String"
+															"name": "Industry Sub-Segment"
 														},
 														"sink": {
 															"name": "Industry_Sub_Segment",
@@ -632,7 +622,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_13",
+															"name": "Opportunity Class",
 															"type": "String"
 														},
 														"sink": {
@@ -642,8 +632,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_14",
-															"type": "String"
+															"name": "Stage"
 														},
 														"sink": {
 															"name": "Stage",
@@ -652,8 +641,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_15",
-															"type": "String"
+															"name": "Restricted"
 														},
 														"sink": {
 															"name": "Restricted",
@@ -662,7 +650,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_16",
+															"name": "Win Probability",
 															"type": "String"
 														},
 														"sink": {
@@ -672,7 +660,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_17",
+															"name": "Total Current Revenue",
 															"type": "String"
 														},
 														"sink": {
@@ -682,8 +670,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_18",
-															"type": "String"
+															"name": "CCI"
 														},
 														"sink": {
 															"name": "CCI",
@@ -692,8 +679,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_19",
-															"type": "String"
+															"name": "CCI%"
 														},
 														"sink": {
 															"name": "CCI1",
@@ -702,7 +688,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_20",
+															"name": "Target Margin %",
 															"type": "String"
 														},
 														"sink": {
@@ -712,7 +698,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_21",
+															"name": "Create Date",
 															"type": "String"
 														},
 														"sink": {
@@ -722,7 +708,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_22",
+															"name": "Stage Update Date",
 															"type": "String"
 														},
 														"sink": {
@@ -732,7 +718,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_23",
+															"name": "Pipeline Entry Date",
 															"type": "String"
 														},
 														"sink": {
@@ -742,7 +728,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_24",
+															"name": "Proposal Submission Date",
 															"type": "String"
 														},
 														"sink": {
@@ -752,8 +738,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_25",
-															"type": "String"
+															"name": "Expected Contract Signing Date"
 														},
 														"sink": {
 															"name": "Expected_Contract_Signing_Date",
@@ -762,7 +747,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_26",
+															"name": "Status Since Date",
 															"type": "String"
 														},
 														"sink": {
@@ -772,7 +757,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_27",
+															"name": "Cons Start Date",
 															"type": "String"
 														},
 														"sink": {
@@ -782,7 +767,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_28",
+															"name": "Cons End Date",
 															"type": "String"
 														},
 														"sink": {
@@ -792,7 +777,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_29",
+															"name": "OS Start Date",
 															"type": "String"
 														},
 														"sink": {
@@ -802,7 +787,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_30",
+															"name": "OS End Date",
 															"type": "String"
 														},
 														"sink": {
@@ -812,7 +797,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_31",
+															"name": "ECSD Quarter",
 															"type": "String"
 														},
 														"sink": {
@@ -822,7 +807,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_32",
+															"name": "RSD Quarter",
 															"type": "String"
 														},
 														"sink": {
@@ -832,8 +817,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_33",
-															"type": "String"
+															"name": "ToW"
 														},
 														"sink": {
 															"name": "ToW",
@@ -842,7 +826,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_34",
+															"name": "Business Dimensions",
 															"type": "String"
 														},
 														"sink": {
@@ -852,8 +836,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_35",
-															"type": "String"
+															"name": "SG"
 														},
 														"sink": {
 															"name": "SG",
@@ -862,7 +845,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_36",
+															"name": "Service Start Date",
 															"type": "String"
 														},
 														"sink": {
@@ -872,7 +855,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_37",
+															"name": "Service End Date",
 															"type": "String"
 														},
 														"sink": {
@@ -882,8 +865,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_38",
-															"type": "String"
+															"name": "SSG"
 														},
 														"sink": {
 															"name": "SSG",
@@ -892,7 +874,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_39",
+															"name": "Opp Service Revenue",
 															"type": "String"
 														},
 														"sink": {
@@ -902,7 +884,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_40",
+															"name": "Current Revenue",
 															"type": "String"
 														},
 														"sink": {
@@ -912,7 +894,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_41",
+															"name": "Wtd Current Revenue",
 															"type": "String"
 														},
 														"sink": {
@@ -922,7 +904,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_42",
+															"name": "Target Price",
 															"type": "String"
 														},
 														"sink": {
@@ -932,8 +914,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_43",
-															"type": "String"
+															"name": "CCI2"
 														},
 														"sink": {
 															"name": "CCI2",
@@ -942,7 +923,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_44",
+															"name": "Total CCI%",
 															"type": "String"
 														},
 														"sink": {
@@ -952,8 +933,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_45",
-															"type": "String"
+															"name": "Global Client Account Lead"
 														},
 														"sink": {
 															"name": "Global_Client_Account_Lead",
@@ -962,7 +942,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_46",
+															"name": "Technology Services Lead",
 															"type": "String"
 														},
 														"sink": {
@@ -972,7 +952,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_47",
+															"name": "Client Account Lead",
 															"type": "String"
 														},
 														"sink": {
@@ -982,8 +962,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_48",
-															"type": "String"
+															"name": "Sales Capture (Primary)"
 														},
 														"sink": {
 															"name": "Sales_Capture_Primary",
@@ -992,7 +971,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_49",
+															"name": "Contract Extension Flag",
 															"type": "String"
 														},
 														"sink": {
@@ -1002,8 +981,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_50",
-															"type": "String"
+															"name": "Selling Country/Location"
 														},
 														"sink": {
 															"name": "Selling_Country_Location",
@@ -1012,7 +990,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_51",
+															"name": "Geo Unit",
 															"type": "String"
 														},
 														"sink": {
@@ -1022,7 +1000,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_52",
+															"name": "Primary Work Location",
 															"type": "String"
 														},
 														"sink": {
@@ -1032,7 +1010,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_53",
+															"name": "Delivery Centers",
 															"type": "String"
 														},
 														"sink": {
@@ -1042,8 +1020,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_54",
-															"type": "String"
+															"name": "Competitor"
 														},
 														"sink": {
 															"name": "Competitor",
@@ -1052,7 +1029,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_55",
+															"name": "Winning Competitor",
 															"type": "String"
 														},
 														"sink": {
@@ -1062,8 +1039,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_56",
-															"type": "String"
+															"name": "Reason"
 														},
 														"sink": {
 															"name": "Reason",
@@ -1072,8 +1048,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_57",
-															"type": "String"
+															"name": "Competitive / Sole Source"
 														},
 														"sink": {
 															"name": "Competitive_Sole_Source",
@@ -1082,7 +1057,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_58",
+															"name": "Third Party Advisor",
 															"type": "String"
 														},
 														"sink": {
@@ -1092,8 +1067,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_59",
-															"type": "String"
+															"name": "Digital"
 														},
 														"sink": {
 															"name": "Digital",
@@ -1102,8 +1076,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_60",
-															"type": "String"
+															"name": "Accenture Products & Platforms"
 														},
 														"sink": {
 															"name": "Accenture_Products_Platforms",
@@ -1112,8 +1085,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_61",
-															"type": "String"
+															"name": "Alliances"
 														},
 														"sink": {
 															"name": "Alliances",
@@ -1122,7 +1094,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_62",
+															"name": "Business Service",
 															"type": "String"
 														},
 														"sink": {
@@ -1132,7 +1104,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_63",
+															"name": "Consulting Practice",
 															"type": "String"
 														},
 														"sink": {
@@ -1142,8 +1114,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_64",
-															"type": "String"
+															"name": "Cross Service Group Offering"
 														},
 														"sink": {
 															"name": "Cross_Service_Group_Offering",
@@ -1152,7 +1123,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_65",
+															"name": "Mergers & Acquisitions",
 															"type": "String"
 														},
 														"sink": {
@@ -1162,7 +1133,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_66",
+															"name": "Strategy Offerings",
 															"type": "String"
 														},
 														"sink": {
@@ -1172,8 +1143,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_67",
-															"type": "String"
+															"name": "Tech/Operations Offerings"
 														},
 														"sink": {
 															"name": "Tech_Operations_Offerings",
@@ -1182,7 +1152,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_68",
+															"name": "Win Category",
 															"type": "String"
 														},
 														"sink": {
@@ -1192,8 +1162,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_69",
-															"type": "String"
+															"name": " Extension/non-Extension "
 														},
 														"sink": {
 															"name": "Extension_non_Extension",
@@ -1202,8 +1171,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_70",
-															"type": "String"
+															"name": " Deal size "
 														},
 														"sink": {
 															"name": "Deal_size",
@@ -1212,8 +1180,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_71",
-															"type": "String"
+															"name": " OG Abbrev "
 														},
 														"sink": {
 															"name": "OG_Abbrev",
@@ -1222,8 +1189,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_72",
-															"type": "String"
+															"name": "Geo Unit"
 														},
 														"sink": {
 															"name": "Geo_Unit1",
@@ -1232,8 +1198,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_73",
-															"type": "String"
+															"name": " Country "
 														},
 														"sink": {
 															"name": "Country",
@@ -1242,8 +1207,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_74",
-															"type": "String"
+															"name": " Master Client Lvl 2 "
 														},
 														"sink": {
 															"name": "Master_Client_Lvl_2",
@@ -1252,8 +1216,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_75",
-															"type": "String"
+															"name": "New"
 														},
 														"sink": {
 															"name": "New",
@@ -1262,8 +1225,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_76",
-															"type": "String"
+															"name": " New since last week "
 														},
 														"sink": {
 															"name": "New_since_last_week",
@@ -1272,8 +1234,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_77",
-															"type": "String"
+															"name": " New this month "
 														},
 														"sink": {
 															"name": "New_this_month",
@@ -1282,7 +1243,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_78",
+															"name": " Deal Volume ",
 															"type": "String"
 														},
 														"sink": {
@@ -1292,7 +1253,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_79",
+															"name": "Master Contract",
 															"type": "String"
 														},
 														"sink": {
@@ -1302,8 +1263,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_80",
-															"type": "String"
+															"name": "Master Contract Name (Global)"
 														},
 														"sink": {
 															"name": "Master_Contract_Name_Global",
@@ -1312,7 +1272,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_81",
+															"name": "Valid from",
 															"type": "String"
 														},
 														"sink": {
@@ -1322,7 +1282,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_82",
+															"name": "Valid to",
 															"type": "String"
 														},
 														"sink": {
@@ -1332,7 +1292,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_83",
+															"name": "Sales Sept",
 															"type": "String"
 														},
 														"sink": {
@@ -1342,7 +1302,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_84",
+															"name": "Revenue Sept",
 															"type": "String"
 														},
 														"sink": {
@@ -1352,7 +1312,7 @@
 													},
 													{
 														"source": {
-															"name": "Prop_85",
+															"name": "Contract CI Sept",
 															"type": "String"
 														},
 														"sink": {
