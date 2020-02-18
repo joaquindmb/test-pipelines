@@ -14,11 +14,11 @@
 		"type": "AzureDataLakeStoreFile",
 		"structure": [
 			{
-				"name": "Opportunity_ID",
+				"name": "Opportunity ID #",
 				"type": "String"
 			},
 			{
-				"name": "Reporting_Status",
+				"name": "Reporting Status",
 				"type": "String"
 			},
 			{
@@ -34,39 +34,39 @@
 				"type": "String"
 			},
 			{
-				"name": "Sub_CSG",
+				"name": "Sub-CSG",
 				"type": "String"
 			},
 			{
-				"name": "Master_Client_Name",
+				"name": "Master Client Name",
 				"type": "String"
 			},
 			{
-				"name": "Master_Client_Class",
+				"name": "Master Client Class",
 				"type": "String"
 			},
 			{
-				"name": "Financial_Customer_Name",
+				"name": "Financial Customer Name",
 				"type": "String"
 			},
 			{
-				"name": "CR_Name",
+				"name": "CR Name",
 				"type": "String"
 			},
 			{
-				"name": "Opportunity_Name",
+				"name": "Opportunity Name",
 				"type": "String"
 			},
 			{
-				"name": "Industry_Segment",
+				"name": "Industry Segment",
 				"type": "String"
 			},
 			{
-				"name": "Industry_Sub_Segment",
+				"name": "Industry Sub-Segment",
 				"type": "String"
 			},
 			{
-				"name": "Opportunity_Class",
+				"name": "Opportunity Class",
 				"type": "String"
 			},
 			{
@@ -78,11 +78,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Win_Probability",
+				"name": "Win Probability",
 				"type": "String"
 			},
 			{
-				"name": "Total_Current_Revenue",
+				"name": "Total Current Revenue",
 				"type": "String"
 			},
 			{
@@ -90,59 +90,59 @@
 				"type": "String"
 			},
 			{
-				"name": "CCI1",
+				"name": "CCI%",
 				"type": "String"
 			},
 			{
-				"name": "Target_Margin",
+				"name": "Target Margin %",
 				"type": "String"
 			},
 			{
-				"name": "Create_Date",
+				"name": "Create Date",
 				"type": "String"
 			},
 			{
-				"name": "Stage_Update_Date",
+				"name": "Stage Update Date",
 				"type": "String"
 			},
 			{
-				"name": "Pipeline_Entry_Date",
+				"name": "Pipeline Entry Date",
 				"type": "String"
 			},
 			{
-				"name": "Proposal_Submission_Date",
+				"name": "Proposal Submission Date",
 				"type": "String"
 			},
 			{
-				"name": "Expected_Contract_Signing_Date",
+				"name": "Expected Contract Signing Date",
 				"type": "String"
 			},
 			{
-				"name": "Status_Since_Date",
+				"name": "Status Since Date",
 				"type": "String"
 			},
 			{
-				"name": "Cons_Start_Date",
+				"name": "Cons Start Date",
 				"type": "String"
 			},
 			{
-				"name": "Cons_End_Date",
+				"name": "Cons End Date",
 				"type": "String"
 			},
 			{
-				"name": "OS_Start_Date",
+				"name": "OS Start Date",
 				"type": "String"
 			},
 			{
-				"name": "OS_End_Date",
+				"name": "OS End Date",
 				"type": "String"
 			},
 			{
-				"name": "ECSD_Quarter",
+				"name": "ECSD Quarter",
 				"type": "String"
 			},
 			{
-				"name": "RSD_Quarter",
+				"name": "RSD Quarter",
 				"type": "String"
 			},
 			{
@@ -150,7 +150,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Business_Dimensions",
+				"name": "Business Dimensions",
 				"type": "String"
 			},
 			{
@@ -158,11 +158,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Service_Start_Date",
+				"name": "Service Start Date",
 				"type": "String"
 			},
 			{
-				"name": "Service_End_Date",
+				"name": "Service End Date",
 				"type": "String"
 			},
 			{
@@ -170,19 +170,19 @@
 				"type": "String"
 			},
 			{
-				"name": "Opp_Service_Revenue",
+				"name": "Opp Service Revenue",
 				"type": "String"
 			},
 			{
-				"name": "Current_Revenue",
+				"name": "Current Revenue",
 				"type": "String"
 			},
 			{
-				"name": "Wtd_Current_Revenue",
+				"name": "Wtd Current Revenue",
 				"type": "String"
 			},
 			{
-				"name": "Target_Price",
+				"name": "Target Price",
 				"type": "String"
 			},
 			{
@@ -190,43 +190,43 @@
 				"type": "String"
 			},
 			{
-				"name": "Total_CCI",
+				"name": "Total CCI%",
 				"type": "String"
 			},
 			{
-				"name": "Global_Client_Account_Lead",
+				"name": "Global Client Account Lead",
 				"type": "String"
 			},
 			{
-				"name": "Technology_Services_Lead",
+				"name": "Technology Services Lead",
 				"type": "String"
 			},
 			{
-				"name": "Client_Account_Lead",
+				"name": "Client Account Lead",
 				"type": "String"
 			},
 			{
-				"name": "Sales_Capture_Primary",
+				"name": "Sales Capture (Primary)",
 				"type": "String"
 			},
 			{
-				"name": "Contract_Extension_Flag",
+				"name": "Contract Extension Flag",
 				"type": "String"
 			},
 			{
-				"name": "Selling_Country_Location",
+				"name": "Selling Country/Location",
 				"type": "String"
 			},
 			{
-				"name": "Geo_Unit",
+				"name": "Geo Unit",
 				"type": "String"
 			},
 			{
-				"name": "Primary_Work_Location",
+				"name": "Primary Work Location",
 				"type": "String"
 			},
 			{
-				"name": "Delivery_Centers",
+				"name": "Delivery Centers",
 				"type": "String"
 			},
 			{
@@ -234,7 +234,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Winning_Competitor",
+				"name": "Winning Competitor",
 				"type": "String"
 			},
 			{
@@ -242,11 +242,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Competitive_Sole_Source",
+				"name": "Competitive / Sole Source",
 				"type": "String"
 			},
 			{
-				"name": "Third_Party_Advisor",
+				"name": "Third Party Advisor",
 				"type": "String"
 			},
 			{
@@ -254,7 +254,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Accenture_Products_Platforms",
+				"name": "Accenture Products & Platforms",
 				"type": "String"
 			},
 			{
@@ -262,55 +262,55 @@
 				"type": "String"
 			},
 			{
-				"name": "Business_Service",
+				"name": "Business Service",
 				"type": "String"
 			},
 			{
-				"name": "Consulting_Practice",
+				"name": "Consulting Practice",
 				"type": "String"
 			},
 			{
-				"name": "Cross_Service_Group_Offering",
+				"name": "Cross Service Group Offering",
 				"type": "String"
 			},
 			{
-				"name": "Mergers_Acquisitions",
+				"name": "Mergers & Acquisitions",
 				"type": "String"
 			},
 			{
-				"name": "Strategy_Offerings",
+				"name": "Strategy Offerings",
 				"type": "String"
 			},
 			{
-				"name": "Tech_Operations_Offerings",
+				"name": "Tech/Operations Offerings",
 				"type": "String"
 			},
 			{
-				"name": "Win_Category",
+				"name": "Win Category",
 				"type": "String"
 			},
 			{
-				"name": "Extension_non_Extension",
+				"name": " Extension/non-Extension ",
 				"type": "String"
 			},
 			{
-				"name": "Deal_size",
+				"name": " Deal size ",
 				"type": "String"
 			},
 			{
-				"name": "OG_Abbrev",
+				"name": " OG Abbrev ",
 				"type": "String"
 			},
 			{
-				"name": "Geo_Unit1",
+				"name": " Geo-Unit ",
 				"type": "String"
 			},
 			{
-				"name": "Country",
+				"name": " Country ",
 				"type": "String"
 			},
 			{
-				"name": "Master_Client_Lvl_2",
+				"name": " Master Client Lvl 2 ",
 				"type": "String"
 			},
 			{
@@ -318,43 +318,43 @@
 				"type": "String"
 			},
 			{
-				"name": "New_since_last_week",
+				"name": " New since last week ",
 				"type": "String"
 			},
 			{
-				"name": "New_this_month",
+				"name": " New this month ",
 				"type": "String"
 			},
 			{
-				"name": "Deal_Volume",
+				"name": " Deal Volume ",
 				"type": "String"
 			},
 			{
-				"name": "Master_Contract",
+				"name": "Master Contract",
 				"type": "String"
 			},
 			{
-				"name": "Master_Contract_Name_Global",
+				"name": "Master Contract Name (Global)",
 				"type": "String"
 			},
 			{
-				"name": "Valid_from",
+				"name": "Valid from",
 				"type": "String"
 			},
 			{
-				"name": "Valid_to",
+				"name": "Valid to",
 				"type": "String"
 			},
 			{
-				"name": "Sales_Sept",
+				"name": "Sales Sept",
 				"type": "String"
 			},
 			{
-				"name": "Revenue_Sept",
+				"name": "Revenue Sept",
 				"type": "String"
 			},
 			{
-				"name": "Contract_CI_Sept",
+				"name": "Contract CI Sept",
 				"type": "String"
 			}
 		],
@@ -367,7 +367,7 @@
 				"encodingName": null,
 				"treatEmptyAsNull": true,
 				"skipLineCount": 0,
-				"firstRowAsHeader": false
+				"firstRowAsHeader": true
 			},
 			"fileName": {
 				"value": "@dataset().FileName",

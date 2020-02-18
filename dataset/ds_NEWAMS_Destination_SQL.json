@@ -2,7 +2,7 @@
 	"name": "ds_NEWAMS_Destination_SQL",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "connecttosql",
+			"referenceName": "connecttosql_ams",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
