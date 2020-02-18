@@ -17,6 +17,9 @@
 		"connecttosql_connectionString": {
 			"value": ""
 		},
+		"connecttosql_ams_connectionString": {
+			"value": ""
+		},
 		"DS_FileReference_properties_typeProperties_fileName": {
 			"value": "@dataset().sFileName"
 		},
@@ -40,6 +43,18 @@
 		},
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 			"value": "FromsFTP"
+		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+			"value": "@dataset().FileName"
+		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+			"value": "@concat('FromsFTP')"
+		},
+		"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
+			"value": "@dataset().FileName"
+		},
+		"ds_TEST_Source_Lake_properties_typeProperties_folderPath": {
+			"value": "@concat('FromsFTP')"
 		},
 		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
 			"value": "@dataset().pFileName"
@@ -67,12 +82,6 @@
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
-		},
-		"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
-			"value": "@dataset().FileName"
-		},
-		"ds_TEST_Source_Lake_properties_typeProperties_folderPath": {
-			"value": "@concat('FromsFTP')"
 		}
 	}
 }

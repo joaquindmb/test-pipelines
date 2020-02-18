@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorytest-jdmb"
 		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().FileName"
+		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat('FromsFTP')"
+		},
 		"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "@dataset().FileName"
@@ -14,6 +22,14 @@
 		"ds_TEST_Source_Lake_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "@concat('FromsFTP')"
+		},
+		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().pFileName"
+		},
+		"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "FromsFTP"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -24,6 +40,790 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Destination_SQL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttosql_ams",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Opportunity_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "Reporting_Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CSG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sub_CSG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Master_Client_Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Master_Client_Class",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Financial_Customer_Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CR_Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Opportunity_Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Industry_Segment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Industry_Sub_Segment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Opportunity_Class",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Stage",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Restricted",
+						"type": "varchar"
+					},
+					{
+						"name": "Win_Probability",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_Current_Revenue",
+						"type": "varchar"
+					},
+					{
+						"name": "CCI",
+						"type": "varchar"
+					},
+					{
+						"name": "CCI1",
+						"type": "varchar"
+					},
+					{
+						"name": "Target_Margin",
+						"type": "varchar"
+					},
+					{
+						"name": "Create_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Stage_Update_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Pipeline_Entry_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Proposal_Submission_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Expected_Contract_Signing_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Status_Since_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Cons_Start_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Cons_End_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "OS_Start_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "OS_End_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "ECSD_Quarter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "RSD_Quarter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ToW",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Business_Dimensions",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Service_Start_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Service_End_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "SSG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Opp_Service_Revenue",
+						"type": "varchar"
+					},
+					{
+						"name": "Current_Revenue",
+						"type": "varchar"
+					},
+					{
+						"name": "Wtd_Current_Revenue",
+						"type": "varchar"
+					},
+					{
+						"name": "Target_Price",
+						"type": "varchar"
+					},
+					{
+						"name": "CCI2",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_CCI",
+						"type": "varchar"
+					},
+					{
+						"name": "Global_Client_Account_Lead",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Technology_Services_Lead",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Client_Account_Lead",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sales_Capture_Primary",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Contract_Extension_Flag",
+						"type": "varchar"
+					},
+					{
+						"name": "Selling_Country_Location",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Geo_Unit",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Primary_Work_Location",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Delivery_Centers",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Competitor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Winning_Competitor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Reason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Competitive_Sole_Source",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Third_Party_Advisor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Digital",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Accenture_Products_Platforms",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Alliances",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Business_Service",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Consulting_Practice",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cross_Service_Group_Offering",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mergers_Acquisitions",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Strategy_Offerings",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tech_Operations_Offerings",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Win_Category",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Extension_non_Extension",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Deal_size",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OG_Abbrev",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Geo_Unit1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Country",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Master_Client_Lvl_2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "New",
+						"type": "nvarchar"
+					},
+					{
+						"name": "New_since_last_week",
+						"type": "varchar"
+					},
+					{
+						"name": "New_this_month",
+						"type": "varchar"
+					},
+					{
+						"name": "Deal_Volume",
+						"type": "varchar"
+					},
+					{
+						"name": "Master_Contract",
+						"type": "varchar"
+					},
+					{
+						"name": "Master_Contract_Name_Global",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Valid_from",
+						"type": "varchar"
+					},
+					{
+						"name": "Valid_to",
+						"type": "varchar"
+					},
+					{
+						"name": "Sales_Sept",
+						"type": "varchar"
+					},
+					{
+						"name": "Revenue_Sept",
+						"type": "varchar"
+					},
+					{
+						"name": "Contract_CI_Sept",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "STG_T_NEWAMS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Source_Lake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "Opportunity ID #",
+						"type": "String"
+					},
+					{
+						"name": "Reporting Status",
+						"type": "String"
+					},
+					{
+						"name": "OG",
+						"type": "String"
+					},
+					{
+						"name": "OU",
+						"type": "String"
+					},
+					{
+						"name": "CSG",
+						"type": "String"
+					},
+					{
+						"name": "Sub-CSG",
+						"type": "String"
+					},
+					{
+						"name": "Master Client Name",
+						"type": "String"
+					},
+					{
+						"name": "Master Client Class",
+						"type": "String"
+					},
+					{
+						"name": "Financial Customer Name",
+						"type": "String"
+					},
+					{
+						"name": "CR Name",
+						"type": "String"
+					},
+					{
+						"name": "Opportunity Name",
+						"type": "String"
+					},
+					{
+						"name": "Industry Segment",
+						"type": "String"
+					},
+					{
+						"name": "Industry Sub-Segment",
+						"type": "String"
+					},
+					{
+						"name": "Opportunity Class",
+						"type": "String"
+					},
+					{
+						"name": "Stage",
+						"type": "String"
+					},
+					{
+						"name": "Restricted",
+						"type": "String"
+					},
+					{
+						"name": "Win Probability",
+						"type": "String"
+					},
+					{
+						"name": "Total Current Revenue",
+						"type": "String"
+					},
+					{
+						"name": "CCI",
+						"type": "Byte"
+					},
+					{
+						"name": "CCI%",
+						"type": "String"
+					},
+					{
+						"name": "Target Margin %",
+						"type": "String"
+					},
+					{
+						"name": "Create Date",
+						"type": "String"
+					},
+					{
+						"name": "Stage Update Date",
+						"type": "String"
+					},
+					{
+						"name": "Pipeline Entry Date",
+						"type": "String"
+					},
+					{
+						"name": "Proposal Submission Date",
+						"type": "String"
+					},
+					{
+						"name": "Expected Contract Signing Date",
+						"type": "String"
+					},
+					{
+						"name": "Status Since Date",
+						"type": "String"
+					},
+					{
+						"name": "Cons Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Cons End Date",
+						"type": "String"
+					},
+					{
+						"name": "OS Start Date",
+						"type": "String"
+					},
+					{
+						"name": "OS End Date",
+						"type": "String"
+					},
+					{
+						"name": "ECSD Quarter",
+						"type": "String"
+					},
+					{
+						"name": "RSD Quarter",
+						"type": "String"
+					},
+					{
+						"name": "ToW",
+						"type": "String"
+					},
+					{
+						"name": "Business Dimensions",
+						"type": "String"
+					},
+					{
+						"name": "SG",
+						"type": "String"
+					},
+					{
+						"name": "Service Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Service End Date",
+						"type": "String"
+					},
+					{
+						"name": "SSG",
+						"type": "String"
+					},
+					{
+						"name": "Opp Service Revenue",
+						"type": "String"
+					},
+					{
+						"name": "Current Revenue",
+						"type": "String"
+					},
+					{
+						"name": "Wtd Current Revenue",
+						"type": "String"
+					},
+					{
+						"name": "Target Price",
+						"type": "String"
+					},
+					{
+						"name": "CCI2",
+						"type": "String"
+					},
+					{
+						"name": "Total CCI%",
+						"type": "String"
+					},
+					{
+						"name": "Global Client Account Lead",
+						"type": "String"
+					},
+					{
+						"name": "Technology Services Lead",
+						"type": "String"
+					},
+					{
+						"name": "Client Account Lead",
+						"type": "String"
+					},
+					{
+						"name": "Sales Capture (Primary)",
+						"type": "String"
+					},
+					{
+						"name": "Contract Extension Flag",
+						"type": "String"
+					},
+					{
+						"name": "Selling Country/Location",
+						"type": "String"
+					},
+					{
+						"name": "Geo Unit",
+						"type": "String"
+					},
+					{
+						"name": "Primary Work Location",
+						"type": "String"
+					},
+					{
+						"name": "Delivery Centers",
+						"type": "String"
+					},
+					{
+						"name": "Competitor",
+						"type": "String"
+					},
+					{
+						"name": "Winning Competitor",
+						"type": "String"
+					},
+					{
+						"name": "Reason",
+						"type": "String"
+					},
+					{
+						"name": "Competitive / Sole Source",
+						"type": "String"
+					},
+					{
+						"name": "Third Party Advisor",
+						"type": "String"
+					},
+					{
+						"name": "Digital",
+						"type": "String"
+					},
+					{
+						"name": "Accenture Products & Platforms",
+						"type": "String"
+					},
+					{
+						"name": "Alliances",
+						"type": "String"
+					},
+					{
+						"name": "Business Service",
+						"type": "String"
+					},
+					{
+						"name": "Consulting Practice",
+						"type": "String"
+					},
+					{
+						"name": "Cross Service Group Offering",
+						"type": "String"
+					},
+					{
+						"name": "Mergers & Acquisitions",
+						"type": "String"
+					},
+					{
+						"name": "Strategy Offerings",
+						"type": "String"
+					},
+					{
+						"name": "Tech/Operations Offerings",
+						"type": "String"
+					},
+					{
+						"name": "Win Category",
+						"type": "String"
+					},
+					{
+						"name": " Extension/non-Extension ",
+						"type": "String"
+					},
+					{
+						"name": " Deal size ",
+						"type": "String"
+					},
+					{
+						"name": " OG Abbrev ",
+						"type": "String"
+					},
+					{
+						"name": " Geo-Unit ",
+						"type": "String"
+					},
+					{
+						"name": " Country ",
+						"type": "String"
+					},
+					{
+						"name": " Master Client Lvl 2 ",
+						"type": "String"
+					},
+					{
+						"name": "New",
+						"type": "String"
+					},
+					{
+						"name": " New since last week ",
+						"type": "String"
+					},
+					{
+						"name": " New this month ",
+						"type": "String"
+					},
+					{
+						"name": " Deal Volume ",
+						"type": "String"
+					},
+					{
+						"name": "Master Contract",
+						"type": "String"
+					},
+					{
+						"name": "Master Contract Name (Global)",
+						"type": "String"
+					},
+					{
+						"name": "Valid from",
+						"type": "String"
+					},
+					{
+						"name": "Valid to",
+						"type": "String"
+					},
+					{
+						"name": "Sales Sept",
+						"type": "String"
+					},
+					{
+						"name": "Revenue Sept",
+						"type": "String"
+					},
+					{
+						"name": "Contract CI Sept",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": "|",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath')]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_TEST_Destination_SQL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttosql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "fecha",
+						"type": "String"
+					},
+					{
+						"name": "identificador",
+						"type": "String"
+					},
+					{
+						"name": "nombre",
+						"type": "String"
+					},
+					{
+						"name": "valor",
+						"type": "Decimal"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[FINANCE].[STG_T_TEST]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_TEST_Source_Lake')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -82,7 +882,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_TEST_Destination_SQL')]",
+			"name": "[concat(parameters('factoryName'), '/ds_biinsite_Destination_SQL')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -94,24 +894,94 @@
 				"type": "AzureSqlTable",
 				"structure": [
 					{
-						"name": "fecha",
+						"name": "Data_Load_Date",
 						"type": "String"
 					},
 					{
-						"name": "identificador",
+						"name": "Period",
 						"type": "String"
 					},
 					{
-						"name": "nombre",
+						"name": "Data_Source",
 						"type": "String"
 					},
 					{
-						"name": "valor",
-						"type": "Decimal"
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
 					}
 				],
 				"typeProperties": {
-					"tableName": "[[FINANCE].[STG_T_TEST]"
+					"tableName": "[[PEOPLE_REVIEW].[STG_PR_Dim_Course_Type]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_biinsite_SourceLake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pFileName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "Data_Load_Date",
+						"type": "String"
+					},
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Data_Source",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_ID",
+						"type": "String"
+					},
+					{
+						"name": "Course_Type_Description",
+						"type": "String"
+					},
+					{
+						"name": "Active_ID",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ";",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": {
+						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]"
 				}
 			},
 			"dependsOn": []
@@ -2418,6 +3288,2798 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_NEWAMS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Log Inicio NEWAMS",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[ITC_PIPELINECONTROL_INSERT]",
+							"storedProcedureParameters": {
+								"AMBIT": {
+									"value": {
+										"value": "@pipeline().parameters.pLog_AMBIT",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ENTRY": {
+									"value": {
+										"value": "@variables('vLog_ENTRY')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"OUT": {
+									"value": {
+										"value": "@variables('vLog_OUT')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PROCNAME": {
+									"value": {
+										"value": "@variables('vLog_PROCNAME')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_DS": {
+									"value": "Inicio Pipeline",
+									"type": "String"
+								},
+								"RESULT_OK_KO": {
+									"value": "1",
+									"type": "Int32"
+								},
+								"STEP": {
+									"value": "100",
+									"type": "Int32"
+								},
+								"ID_PIPELINE": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "connecttosql_ams",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Log Fin KO NEWAMS",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "File To Failed Load",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[ITC_PIPELINECONTROL_INSERT]",
+							"storedProcedureParameters": {
+								"AMBIT": {
+									"value": {
+										"value": "@pipeline().parameters.pLog_AMBIT",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ENTRY": {
+									"value": {
+										"value": "@variables('vLog_ENTRY')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"OUT": {
+									"value": {
+										"value": "@variables('vLog_OUT')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PROCNAME": {
+									"value": {
+										"value": "@variables('vLog_PROCNAME')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_DS": {
+									"value": "Fin Pipeline KO",
+									"type": "String"
+								},
+								"RESULT_OK_KO": {
+									"value": "0",
+									"type": "Int32"
+								},
+								"STEP": {
+									"value": "110",
+									"type": "Int32"
+								},
+								"ID_PIPELINE": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "connecttosql_ams",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Get NameFile NEWAMS",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Log Inicio NEWAMS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DataLake_ListFiles",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							]
+						}
+					},
+					{
+						"name": "Log Fin OK NEWAMS",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "ForEach NEWAMS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[ITC_PIPELINECONTROL_INSERT]",
+							"storedProcedureParameters": {
+								"AMBIT": {
+									"value": {
+										"value": "@pipeline().parameters.pLog_AMBIT",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ENTRY": {
+									"value": {
+										"value": "@variables('vLog_ENTRY')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"OUT": {
+									"value": {
+										"value": "@variables('vLog_OUT')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PROCNAME": {
+									"value": {
+										"value": "@variables('vLog_PROCNAME')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_DS": {
+									"value": {
+										"value": "@concat('Fin Pipeline OK',if(variables('vEjecucionConErores'),': Finalizado con errores',''))",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_OK_KO": {
+									"value": "1",
+									"type": "Int32"
+								},
+								"STEP": {
+									"value": "110",
+									"type": "Int32"
+								},
+								"ID_PIPELINE": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "connecttosql_ams",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "ForEach NEWAMS",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Filter NEWAMS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Filter NEWAMS').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Check FileName Already NEWAMS",
+									"type": "Lookup",
+									"dependsOn": [
+										{
+											"activity": "Set FileName NEWAMS",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"sqlReaderStoredProcedureName": "[[dbo].[ITC_PIPELINE_FILE_LOG_INSERT]",
+											"storedProcedureParameters": {
+												"FileName": {
+													"type": "String",
+													"value": {
+														"value": "@variables('vFileNameCurrent')",
+														"type": "Expression"
+													}
+												},
+												"ID_Pipeline": {
+													"type": "String",
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													}
+												},
+												"Proc": {
+													"type": "String",
+													"value": {
+														"value": "@variables('vLog_PROCNAME')",
+														"type": "Expression"
+													}
+												}
+											},
+											"queryTimeout": "02:00:00"
+										},
+										"dataset": {
+											"referenceName": "SQLCheck_FileName_ams",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									}
+								},
+								{
+									"name": "Set FileName NEWAMS",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "vFileNameCurrent",
+										"value": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "Copy_File_ToSQL NEWAMS",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Check FileName Already NEWAMS",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@activity('Check FileName Already NEWAMS').output.firstRow.Result",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "LOG File Alredy Processed NEWAMS",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Move File To Processed File Alredy Processed",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": {
+																"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'),', Se mueve a la carpeta Processed')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "1",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "300",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Move File To Processed File Alredy Processed",
+												"type": "ExecutePipeline",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"pipeline": {
+														"referenceName": "pl_MoveFile",
+														"type": "PipelineReference"
+													},
+													"parameters": {
+														"sFolderOrig": "FromsFTP",
+														"sFileNameOrig": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														},
+														"sFolderDest": "Processed",
+														"sFileNameDest": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														}
+													}
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Copy To SQL NEWAMS",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "Log Inicio Copia NEWAMS",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "AzureDataLakeStoreSource",
+														"recursive": true
+													},
+													"sink": {
+														"type": "SqlSink",
+														"writeBatchSize": 10000,
+														"preCopyScript": "TRUNCATE TABLE [STG_T_NEWAMS]",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": false,
+													"enableSkipIncompatibleRow": false,
+													"dataIntegrationUnits": 0,
+													"translator": {
+														"type": "TabularTranslator",
+														"mappings": [
+															{
+																"source": {
+																	"name": "Opportunity ID #"
+																},
+																"sink": {
+																	"name": "Opportunity_ID",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Reporting Status"
+																},
+																"sink": {
+																	"name": "Reporting_Status",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "OG"
+																},
+																"sink": {
+																	"name": "OG",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "OU"
+																},
+																"sink": {
+																	"name": "OU",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "CSG"
+																},
+																"sink": {
+																	"name": "CSG",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Sub-CSG"
+																},
+																"sink": {
+																	"name": "Sub_CSG",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Master Client Name"
+																},
+																"sink": {
+																	"name": "Master_Client_Name",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Master Client Class"
+																},
+																"sink": {
+																	"name": "Master_Client_Class",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Financial Customer Name"
+																},
+																"sink": {
+																	"name": "Financial_Customer_Name",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "CR Name",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "CR_Name",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Opportunity Name",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Opportunity_Name",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Industry Segment",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Industry_Segment",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Industry Sub-Segment"
+																},
+																"sink": {
+																	"name": "Industry_Sub_Segment",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Opportunity Class",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Opportunity_Class",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Stage"
+																},
+																"sink": {
+																	"name": "Stage",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Restricted"
+																},
+																"sink": {
+																	"name": "Restricted",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Win Probability",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Win_Probability",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Total Current Revenue",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Total_Current_Revenue",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "CCI"
+																},
+																"sink": {
+																	"name": "CCI",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "CCI%"
+																},
+																"sink": {
+																	"name": "CCI1",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Target Margin %",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Target_Margin",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Create Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Create_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Stage Update Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Stage_Update_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Pipeline Entry Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Pipeline_Entry_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Proposal Submission Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Proposal_Submission_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Expected Contract Signing Date"
+																},
+																"sink": {
+																	"name": "Expected_Contract_Signing_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Status Since Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Status_Since_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Cons Start Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Cons_Start_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Cons End Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Cons_End_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "OS Start Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "OS_Start_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "OS End Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "OS_End_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "ECSD Quarter",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "ECSD_Quarter",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "RSD Quarter",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "RSD_Quarter",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "ToW"
+																},
+																"sink": {
+																	"name": "ToW",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Business Dimensions",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Business_Dimensions",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "SG"
+																},
+																"sink": {
+																	"name": "SG",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Service Start Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Service_Start_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Service End Date",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Service_End_Date",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "SSG"
+																},
+																"sink": {
+																	"name": "SSG",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Opp Service Revenue",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Opp_Service_Revenue",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Current Revenue",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Current_Revenue",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Wtd Current Revenue",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Wtd_Current_Revenue",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Target Price",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Target_Price",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "CCI2"
+																},
+																"sink": {
+																	"name": "CCI2",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Total CCI%",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Total_CCI",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Global Client Account Lead"
+																},
+																"sink": {
+																	"name": "Global_Client_Account_Lead",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Technology Services Lead",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Technology_Services_Lead",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Client Account Lead",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Client_Account_Lead",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Sales Capture (Primary)"
+																},
+																"sink": {
+																	"name": "Sales_Capture_Primary",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Contract Extension Flag",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Contract_Extension_Flag",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Selling Country/Location"
+																},
+																"sink": {
+																	"name": "Selling_Country_Location",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Geo Unit",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Geo_Unit",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Primary Work Location",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Primary_Work_Location",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Delivery Centers",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Delivery_Centers",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Competitor"
+																},
+																"sink": {
+																	"name": "Competitor",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Winning Competitor",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Winning_Competitor",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Reason"
+																},
+																"sink": {
+																	"name": "Reason",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Competitive / Sole Source"
+																},
+																"sink": {
+																	"name": "Competitive_Sole_Source",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Third Party Advisor",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Third_Party_Advisor",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Digital"
+																},
+																"sink": {
+																	"name": "Digital",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Accenture Products & Platforms"
+																},
+																"sink": {
+																	"name": "Accenture_Products_Platforms",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Alliances"
+																},
+																"sink": {
+																	"name": "Alliances",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Business Service",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Business_Service",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Consulting Practice",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Consulting_Practice",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Cross Service Group Offering"
+																},
+																"sink": {
+																	"name": "Cross_Service_Group_Offering",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Mergers & Acquisitions",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Mergers_Acquisitions",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Strategy Offerings",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Strategy_Offerings",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Tech/Operations Offerings"
+																},
+																"sink": {
+																	"name": "Tech_Operations_Offerings",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Win Category",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Win_Category",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " Extension/non-Extension "
+																},
+																"sink": {
+																	"name": "Extension_non_Extension",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " Deal size "
+																},
+																"sink": {
+																	"name": "Deal_size",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " OG Abbrev "
+																},
+																"sink": {
+																	"name": "OG_Abbrev",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " Geo-Unit "
+																},
+																"sink": {
+																	"name": "Geo_Unit1",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " Country "
+																},
+																"sink": {
+																	"name": "Country",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " Master Client Lvl 2 "
+																},
+																"sink": {
+																	"name": "Master_Client_Lvl_2",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "New"
+																},
+																"sink": {
+																	"name": "New",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " New since last week "
+																},
+																"sink": {
+																	"name": "New_since_last_week",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " New this month "
+																},
+																"sink": {
+																	"name": "New_this_month",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": " Deal Volume ",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Deal_Volume",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Master Contract",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Master_Contract",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Master Contract Name (Global)"
+																},
+																"sink": {
+																	"name": "Master_Contract_Name_Global",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Valid from",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Valid_from",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Valid to",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Valid_to",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Sales Sept",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Sales_Sept",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Revenue Sept",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Revenue_Sept",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "Contract CI Sept",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "Contract_CI_Sept",
+																	"type": "String"
+																}
+															}
+														]
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_NEWAMS_Source_Lake",
+														"type": "DatasetReference",
+														"parameters": {
+															"FileName": {
+																"value": "@variables('vFileNameCurrent')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_NEWAMS_Destination_SQL",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											},
+											{
+												"name": "Log OK NEWAMS",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "File To Processed",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "ITC_PIPELINECONTROL_INSERT",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": {
+																"value": "@concat('Fin del proceso de copia OK: ',string(activity('Copy To SQL NEWAMS').output))",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "1",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "220",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql_ams",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Log KO NEWAMS",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Set EjecucionConErrores NEWAMS",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "ITC_PIPELINECONTROL_INSERT",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": {
+																"value": "@concat('Fin del proceso de copia ERROR: ',string(activity('Copy To SQL NEWAMS').output))",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "0",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "220",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql_ams",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Log Inicio Copia NEWAMS",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "ITC_PIPELINECONTROL_INSERT",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": "Inicio proceso de copia",
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "1",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "200",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql_ams",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "PL_FEED__NEWAMS",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Copy To SQL NEWAMS",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[PL_FEED_NEWAMS]",
+													"storedProcedureParameters": {
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"AMBITO": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql_ams",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "File To Processed",
+												"type": "ExecutePipeline",
+												"dependsOn": [
+													{
+														"activity": "PL_FEED__NEWAMS",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"pipeline": {
+														"referenceName": "pl_MoveFile",
+														"type": "PipelineReference"
+													},
+													"parameters": {
+														"sFolderOrig": "FromsFTP",
+														"sFileNameOrig": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														},
+														"sFolderDest": "Processed",
+														"sFileNameDest": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														}
+													}
+												}
+											},
+											{
+												"name": "File To FailedLoad",
+												"type": "ExecutePipeline",
+												"dependsOn": [
+													{
+														"activity": "Copy To SQL NEWAMS",
+														"dependencyConditions": [
+															"Failed"
+														]
+													},
+													{
+														"activity": "PL_FEED__NEWAMS",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"pipeline": {
+														"referenceName": "pl_MoveFile",
+														"type": "PipelineReference"
+													},
+													"parameters": {
+														"sFolderOrig": "FromsFTP",
+														"sFileNameOrig": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														},
+														"sFolderDest": "FailedLoad",
+														"sFileNameDest": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														}
+													}
+												}
+											},
+											{
+												"name": "Set EjecucionConErrores NEWAMS",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "File To FailedLoad",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "vEjecucionConErores",
+													"value": true
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Filter NEWAMS",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get NameFile NEWAMS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get NameFile NEWAMS').output.childitems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@and(  greaterOrEquals(indexof(item().name,'AMS'),0),  endswith(item().name,'.csv') )",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "File To Failed Load",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "ForEach NEWAMS",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_MoveFile",
+								"type": "PipelineReference"
+							},
+							"parameters": {
+								"sFolderOrig": {
+									"value": "@concat('FromsFTP')",
+									"type": "Expression"
+								},
+								"sFileNameOrig": {
+									"value": "@variables('vFileNameCurrent')",
+									"type": "Expression"
+								},
+								"sFolderDest": {
+									"value": "@concat('FailedLoad')",
+									"type": "Expression"
+								},
+								"sFileNameDest": {
+									"value": "@variables('vFileNameCurrent')",
+									"type": "Expression"
+								}
+							}
+						}
+					}
+				],
+				"parameters": {
+					"pLog_AMBIT": {
+						"type": "String",
+						"defaultValue": "AMS"
+					}
+				},
+				"variables": {
+					"vLog_PROCNAME": {
+						"type": "String",
+						"defaultValue": "pl_NEWAMS"
+					},
+					"vLog_ENTRY": {
+						"type": "String",
+						"defaultValue": "File_NEWAMS"
+					},
+					"vLog_OUT": {
+						"type": "String",
+						"defaultValue": "[[STG_T_NEWAMS]"
+					},
+					"vFileNameCurrent": {
+						"type": "String"
+					},
+					"vEjecucionConErores": {
+						"type": "Boolean"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
+				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Source_Lake')]",
+				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Destination_SQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_TEST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Log Inicio TEST",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+							"storedProcedureParameters": {
+								"AMBIT": {
+									"value": {
+										"value": "@pipeline().parameters.pLog_AMBIT",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ENTRY": {
+									"value": {
+										"value": "@variables('vLog_ENTRY')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"OUT": {
+									"value": {
+										"value": "@variables('vLog_OUT')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PROCNAME": {
+									"value": {
+										"value": "@variables('vLog_PROCNAME')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_DS": {
+									"value": "Inicio Pipeline",
+									"type": "String"
+								},
+								"RESULT_OK_KO": {
+									"value": "1",
+									"type": "Int32"
+								},
+								"STEP": {
+									"value": "100",
+									"type": "Int32"
+								},
+								"ID_PIPELINE": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "connecttosql",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Log Fin KO TEST",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "File To Failed Load",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+							"storedProcedureParameters": {
+								"AMBIT": {
+									"value": {
+										"value": "@pipeline().parameters.pLog_AMBIT",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ENTRY": {
+									"value": {
+										"value": "@variables('vLog_ENTRY')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"OUT": {
+									"value": {
+										"value": "@variables('vLog_OUT')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PROCNAME": {
+									"value": {
+										"value": "@variables('vLog_PROCNAME')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_DS": {
+									"value": "Fin Pipeline KO",
+									"type": "String"
+								},
+								"RESULT_OK_KO": {
+									"value": "0",
+									"type": "Int32"
+								},
+								"STEP": {
+									"value": "110",
+									"type": "Int32"
+								},
+								"ID_PIPELINE": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "connecttosql",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Get NameFile TEST",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Log Inicio TEST",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DataLake_ListFiles",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							]
+						}
+					},
+					{
+						"name": "Log Fin OK TEST",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "ForEach TEST",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+							"storedProcedureParameters": {
+								"AMBIT": {
+									"value": {
+										"value": "@pipeline().parameters.pLog_AMBIT",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ENTRY": {
+									"value": {
+										"value": "@variables('vLog_ENTRY')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"OUT": {
+									"value": {
+										"value": "@variables('vLog_OUT')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PROCNAME": {
+									"value": {
+										"value": "@variables('vLog_PROCNAME')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_DS": {
+									"value": {
+										"value": "@concat('Fin Pipeline OK',if(variables('vEjecucionConErores'),': Finalizado con errores',''))",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RESULT_OK_KO": {
+									"value": "1",
+									"type": "Int32"
+								},
+								"STEP": {
+									"value": "110",
+									"type": "Int32"
+								},
+								"ID_PIPELINE": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "connecttosql",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "ForEach TEST",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Filter TEST",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Filter TEST').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Check FileName Already TEST",
+									"type": "Lookup",
+									"dependsOn": [
+										{
+											"activity": "Set FileName TEST",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SqlSource",
+											"sqlReaderStoredProcedureName": "FINANCE].[ITC_PIPELINE_FILE_LOG_INSERT]",
+											"storedProcedureParameters": {
+												"FileName": {
+													"type": "String",
+													"value": {
+														"value": "@variables('vFileNameCurrent')",
+														"type": "Expression"
+													}
+												},
+												"Proc": {
+													"type": "String",
+													"value": {
+														"value": "@variables('vLog_PROCNAME')",
+														"type": "Expression"
+													}
+												},
+												"ID_PIPELINE": {
+													"type": "String",
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													}
+												}
+											}
+										},
+										"dataset": {
+											"referenceName": "SQLCheck_FileName",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									}
+								},
+								{
+									"name": "Set FileName TEST",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "vFileNameCurrent",
+										"value": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "Copy_File_ToSQL TEST",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Check FileName Already TEST",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@activity('Check FileName Already TEST').output.firstRow.Result",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "LOG File Alredy Processed TEST",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Move File To Processed File Alredy Processed",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": {
+																"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'),', Se mueve a la carpeta Processed')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "1",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "300",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Move File To Processed File Alredy Processed",
+												"type": "ExecutePipeline",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"pipeline": {
+														"referenceName": "pl_MoveFile",
+														"type": "PipelineReference"
+													},
+													"parameters": {
+														"sFolderOrig": "FromsFTP",
+														"sFileNameOrig": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														},
+														"sFolderDest": "Processed",
+														"sFileNameDest": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														}
+													}
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Copy To SQL TEST",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "Log Inicio Copia TEST",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "AzureDataLakeStoreSource",
+														"recursive": true
+													},
+													"sink": {
+														"type": "SqlSink",
+														"writeBatchSize": 10000,
+														"preCopyScript": "TRUNCATE TABLE [FINANCE].[STG_T_TEST]",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": false,
+													"enableSkipIncompatibleRow": false,
+													"dataIntegrationUnits": 0,
+													"translator": {
+														"type": "TabularTranslator",
+														"columnMappings": {
+															"fecha": "fecha",
+															"identificador": "identificador",
+															"nombre": "nombre",
+															"valor": "valor"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_TEST_Source_Lake",
+														"type": "DatasetReference",
+														"parameters": {
+															"FileName": {
+																"value": "@variables('vFileNameCurrent')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_TEST_Destination_SQL",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											},
+											{
+												"name": "Log OK TEST",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "File To Processed",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": {
+																"value": "@concat('Fin del proceso de copia OK: ',string(activity('Copy To SQL TEST').output))",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "1",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "220",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Log KO TEST",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Set EjecucionConErrores TEST",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": {
+																"value": "@concat('Fin del proceso de copia ERROR: ',string(activity('Copy To SQL TEST').output))",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "0",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "220",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Log Inicio Copia TEST",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
+													"storedProcedureParameters": {
+														"AMBIT": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ENTRY": {
+															"value": {
+																"value": "@variables('vLog_ENTRY')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"OUT": {
+															"value": {
+																"value": "@variables('vLog_OUT')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PROCNAME": {
+															"value": {
+																"value": "@variables('vLog_PROCNAME')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"RESULT_DS": {
+															"value": "Inicio proceso de copia",
+															"type": "String"
+														},
+														"RESULT_OK_KO": {
+															"value": "1",
+															"type": "Int32"
+														},
+														"STEP": {
+															"value": "200",
+															"type": "Int32"
+														},
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "PL_FEED__TEST",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Copy To SQL TEST",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[FINANCE].[PL_FEED_TEST]",
+													"storedProcedureParameters": {
+														"ID_PIPELINE": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"AMBITO": {
+															"value": {
+																"value": "@pipeline().parameters.pLog_AMBIT",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "connecttosql",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "File To Processed",
+												"type": "ExecutePipeline",
+												"dependsOn": [
+													{
+														"activity": "PL_FEED__TEST",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"pipeline": {
+														"referenceName": "pl_MoveFile",
+														"type": "PipelineReference"
+													},
+													"parameters": {
+														"sFolderOrig": "FromsFTP",
+														"sFileNameOrig": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														},
+														"sFolderDest": "Processed",
+														"sFileNameDest": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														}
+													}
+												}
+											},
+											{
+												"name": "File To FailedLoad",
+												"type": "ExecutePipeline",
+												"dependsOn": [
+													{
+														"activity": "Copy To SQL TEST",
+														"dependencyConditions": [
+															"Failed"
+														]
+													},
+													{
+														"activity": "PL_FEED__TEST",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"pipeline": {
+														"referenceName": "pl_MoveFile",
+														"type": "PipelineReference"
+													},
+													"parameters": {
+														"sFolderOrig": "FromsFTP",
+														"sFileNameOrig": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														},
+														"sFolderDest": "FailedLoad",
+														"sFileNameDest": {
+															"value": "@variables('vFileNameCurrent')",
+															"type": "Expression"
+														}
+													}
+												}
+											},
+											{
+												"name": "Set EjecucionConErrores TEST",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "File To FailedLoad",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "vEjecucionConErores",
+													"value": true
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Filter TEST",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get NameFile TEST",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get NameFile TEST').output.childitems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@greaterOrEquals(indexof(item().name,'test'),0)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "File To Failed Load",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "ForEach TEST",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_MoveFile",
+								"type": "PipelineReference"
+							},
+							"parameters": {
+								"sFolderOrig": {
+									"value": "@concat('FromsFTP')",
+									"type": "Expression"
+								},
+								"sFileNameOrig": {
+									"value": "@variables('vFileNameCurrent')",
+									"type": "Expression"
+								},
+								"sFolderDest": {
+									"value": "@concat('FailedLoad')",
+									"type": "Expression"
+								},
+								"sFileNameDest": {
+									"value": "@variables('vFileNameCurrent')",
+									"type": "Expression"
+								}
+							}
+						}
+					}
+				],
+				"parameters": {
+					"pLog_AMBIT": {
+						"type": "String"
+					}
+				},
+				"variables": {
+					"vLog_PROCNAME": {
+						"type": "String",
+						"defaultValue": "pl_TEST"
+					},
+					"vLog_ENTRY": {
+						"type": "String",
+						"defaultValue": "File_TEST"
+					},
+					"vLog_OUT": {
+						"type": "String",
+						"defaultValue": "[[FINANCE].[STG_T_TEST]"
+					},
+					"vFileNameCurrent": {
+						"type": "String"
+					},
+					"vEjecucionConErores": {
+						"type": "Boolean"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
+				"[concat(variables('factoryId'), '/datasets/ds_TEST_Source_Lake')]",
+				"[concat(variables('factoryId'), '/datasets/ds_TEST_Destination_SQL')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pl_biinsite')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -3407,7 +7069,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]"
+				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
+				"[concat(variables('factoryId'), '/datasets/ds_biinsite_SourceLake')]",
+				"[concat(variables('factoryId'), '/datasets/ds_biinsite_Destination_SQL')]"
 			]
 		},
 		{
@@ -3438,993 +7102,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pl_TEST')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Log Inicio TEST",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-							"storedProcedureParameters": {
-								"AMBIT": {
-									"value": {
-										"value": "@pipeline().parameters.pLog_AMBIT",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ENTRY": {
-									"value": {
-										"value": "@variables('vLog_ENTRY')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"OUT": {
-									"value": {
-										"value": "@variables('vLog_OUT')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"PROCNAME": {
-									"value": {
-										"value": "@variables('vLog_PROCNAME')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_DS": {
-									"value": "Inicio Pipeline",
-									"type": "String"
-								},
-								"RESULT_OK_KO": {
-									"value": "1",
-									"type": "Int32"
-								},
-								"STEP": {
-									"value": "100",
-									"type": "Int32"
-								},
-								"ID_PIPELINE": {
-									"value": {
-										"value": "@pipeline().RunId",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "connecttosql",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Log Fin KO TEST",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "File To Failed Load",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-							"storedProcedureParameters": {
-								"AMBIT": {
-									"value": {
-										"value": "@pipeline().parameters.pLog_AMBIT",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ENTRY": {
-									"value": {
-										"value": "@variables('vLog_ENTRY')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"OUT": {
-									"value": {
-										"value": "@variables('vLog_OUT')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"PROCNAME": {
-									"value": {
-										"value": "@variables('vLog_PROCNAME')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_DS": {
-									"value": "Fin Pipeline KO",
-									"type": "String"
-								},
-								"RESULT_OK_KO": {
-									"value": "0",
-									"type": "Int32"
-								},
-								"STEP": {
-									"value": "110",
-									"type": "Int32"
-								},
-								"ID_PIPELINE": {
-									"value": {
-										"value": "@pipeline().RunId",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "connecttosql",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Get NameFile TEST",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Log Inicio TEST",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DataLake_ListFiles",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems"
-							]
-						}
-					},
-					{
-						"name": "Log Fin OK TEST",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "ForEach TEST",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-							"storedProcedureParameters": {
-								"AMBIT": {
-									"value": {
-										"value": "@pipeline().parameters.pLog_AMBIT",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ENTRY": {
-									"value": {
-										"value": "@variables('vLog_ENTRY')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"OUT": {
-									"value": {
-										"value": "@variables('vLog_OUT')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"PROCNAME": {
-									"value": {
-										"value": "@variables('vLog_PROCNAME')",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_DS": {
-									"value": {
-										"value": "@concat('Fin Pipeline OK',if(variables('vEjecucionConErores'),': Finalizado con errores',''))",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RESULT_OK_KO": {
-									"value": "1",
-									"type": "Int32"
-								},
-								"STEP": {
-									"value": "110",
-									"type": "Int32"
-								},
-								"ID_PIPELINE": {
-									"value": {
-										"value": "@pipeline().RunId",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "connecttosql",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "ForEach TEST",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Filter TEST",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Filter TEST').output.value",
-								"type": "Expression"
-							},
-							"isSequential": true,
-							"activities": [
-								{
-									"name": "Check FileName Already TEST",
-									"type": "Lookup",
-									"dependsOn": [
-										{
-											"activity": "Set FileName TEST",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SqlSource",
-											"sqlReaderStoredProcedureName": "FINANCE].[ITC_PIPELINE_FILE_LOG_INSERT]",
-											"storedProcedureParameters": {
-												"FileName": {
-													"type": "String",
-													"value": {
-														"value": "@variables('vFileNameCurrent')",
-														"type": "Expression"
-													}
-												},
-												"Proc": {
-													"type": "String",
-													"value": {
-														"value": "@variables('vLog_PROCNAME')",
-														"type": "Expression"
-													}
-												},
-												"ID_PIPELINE": {
-													"type": "String",
-													"value": {
-														"value": "@pipeline().RunId",
-														"type": "Expression"
-													}
-												}
-											}
-										},
-										"dataset": {
-											"referenceName": "SQLCheck_FileName",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									}
-								},
-								{
-									"name": "Set FileName TEST",
-									"type": "SetVariable",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "vFileNameCurrent",
-										"value": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
-								},
-								{
-									"name": "Copy_File_ToSQL TEST",
-									"type": "IfCondition",
-									"dependsOn": [
-										{
-											"activity": "Check FileName Already TEST",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"userProperties": [],
-									"typeProperties": {
-										"expression": {
-											"value": "@activity('Check FileName Already TEST').output.firstRow.Result",
-											"type": "Expression"
-										},
-										"ifFalseActivities": [
-											{
-												"name": "LOG File Alredy Processed TEST",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "Move File To Processed File Alredy Processed",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": {
-																"value": "@concat('Fichero ya procesado: ', variables('vFileNameCurrent'),', Se mueve a la carpeta Processed')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "1",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "300",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Move File To Processed File Alredy Processed",
-												"type": "ExecutePipeline",
-												"dependsOn": [],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pl_MoveFile",
-														"type": "PipelineReference"
-													},
-													"parameters": {
-														"sFolderOrig": "FromsFTP",
-														"sFileNameOrig": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														},
-														"sFolderDest": "Processed",
-														"sFileNameDest": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														}
-													}
-												}
-											}
-										],
-										"ifTrueActivities": [
-											{
-												"name": "Copy To SQL TEST",
-												"type": "Copy",
-												"dependsOn": [
-													{
-														"activity": "Log Inicio Copia TEST",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"source": {
-														"type": "AzureDataLakeStoreSource",
-														"recursive": true
-													},
-													"sink": {
-														"type": "SqlSink",
-														"writeBatchSize": 10000,
-														"preCopyScript": "TRUNCATE TABLE [FINANCE].[STG_T_TEST]",
-														"disableMetricsCollection": false
-													},
-													"enableStaging": false,
-													"enableSkipIncompatibleRow": false,
-													"dataIntegrationUnits": 0,
-													"translator": {
-														"type": "TabularTranslator",
-														"columnMappings": {
-															"fecha": "fecha",
-															"identificador": "identificador",
-															"nombre": "nombre",
-															"valor": "valor"
-														}
-													}
-												},
-												"inputs": [
-													{
-														"referenceName": "ds_TEST_Source_Lake",
-														"type": "DatasetReference",
-														"parameters": {
-															"FileName": {
-																"value": "@variables('vFileNameCurrent')",
-																"type": "Expression"
-															}
-														}
-													}
-												],
-												"outputs": [
-													{
-														"referenceName": "ds_TEST_Destination_SQL",
-														"type": "DatasetReference",
-														"parameters": {}
-													}
-												]
-											},
-											{
-												"name": "Log OK TEST",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "File To Processed",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": {
-																"value": "@concat('Fin del proceso de copia OK: ',string(activity('Copy To SQL TEST').output))",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "1",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "220",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Log KO TEST",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "Set EjecucionConErrores TEST",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": {
-																"value": "@concat('Fin del proceso de copia ERROR: ',string(activity('Copy To SQL TEST').output))",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "0",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "220",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "Log Inicio Copia TEST",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[FINANCE].[ITC_PIPELINECONTROL_INSERT]",
-													"storedProcedureParameters": {
-														"AMBIT": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"ENTRY": {
-															"value": {
-																"value": "@variables('vLog_ENTRY')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"OUT": {
-															"value": {
-																"value": "@variables('vLog_OUT')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"PROCNAME": {
-															"value": {
-																"value": "@variables('vLog_PROCNAME')",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"RESULT_DS": {
-															"value": "Inicio proceso de copia",
-															"type": "String"
-														},
-														"RESULT_OK_KO": {
-															"value": "1",
-															"type": "Int32"
-														},
-														"STEP": {
-															"value": "200",
-															"type": "Int32"
-														},
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "PL_FEED__TEST",
-												"type": "SqlServerStoredProcedure",
-												"dependsOn": [
-													{
-														"activity": "Copy To SQL TEST",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"storedProcedureName": "[[FINANCE].[PL_FEED_TEST]",
-													"storedProcedureParameters": {
-														"ID_PIPELINE": {
-															"value": {
-																"value": "@pipeline().RunId",
-																"type": "Expression"
-															},
-															"type": "String"
-														},
-														"AMBITO": {
-															"value": {
-																"value": "@pipeline().parameters.pLog_AMBIT",
-																"type": "Expression"
-															},
-															"type": "String"
-														}
-													}
-												},
-												"linkedServiceName": {
-													"referenceName": "connecttosql",
-													"type": "LinkedServiceReference"
-												}
-											},
-											{
-												"name": "File To Processed",
-												"type": "ExecutePipeline",
-												"dependsOn": [
-													{
-														"activity": "PL_FEED__TEST",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pl_MoveFile",
-														"type": "PipelineReference"
-													},
-													"parameters": {
-														"sFolderOrig": "FromsFTP",
-														"sFileNameOrig": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														},
-														"sFolderDest": "Processed",
-														"sFileNameDest": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														}
-													}
-												}
-											},
-											{
-												"name": "File To FailedLoad",
-												"type": "ExecutePipeline",
-												"dependsOn": [
-													{
-														"activity": "Copy To SQL TEST",
-														"dependencyConditions": [
-															"Failed"
-														]
-													},
-													{
-														"activity": "PL_FEED__TEST",
-														"dependencyConditions": [
-															"Failed"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pl_MoveFile",
-														"type": "PipelineReference"
-													},
-													"parameters": {
-														"sFolderOrig": "FromsFTP",
-														"sFileNameOrig": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														},
-														"sFolderDest": "FailedLoad",
-														"sFileNameDest": {
-															"value": "@variables('vFileNameCurrent')",
-															"type": "Expression"
-														}
-													}
-												}
-											},
-											{
-												"name": "Set EjecucionConErrores TEST",
-												"type": "SetVariable",
-												"dependsOn": [
-													{
-														"activity": "File To FailedLoad",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"variableName": "vEjecucionConErores",
-													"value": true
-												}
-											}
-										]
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Filter TEST",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Get NameFile TEST",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get NameFile TEST').output.childitems",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@greaterOrEquals(indexof(item().name,'test'),0)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "File To Failed Load",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "ForEach TEST",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "pl_MoveFile",
-								"type": "PipelineReference"
-							},
-							"parameters": {
-								"sFolderOrig": {
-									"value": "@concat('FromsFTP')",
-									"type": "Expression"
-								},
-								"sFileNameOrig": {
-									"value": "@variables('vFileNameCurrent')",
-									"type": "Expression"
-								},
-								"sFolderDest": {
-									"value": "@concat('FailedLoad')",
-									"type": "Expression"
-								},
-								"sFileNameDest": {
-									"value": "@variables('vFileNameCurrent')",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"parameters": {
-					"pLog_AMBIT": {
-						"type": "String"
-					}
-				},
-				"variables": {
-					"vLog_PROCNAME": {
-						"type": "String",
-						"defaultValue": "pl_TEST"
-					},
-					"vLog_ENTRY": {
-						"type": "String",
-						"defaultValue": "File_TEST"
-					},
-					"vLog_OUT": {
-						"type": "String",
-						"defaultValue": "[[FINANCE].[STG_T_TEST]"
-					},
-					"vFileNameCurrent": {
-						"type": "String"
-					},
-					"vEjecucionConErores": {
-						"type": "Boolean"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
-				"[concat(variables('factoryId'), '/datasets/ds_TEST_Source_Lake')]",
-				"[concat(variables('factoryId'), '/datasets/ds_TEST_Destination_SQL')]"
 			]
 		}
 	]

@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connecttosql'"
 		},
+		"connecttosql_ams_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'connecttosql_ams'"
+		},
 		"DS_FileReference_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "@dataset().sFileName"
@@ -54,6 +58,22 @@
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "FromsFTP"
+		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().FileName"
+		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat('FromsFTP')"
+		},
+		"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().FileName"
+		},
+		"ds_TEST_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat('FromsFTP')"
 		},
 		"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
 			"type": "string",
@@ -90,14 +110,6 @@
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
-		},
-		"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@dataset().FileName"
-		},
-		"ds_TEST_Source_Lake_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "@concat('FromsFTP')"
 		},
 		"containerUri": {
 			"type": "string",
@@ -137,6 +149,9 @@
 					},
 					"connecttosql_connectionString": {
 						"value": "[parameters('connecttosql_connectionString')]"
+					},
+					"connecttosql_ams_connectionString": {
+						"value": "[parameters('connecttosql_ams_connectionString')]"
 					},
 					"AzureDataLakeStorageGen2_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorageGen2_properties_typeProperties_url')]"
@@ -179,12 +194,6 @@
 					},
 					"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 						"value": "[parameters('PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath')]"
-					},
-					"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
-						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_fileName')]"
-					},
-					"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
-						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]"
 					}
 				}
 			},
@@ -204,11 +213,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_fileName')]"
+					},
+					"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath')]"
+					},
 					"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
 						"value": "[parameters('ds_TEST_Source_Lake_properties_typeProperties_fileName')]"
 					},
 					"ds_TEST_Source_Lake_properties_typeProperties_folderPath": {
 						"value": "[parameters('ds_TEST_Source_Lake_properties_typeProperties_folderPath')]"
+					},
+					"ds_biinsite_SourceLake_properties_typeProperties_fileName": {
+						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_fileName')]"
+					},
+					"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
+						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]"
 					},
 					"trigger1_properties_typeProperties_scope": {
 						"value": "[parameters('trigger1_properties_typeProperties_scope')]"
