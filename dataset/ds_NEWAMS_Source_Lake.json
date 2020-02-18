@@ -87,7 +87,7 @@
 			},
 			{
 				"name": "CCI",
-				"type": "String"
+				"type": "Byte"
 			},
 			{
 				"name": "CCI%",

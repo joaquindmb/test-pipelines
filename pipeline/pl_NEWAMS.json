@@ -1189,7 +1189,7 @@
 													},
 													{
 														"source": {
-															"name": "Geo Unit"
+															"name": " Geo-Unit "
 														},
 														"sink": {
 															"name": "Geo_Unit1",
