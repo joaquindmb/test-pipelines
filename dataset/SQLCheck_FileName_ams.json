@@ -1,0 +1,16 @@
+{
+	"name": "SQLCheck_FileName_ams",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttosql_ams",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ITC_PIPELINECONTROL"
+		}
+	}
+}
