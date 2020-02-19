@@ -1,5 +1,5 @@
 {
-	"name": "pl_NEWAMS",
+	"name": "pl_NEWAMS_old",
 	"properties": {
 		"activities": [
 			{
@@ -1325,7 +1325,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "ds_NEWAMS_Source_Lake",
+												"referenceName": "ds_NEWAMS_Source_Lake_old",
 												"type": "DatasetReference",
 												"parameters": {
 													"FileName": {
@@ -1337,7 +1337,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "ds_NEWAMS_Destination_SQL",
+												"referenceName": "ds_NEWAMS_Destination_SQL_old",
 												"type": "DatasetReference"
 											}
 										]

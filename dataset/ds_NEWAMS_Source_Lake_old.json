@@ -1,5 +1,5 @@
 {
-	"name": "ds_NEWAMS_Source_Lake",
+	"name": "ds_NEWAMS_Source_Lake_old",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "connecttodatalake",
