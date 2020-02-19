@@ -1,0 +1,401 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorytest-jdmb"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Source_Lake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "connecttodatalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "Opportunity ID #",
+						"type": "String"
+					},
+					{
+						"name": "Reporting Status",
+						"type": "String"
+					},
+					{
+						"name": "OG",
+						"type": "String"
+					},
+					{
+						"name": "OU",
+						"type": "String"
+					},
+					{
+						"name": "CSG",
+						"type": "String"
+					},
+					{
+						"name": "Sub-CSG",
+						"type": "String"
+					},
+					{
+						"name": "Master Client Name",
+						"type": "String"
+					},
+					{
+						"name": "Master Client Class",
+						"type": "String"
+					},
+					{
+						"name": "Financial Customer Name",
+						"type": "String"
+					},
+					{
+						"name": "CR Name",
+						"type": "String"
+					},
+					{
+						"name": "Opportunity Name",
+						"type": "String"
+					},
+					{
+						"name": "Industry Segment",
+						"type": "String"
+					},
+					{
+						"name": "Industry Sub-Segment",
+						"type": "String"
+					},
+					{
+						"name": "Opportunity Class",
+						"type": "String"
+					},
+					{
+						"name": "Stage",
+						"type": "String"
+					},
+					{
+						"name": "Restricted",
+						"type": "String"
+					},
+					{
+						"name": "Win Probability",
+						"type": "String"
+					},
+					{
+						"name": "Total Current Revenue",
+						"type": "String"
+					},
+					{
+						"name": "CCI",
+						"type": "String"
+					},
+					{
+						"name": "CCI%",
+						"type": "String"
+					},
+					{
+						"name": "Target Margin %",
+						"type": "String"
+					},
+					{
+						"name": "Create Date",
+						"type": "String"
+					},
+					{
+						"name": "Stage Update Date",
+						"type": "String"
+					},
+					{
+						"name": "Pipeline Entry Date",
+						"type": "String"
+					},
+					{
+						"name": "Proposal Submission Date",
+						"type": "String"
+					},
+					{
+						"name": "Expected Contract Signing Date",
+						"type": "String"
+					},
+					{
+						"name": "Status Since Date",
+						"type": "String"
+					},
+					{
+						"name": "Cons Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Cons End Date",
+						"type": "String"
+					},
+					{
+						"name": "OS Start Date",
+						"type": "String"
+					},
+					{
+						"name": "OS End Date",
+						"type": "String"
+					},
+					{
+						"name": "ECSD Quarter",
+						"type": "String"
+					},
+					{
+						"name": "RSD Quarter",
+						"type": "String"
+					},
+					{
+						"name": "ToW",
+						"type": "String"
+					},
+					{
+						"name": "Business Dimensions",
+						"type": "String"
+					},
+					{
+						"name": "SG",
+						"type": "String"
+					},
+					{
+						"name": "Service Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Service End Date",
+						"type": "String"
+					},
+					{
+						"name": "SSG",
+						"type": "String"
+					},
+					{
+						"name": "Opp Service Revenue",
+						"type": "String"
+					},
+					{
+						"name": "Current Revenue",
+						"type": "String"
+					},
+					{
+						"name": "Wtd Current Revenue",
+						"type": "String"
+					},
+					{
+						"name": "Target Price",
+						"type": "String"
+					},
+					{
+						"name": "CCI2",
+						"type": "String"
+					},
+					{
+						"name": "Total CCI%",
+						"type": "String"
+					},
+					{
+						"name": "Global Client Account Lead",
+						"type": "String"
+					},
+					{
+						"name": "Technology Services Lead",
+						"type": "String"
+					},
+					{
+						"name": "Client Account Lead",
+						"type": "String"
+					},
+					{
+						"name": "Sales Capture (Primary)",
+						"type": "String"
+					},
+					{
+						"name": "Contract Extension Flag",
+						"type": "String"
+					},
+					{
+						"name": "Selling Country/Location",
+						"type": "String"
+					},
+					{
+						"name": "Geo Unit",
+						"type": "String"
+					},
+					{
+						"name": "Primary Work Location",
+						"type": "String"
+					},
+					{
+						"name": "Delivery Centers",
+						"type": "String"
+					},
+					{
+						"name": "Competitor",
+						"type": "String"
+					},
+					{
+						"name": "Winning Competitor",
+						"type": "String"
+					},
+					{
+						"name": "Reason",
+						"type": "String"
+					},
+					{
+						"name": "Competitive / Sole Source",
+						"type": "String"
+					},
+					{
+						"name": "Third Party Advisor",
+						"type": "String"
+					},
+					{
+						"name": "Digital",
+						"type": "String"
+					},
+					{
+						"name": "Accenture Products & Platforms",
+						"type": "String"
+					},
+					{
+						"name": "Alliances",
+						"type": "String"
+					},
+					{
+						"name": "Business Service",
+						"type": "String"
+					},
+					{
+						"name": "Consulting Practice",
+						"type": "String"
+					},
+					{
+						"name": "Cross Service Group Offering",
+						"type": "String"
+					},
+					{
+						"name": "Mergers & Acquisitions",
+						"type": "String"
+					},
+					{
+						"name": "Strategy Offerings",
+						"type": "String"
+					},
+					{
+						"name": "Tech/Operations Offerings",
+						"type": "String"
+					},
+					{
+						"name": "Win Category",
+						"type": "String"
+					},
+					{
+						"name": " Extension/non-Extension ",
+						"type": "String"
+					},
+					{
+						"name": " Deal size ",
+						"type": "String"
+					},
+					{
+						"name": " OG Abbrev ",
+						"type": "String"
+					},
+					{
+						"name": " Geo-Unit ",
+						"type": "String"
+					},
+					{
+						"name": " Country ",
+						"type": "String"
+					},
+					{
+						"name": " Master Client Lvl 2 ",
+						"type": "String"
+					},
+					{
+						"name": "New",
+						"type": "String"
+					},
+					{
+						"name": " New since last week ",
+						"type": "String"
+					},
+					{
+						"name": " New this month ",
+						"type": "String"
+					},
+					{
+						"name": " Deal Volume ",
+						"type": "String"
+					},
+					{
+						"name": "Master Contract",
+						"type": "String"
+					},
+					{
+						"name": "Master Contract Name (Global)",
+						"type": "String"
+					},
+					{
+						"name": "Valid from",
+						"type": "String"
+					},
+					{
+						"name": "Valid to",
+						"type": "String"
+					},
+					{
+						"name": "Sales Sept",
+						"type": "String"
+					},
+					{
+						"name": "Revenue Sept",
+						"type": "String"
+					},
+					{
+						"name": "Contract CI Sept",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": "|",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": {
+						"value": "@dataset().FileName",
+						"type": "Expression"
+					},
+					"folderPath": {
+						"value": "@concat('FromsFTP')",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
