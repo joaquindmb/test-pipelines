@@ -295,13 +295,20 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "SqlSource",
-									"sqlReaderStoredProcedureName": "[ITC_PIPELINE_FILE_LOG_INSERT]",
+									"type": "AzureSqlSource",
+									"sqlReaderStoredProcedureName": "[dbo].[ITC_PIPELINE_FILE_LOG_INSERT]",
 									"storedProcedureParameters": {
 										"FileName": {
 											"type": "String",
 											"value": {
 												"value": "@variables('vFileNameCurrent')",
+												"type": "Expression"
+											}
+										},
+										"ID_Pipeline": {
+											"type": "String",
+											"value": {
+												"value": "@pipeline().RunId",
 												"type": "Expression"
 											}
 										},
@@ -311,18 +318,12 @@
 												"value": "@variables('vLog_PROCNAME')",
 												"type": "Expression"
 											}
-										},
-										"ID_PIPELINE": {
-											"type": "String",
-											"value": {
-												"value": "@pipeline().RunId",
-												"type": "Expression"
-											}
 										}
-									}
+									},
+									"queryTimeout": "02:00:00"
 								},
 								"dataset": {
-									"referenceName": "SQLCheck_FileName",
+									"referenceName": "SQLCheck_FileName_ams",
 									"type": "DatasetReference"
 								}
 							}
