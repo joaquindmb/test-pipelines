@@ -44,10 +44,10 @@
 		"PR_Fact_Staff_Source_Lake_properties_typeProperties_folderPath": {
 			"value": "FromsFTP"
 		},
-		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+		"ds_NEWAMS_Source_Lake_old_properties_typeProperties_fileName": {
 			"value": "@dataset().FileName"
 		},
-		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+		"ds_NEWAMS_Source_Lake_old_properties_typeProperties_folderPath": {
 			"value": "@concat('FromsFTP')"
 		},
 		"ds_TEST_Source_Lake_properties_typeProperties_fileName": {

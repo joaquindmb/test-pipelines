@@ -59,11 +59,11 @@
 			"type": "string",
 			"defaultValue": "FromsFTP"
 		},
-		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+		"ds_NEWAMS_Source_Lake_old_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "@dataset().FileName"
 		},
-		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+		"ds_NEWAMS_Source_Lake_old_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "@concat('FromsFTP')"
 		},
@@ -213,11 +213,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
-						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_fileName')]"
+					"ds_NEWAMS_Source_Lake_old_properties_typeProperties_fileName": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_old_properties_typeProperties_fileName')]"
 					},
-					"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
-						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath')]"
+					"ds_NEWAMS_Source_Lake_old_properties_typeProperties_folderPath": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_old_properties_typeProperties_folderPath')]"
 					},
 					"ds_TEST_Source_Lake_properties_typeProperties_fileName": {
 						"value": "[parameters('ds_TEST_Source_Lake_properties_typeProperties_fileName')]"

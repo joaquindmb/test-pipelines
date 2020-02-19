@@ -7,11 +7,11 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorytest-jdmb"
 		},
-		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+		"ds_NEWAMS_Source_Lake_old_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "@dataset().FileName"
 		},
-		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+		"ds_NEWAMS_Source_Lake_old_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "@concat('FromsFTP')"
 		},
@@ -41,7 +41,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Destination_SQL')]",
+			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Destination_SQL_old')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -405,7 +405,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Source_Lake')]",
+			"name": "[concat(parameters('factoryName'), '/ds_NEWAMS_Source_Lake_old')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -778,11 +778,11 @@
 						"firstRowAsHeader": true
 					},
 					"fileName": {
-						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_fileName')]",
+						"value": "[parameters('ds_NEWAMS_Source_Lake_old_properties_typeProperties_fileName')]",
 						"type": "Expression"
 					},
 					"folderPath": {
-						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath')]",
+						"value": "[parameters('ds_NEWAMS_Source_Lake_old_properties_typeProperties_folderPath')]",
 						"type": "Expression"
 					}
 				}
@@ -3288,7 +3288,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_NEWAMS')]",
+			"name": "[concat(parameters('factoryName'), '/pl_NEWAMS_old')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -4618,7 +4618,7 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_NEWAMS_Source_Lake",
+														"referenceName": "ds_NEWAMS_Source_Lake_old",
 														"type": "DatasetReference",
 														"parameters": {
 															"FileName": {
@@ -4630,7 +4630,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_NEWAMS_Destination_SQL",
+														"referenceName": "ds_NEWAMS_Destination_SQL_old",
 														"type": "DatasetReference",
 														"parameters": {}
 													}
@@ -5088,8 +5088,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_MoveFile')]",
-				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Source_Lake')]",
-				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Destination_SQL')]"
+				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Source_Lake_old')]",
+				"[concat(variables('factoryId'), '/datasets/ds_NEWAMS_Destination_SQL_old')]"
 			]
 		},
 		{
