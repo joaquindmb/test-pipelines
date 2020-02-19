@@ -1,0 +1,383 @@
+{
+	"name": "ds_NEWAMS_Source_Lake",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "connecttodatalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDataLakeStoreFile",
+		"structure": [
+			{
+				"name": "Opportunity_ID",
+				"type": "String"
+			},
+			{
+				"name": "Reporting_Status",
+				"type": "String"
+			},
+			{
+				"name": "OG",
+				"type": "String"
+			},
+			{
+				"name": "OU",
+				"type": "String"
+			},
+			{
+				"name": "CSG",
+				"type": "String"
+			},
+			{
+				"name": "Sub_CSG",
+				"type": "String"
+			},
+			{
+				"name": "Master_Client_Name",
+				"type": "String"
+			},
+			{
+				"name": "Master_Client_Class",
+				"type": "String"
+			},
+			{
+				"name": "Financial_Customer_Name",
+				"type": "String"
+			},
+			{
+				"name": "CR_Name",
+				"type": "String"
+			},
+			{
+				"name": "Opportunity_Name",
+				"type": "String"
+			},
+			{
+				"name": "Industry_Segment",
+				"type": "String"
+			},
+			{
+				"name": "Industry_Sub_Segment",
+				"type": "String"
+			},
+			{
+				"name": "Opportunity_Class",
+				"type": "String"
+			},
+			{
+				"name": "Stage",
+				"type": "String"
+			},
+			{
+				"name": "Restricted",
+				"type": "String"
+			},
+			{
+				"name": "Win_Probability",
+				"type": "String"
+			},
+			{
+				"name": "Total_Current_Revenue",
+				"type": "String"
+			},
+			{
+				"name": "CCI",
+				"type": "String"
+			},
+			{
+				"name": "CCI1",
+				"type": "String"
+			},
+			{
+				"name": "Target_Margin",
+				"type": "String"
+			},
+			{
+				"name": "Create_Date",
+				"type": "String"
+			},
+			{
+				"name": "Stage_Update_Date",
+				"type": "String"
+			},
+			{
+				"name": "Pipeline_Entry_Date",
+				"type": "String"
+			},
+			{
+				"name": "Proposal_Submission_Date",
+				"type": "String"
+			},
+			{
+				"name": "Expected_Contract_Signing_Date",
+				"type": "String"
+			},
+			{
+				"name": "Status_Since_Date",
+				"type": "String"
+			},
+			{
+				"name": "Cons_Start_Date",
+				"type": "String"
+			},
+			{
+				"name": "Cons_End_Date",
+				"type": "String"
+			},
+			{
+				"name": "OS_Start_Date",
+				"type": "String"
+			},
+			{
+				"name": "OS_End_Date",
+				"type": "String"
+			},
+			{
+				"name": "ECSD_Quarter",
+				"type": "String"
+			},
+			{
+				"name": "RSD_Quarter",
+				"type": "String"
+			},
+			{
+				"name": "ToW",
+				"type": "String"
+			},
+			{
+				"name": "Business_Dimensions",
+				"type": "String"
+			},
+			{
+				"name": "SG",
+				"type": "String"
+			},
+			{
+				"name": "Service_Start_Date",
+				"type": "String"
+			},
+			{
+				"name": "Service_End_Date",
+				"type": "String"
+			},
+			{
+				"name": "SSG",
+				"type": "String"
+			},
+			{
+				"name": "Opp_Service_Revenue",
+				"type": "String"
+			},
+			{
+				"name": "Current_Revenue",
+				"type": "String"
+			},
+			{
+				"name": "Wtd_Current_Revenue",
+				"type": "String"
+			},
+			{
+				"name": "Target_Price",
+				"type": "String"
+			},
+			{
+				"name": "CCI2",
+				"type": "String"
+			},
+			{
+				"name": "Total_CCI",
+				"type": "String"
+			},
+			{
+				"name": "Global_Client_Account_Lead",
+				"type": "String"
+			},
+			{
+				"name": "Technology_Services_Lead",
+				"type": "String"
+			},
+			{
+				"name": "Client_Account_Lead",
+				"type": "String"
+			},
+			{
+				"name": "Sales_Capture_Primary",
+				"type": "String"
+			},
+			{
+				"name": "Contract_Extension_Flag",
+				"type": "String"
+			},
+			{
+				"name": "Selling_Country_Location",
+				"type": "String"
+			},
+			{
+				"name": "Geo_Unit",
+				"type": "String"
+			},
+			{
+				"name": "Primary_Work_Location",
+				"type": "String"
+			},
+			{
+				"name": "Delivery_Centers",
+				"type": "String"
+			},
+			{
+				"name": "Competitor",
+				"type": "String"
+			},
+			{
+				"name": "Winning_Competitor",
+				"type": "String"
+			},
+			{
+				"name": "Reason",
+				"type": "String"
+			},
+			{
+				"name": "Competitive_Sole_Source",
+				"type": "String"
+			},
+			{
+				"name": "Third_Party_Advisor",
+				"type": "String"
+			},
+			{
+				"name": "Digital",
+				"type": "String"
+			},
+			{
+				"name": "Accenture_Products_Platforms",
+				"type": "String"
+			},
+			{
+				"name": "Alliances",
+				"type": "String"
+			},
+			{
+				"name": "Business_Service",
+				"type": "String"
+			},
+			{
+				"name": "Consulting_Practice",
+				"type": "String"
+			},
+			{
+				"name": "Cross_Service_Group_Offering",
+				"type": "String"
+			},
+			{
+				"name": "Mergers_Acquisitions",
+				"type": "String"
+			},
+			{
+				"name": "Strategy_Offerings",
+				"type": "String"
+			},
+			{
+				"name": "Tech_Operations_Offerings",
+				"type": "String"
+			},
+			{
+				"name": "Win_Category",
+				"type": "String"
+			},
+			{
+				"name": "Extension_non_Extension",
+				"type": "String"
+			},
+			{
+				"name": "Deal_size",
+				"type": "String"
+			},
+			{
+				"name": "OG_Abbrev",
+				"type": "String"
+			},
+			{
+				"name": "Geo_Unit1",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "Master_Client_Lvl_2",
+				"type": "String"
+			},
+			{
+				"name": "New",
+				"type": "String"
+			},
+			{
+				"name": "New_since_last_week",
+				"type": "String"
+			},
+			{
+				"name": "New_this_month",
+				"type": "String"
+			},
+			{
+				"name": "Deal_Volume",
+				"type": "String"
+			},
+			{
+				"name": "Master_Contract",
+				"type": "String"
+			},
+			{
+				"name": "Master_Contract_Name_Global",
+				"type": "String"
+			},
+			{
+				"name": "Valid_from",
+				"type": "String"
+			},
+			{
+				"name": "Valid_to",
+				"type": "String"
+			},
+			{
+				"name": "Sales_Sept",
+				"type": "String"
+			},
+			{
+				"name": "Revenue_Sept",
+				"type": "String"
+			},
+			{
+				"name": "Contract_CI_Sept",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": "|",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": {
+				"value": "@dataset().FileName",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "@concat('FromsFTP')",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
