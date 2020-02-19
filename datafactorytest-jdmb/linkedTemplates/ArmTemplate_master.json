@@ -111,6 +111,14 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/af366761-7221-4663-a2ea-a9919ab7f12f/resourceGroups/test-jdmb/providers/Microsoft.Storage/storageAccounts/jdbmdatalakegen2"
 		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().FileName"
+		},
+		"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat('FromsFTP')"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -230,6 +238,12 @@
 					},
 					"ds_biinsite_SourceLake_properties_typeProperties_folderPath": {
 						"value": "[parameters('ds_biinsite_SourceLake_properties_typeProperties_folderPath')]"
+					},
+					"ds_NEWAMS_Source_Lake_properties_typeProperties_fileName": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_fileName')]"
+					},
+					"ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath": {
+						"value": "[parameters('ds_NEWAMS_Source_Lake_properties_typeProperties_folderPath')]"
 					},
 					"trigger1_properties_typeProperties_scope": {
 						"value": "[parameters('trigger1_properties_typeProperties_scope')]"
