@@ -78,11 +78,11 @@
 			},
 			{
 				"name": "Total_Current_Revenue",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "CCI",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "CCI1",
@@ -166,23 +166,23 @@
 			},
 			{
 				"name": "Opp_Service_Revenue",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Current_Revenue",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Wtd_Current_Revenue",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Target_Price",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "CCI2",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Total_CCI",
@@ -322,7 +322,7 @@
 			},
 			{
 				"name": "Deal_Volume",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Master_Contract",
@@ -342,15 +342,15 @@
 			},
 			{
 				"name": "Sales_Sept",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Revenue_Sept",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "Contract_CI_Sept",
-				"type": "Decimal"
+				"type": "String"
 			}
 		],
 		"typeProperties": {
